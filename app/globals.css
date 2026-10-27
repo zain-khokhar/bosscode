@@ -769,6 +769,7 @@ html.lenis, html.lenis body { height: auto; }
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+  color: var(--cyan);
 }
 
 .bc-telemetry-value {
@@ -1144,13 +1145,34 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 .bc-quantum-badge:hover {
-  background: rgba(255,255,255,0.10);
-  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.22);
+  transform: translateY(-2px);
+}
+
+.bc-quantum-badge-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  transition: all 0.3s ease;
+  margin-bottom: 2px;
+}
+
+.bc-quantum-badge:hover .bc-quantum-badge-icon {
+  background: rgba(0, 229, 255, 0.16);
+  border-color: rgba(0, 229, 255, 0.45);
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.28);
 }
 
 .bc-quantum-badge svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   color: var(--cyan);
 }
 

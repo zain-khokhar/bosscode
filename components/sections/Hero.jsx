@@ -8,14 +8,61 @@ function CodeContent({ tab }) {
     return (
       <div id="bc-device-content">
         {[
-          { label: '🚀 Build velocity', val: '3.2× faster' },
-          { label: '⚡ API latency',    val: '<180ms avg'  },
-          { label: '📦 Deploy freq.',   val: 'Daily'       },
-          { label: '🛡 Code coverage',  val: '94%'         },
-          { label: '✅ Sprint velocity', val: '42 pts'     },
+          {
+            label: 'Build velocity',
+            val: '3.2× faster',
+            icon: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+              </svg>
+            ),
+          },
+          {
+            label: 'API latency',
+            val: '<180ms avg',
+            icon: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            ),
+          },
+          {
+            label: 'Deploy freq.',
+            val: 'Daily',
+            icon: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            ),
+          },
+          {
+            label: 'Code coverage',
+            val: '94%',
+            icon: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            ),
+          },
+          {
+            label: 'Sprint velocity',
+            val: '42 pts',
+            icon: (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            ),
+          },
         ].map((r) => (
           <div className="bc-telemetry-row" key={r.label}>
-            <span className="bc-telemetry-label">{r.label}</span>
+            <span className="bc-telemetry-label">
+              {r.icon}
+              {r.label}
+            </span>
             <span className="bc-telemetry-value">{r.val}</span>
           </div>
         ))}
