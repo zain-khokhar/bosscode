@@ -62,6 +62,8 @@ html {
   scroll-behavior: auto;
   background: var(--white);
   color: var(--navy);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 body {
@@ -72,6 +74,15 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -170,15 +181,17 @@ html.lenis, html.lenis body { height: auto; }
    ============================================================================= */
 #scroll-indicator {
   position: fixed;
-  right: 24px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  width: 2px;
-  height: 80px;
-  background: var(--navy-08);
+  width: 6px;
+  height: 140px;
+  background: var(--navy-12);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 12px var(--navy-12);
   border-radius: 999px;
   z-index: 9000;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.4s ease;
   pointer-events: none;
 }
@@ -188,8 +201,9 @@ html.lenis, html.lenis body { height: auto; }
   top: 0;
   left: 0;
   width: 100%;
-  height: 24px;
+  height: 36px;
   background: var(--navy);
+  box-shadow: 0 2px 8px var(--navy-25);
   border-radius: 999px;
 }
 
@@ -1074,7 +1088,7 @@ html.lenis, html.lenis body { height: auto; }
    ============================================================================= */
 #bc-quantum {
   position: relative;
-  background: var(--navy);
+  background: var(--white);
   min-height: 90vh;
   display: flex;
   align-items: center;
@@ -1082,6 +1096,16 @@ html.lenis, html.lenis body { height: auto; }
   padding: 120px 0;
   overflow: hidden;
   cursor: crosshair;
+  will-change: background-color;
+}
+
+#bc-quantum-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
 }
 
 #bc-quantum-canvas {
@@ -1101,6 +1125,7 @@ html.lenis, html.lenis body { height: auto; }
   display: flex;
   flex-direction: column;
   align-items: center;
+  will-change: opacity, transform;
 }
 
 #bc-quantum-title {
@@ -1154,26 +1179,26 @@ html.lenis, html.lenis body { height: auto; }
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  background: rgba(0, 229, 255, 0.08);
-  border: 1px solid rgba(0, 229, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--cyan);
+  color: var(--white);
   transition: all 0.3s ease;
   margin-bottom: 2px;
 }
 
 .bc-quantum-badge:hover .bc-quantum-badge-icon {
-  background: rgba(0, 229, 255, 0.16);
-  border-color: rgba(0, 229, 255, 0.45);
-  box-shadow: 0 0 18px rgba(0, 229, 255, 0.28);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
 }
 
 .bc-quantum-badge svg {
   width: 20px;
   height: 20px;
-  color: var(--cyan);
+  color: var(--white);
 }
 
 .bc-quantum-badge-title {
@@ -1826,22 +1851,30 @@ html.lenis, html.lenis body { height: auto; }
   display: flex;
   flex-direction: column;
   gap: 10px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, white 12%, white 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, white 12%, white 88%, transparent);
+  width: 100%;
+  overflow: hidden;
 }
 
 .bc-marquee-track {
   display: flex;
   width: max-content;
   gap: 0;
+  will-change: transform;
+}
+
+.bc-marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0;
 }
 
 .bc-marquee-track--left {
-  animation: marquee-left 46s linear infinite;
+  animation: marquee-left 110s linear infinite;
 }
 
 .bc-marquee-track--right {
-  animation: marquee-right 36s linear infinite;
+  animation: marquee-right 95s linear infinite;
 }
 
 .bc-marquee-track--left:hover,
@@ -1850,21 +1883,22 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 @keyframes marquee-left {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes marquee-right {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  from { transform: translate3d(-50%, 0, 0); }
+  to   { transform: translate3d(0, 0, 0); }
 }
 
 .bc-marquee-item {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   white-space: nowrap;
   padding: 8px 20px;
-  margin: 0 4px;
+  margin: 0 5px;
   border-radius: 999px;
   background: var(--navy-04);
   border: 1px solid var(--navy-06);
@@ -1913,22 +1947,23 @@ html.lenis, html.lenis body { height: auto; }
   display: flex;
   flex-direction: column;
   gap: 16px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, white 14%, white 86%, transparent);
-  mask-image: linear-gradient(90deg, transparent, white 14%, white 86%, transparent);
+  width: 100%;
+  overflow: hidden;
 }
 
 .bc-testimonials-track {
   display: flex;
-  gap: 16px;
+  gap: 0;
   width: max-content;
+  will-change: transform;
 }
 
 .bc-testimonials-track--left {
-  animation: marquee-left 48s linear infinite;
+  animation: marquee-left 90s linear infinite;
 }
 
 .bc-testimonials-track--right {
-  animation: marquee-right 58s linear infinite;
+  animation: marquee-right 105s linear infinite;
 }
 
 .bc-testimonials-track--left:hover,
@@ -1938,6 +1973,7 @@ html.lenis, html.lenis body { height: auto; }
 
 .bc-testimonial-card {
   width: 400px;
+  margin-right: 16px;
   flex-shrink: 0;
   background: var(--white);
   border: 1px solid var(--navy-08);
@@ -2508,3 +2544,4 @@ html.lenis, html.lenis body { height: auto; }
   #bc-newsletter-form { border-radius: 14px; flex-direction: column; }
   #bc-newsletter-submit { margin: 0; border-radius: 0 0 14px 14px; text-align: center; }
 }
+

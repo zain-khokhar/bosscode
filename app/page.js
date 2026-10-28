@@ -38,22 +38,28 @@ export default function Home() {
 
     /* Scroll progress indicator */
     const indicator = document.getElementById('scroll-indicator');
-    const bar       = document.getElementById('scroll-indicator-bar');
+    const bar = document.getElementById('scroll-indicator-bar');
 
     const onScroll = () => {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress  = docHeight > 0 ? scrollTop / docHeight : 0;
-      if (indicator) indicator.style.opacity = scrollTop > 100 ? '1' : '0';
-      if (bar)       bar.style.top           = `${progress * 56}px`;
+      const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
+      if (indicator) indicator.style.opacity = '1';
+      if (bar && indicator) {
+        const maxTravel = indicator.clientHeight - bar.clientHeight;
+        bar.style.top = `${progress * maxTravel}px`;
+      }
     };
 
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
 
     return () => {
       lenisInstance?.destroy();
       if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
     };
   }, []);
 

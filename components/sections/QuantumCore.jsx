@@ -4,18 +4,28 @@ import { useEffect, useRef } from 'react';
 const PARTICLES = 60;
 
 export default function QuantumCore() {
-  const canvasRef = useRef(null);
-  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const sectionRef = useRef(null);
+  const bgRef      = useRef(null);
+  const contentRef = useRef(null);
+  const canvasRef  = useRef(null);
+  const mouseRef   = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvas  = canvasRef.current;
+    const section = sectionRef.current;
+    const bg      = bgRef.current;
+    const content = contentRef.current;
+    const servicesSection = document.getElementById('bc-services');
+    if (!canvas || !section) return;
 
     const ctx = canvas.getContext('2d');
     let width, height, particles, animId;
 
+    // Start progress (0 = white #ffffff, 1 = deep navy #000921)
+    let smoothProgress = 0;
+
     function resize() {
-      const rect = canvas.parentElement.getBoundingClientRect();
+      const rect = section.getBoundingClientRect();
       width = canvas.width = rect.width;
       height = canvas.height = rect.height;
     }
@@ -35,6 +45,49 @@ export default function QuantumCore() {
       ctx.clearRect(0, 0, width, height);
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
+
+      // Lusion-style smooth background color interpolation at the START of #bc-quantum
+      // As the top of #bc-quantum scrolls from 95% of viewport height up to 15% of viewport height,
+      // progress smoothly moves from 0 (White) to 1 (Deep Navy #000921).
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const startTrigger = vh * 0.95;
+      const endTrigger   = vh * 0.15;
+      const rawProgress  = (startTrigger - rect.top) / (startTrigger - endTrigger);
+      const targetProgress = Math.min(Math.max(rawProgress, 0), 1);
+
+      // Silky-smooth damping factor (Lusion-like inertia)
+      smoothProgress += (targetProgress - smoothProgress) * 0.045;
+      if (Math.abs(targetProgress - smoothProgress) < 0.0005) {
+        smoothProgress = targetProgress;
+      }
+
+      // Smooth cubic ease
+      const t = smoothProgress * smoothProgress * (3 - 2 * smoothProgress);
+
+      // Rich sapphire/navy color curve from White (255, 255, 255) -> Deep Navy (0, 9, 33)
+      // Red & Green drop faster than Blue so mid-tones pass through sleek blue/navy instead of grey
+      const r = Math.round(255 * Math.pow(1 - t, 1.55));
+      const g = Math.round(255 - (255 - 9) * Math.pow(t, 0.72));
+      const b = Math.round(255 - (255 - 33) * Math.pow(t, 0.92));
+      const bgColor = `rgb(${r}, ${g}, ${b})`;
+
+      section.style.backgroundColor = bgColor;
+      if (servicesSection) {
+        servicesSection.style.backgroundColor = bgColor;
+      }
+
+      if (bg) {
+        bg.style.opacity = String(t.toFixed(4));
+      }
+
+      if (content) {
+        // Content smoothly brightens and glides into place as the background turns deep navy
+        const contentOpacity = 0.15 + 0.85 * t;
+        const translateY = (1 - t) * 36;
+        content.style.opacity = String(contentOpacity.toFixed(4));
+        content.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0)`;
+      }
 
       // Update positions
       for (const p of particles) {
@@ -71,7 +124,7 @@ export default function QuantumCore() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(255,255,255,${0.12 * (1 - d / 110)})`;
+            ctx.strokeStyle = `rgba(255,255,255,${0.12 * (1 - d / 110) * t})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -82,7 +135,7 @@ export default function QuantumCore() {
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+        ctx.fillStyle = `rgba(255,255,255,${p.opacity * t})`;
         ctx.fill();
       }
 
@@ -99,6 +152,9 @@ export default function QuantumCore() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', onResize);
+      if (servicesSection) {
+        servicesSection.style.backgroundColor = '';
+      }
     };
   }, []);
 
@@ -157,12 +213,14 @@ export default function QuantumCore() {
   ];
 
   return (
-    <section id="bc-quantum" onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
-      <div className="arch-grid arch-grid--dark" aria-hidden="true" />
-      <canvas id="bc-quantum-canvas" ref={canvasRef} aria-hidden="true" />
+    <section id="bc-quantum" ref={sectionRef} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
+      <div id="bc-quantum-bg" ref={bgRef} aria-hidden="true">
+        <div className="arch-grid arch-grid--dark" />
+        <canvas id="bc-quantum-canvas" ref={canvasRef} />
+      </div>
 
       <div className="container">
-        <div id="bc-quantum-content">
+        <div id="bc-quantum-content" ref={contentRef}>
           <div className="section-tag section-tag--dark">
             <span className="dot" />
             Our Commitment

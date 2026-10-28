@@ -106,12 +106,19 @@ function TestimonialCard({ t }) {
 }
 
 function Track({ items, dir }) {
-  const doubled = [...items, ...items];
+  const half = [...items, ...items];
   return (
     <div className={`bc-testimonials-track bc-testimonials-track--${dir}`}>
-      {doubled.map((t, i) => (
-        <TestimonialCard t={t} key={`${t.name}-${i}`} />
-      ))}
+      <div className="bc-marquee-group">
+        {half.map((t, i) => (
+          <TestimonialCard t={t} key={`a-${t.name}-${i}`} />
+        ))}
+      </div>
+      <div className="bc-marquee-group" aria-hidden="true">
+        {half.map((t, i) => (
+          <TestimonialCard t={t} key={`b-${t.name}-${i}`} />
+        ))}
+      </div>
     </div>
   );
 }

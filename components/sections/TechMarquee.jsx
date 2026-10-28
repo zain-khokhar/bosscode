@@ -11,14 +11,26 @@ const ROW2 = [
 ];
 
 function Track({ items, dir }) {
-  const doubled = [...items, ...items];
+  // Repeat 4x per half so a single half (~4,500px) is always wider than any viewport,
+  // and render two identical halves so translate3d(-50%, 0, 0) loops with zero jerk.
+  const half = [...items, ...items, ...items, ...items];
+
   return (
     <div className={`bc-marquee-track bc-marquee-track--${dir}`}>
-      {doubled.map((item, i) => (
-        <div className="bc-marquee-item" key={`${item}-${i}`}>
-          {item}
-        </div>
-      ))}
+      <div className="bc-marquee-group">
+        {half.map((item, i) => (
+          <div className="bc-marquee-item" key={`a-${item}-${i}`}>
+            {item}
+          </div>
+        ))}
+      </div>
+      <div className="bc-marquee-group" aria-hidden="true">
+        {half.map((item, i) => (
+          <div className="bc-marquee-item" key={`b-${item}-${i}`}>
+            {item}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
