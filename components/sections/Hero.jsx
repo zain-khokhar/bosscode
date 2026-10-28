@@ -95,7 +95,7 @@ function CodeContent({ tab }) {
   // architecture (default)
   return (
     <div id="bc-device-content">
-      <div className="bc-code-comment">{'// BossCode 2026 — System Architecture'}</div>
+      <div className="bc-code-comment">{'// BossCode 2026: System Architecture'}</div>
       <br />
       <div>
         <span className="bc-code-keyword">type </span>
@@ -168,7 +168,7 @@ export default function Hero() {
             </h1>
 
             <p id="bc-hero-sub">
-              Strategy-first digital agency — we design, engineer, and launch
+              Strategy-first digital agency. We design, engineer, and launch
               high-performance web applications that drive measurable business growth.
             </p>
 

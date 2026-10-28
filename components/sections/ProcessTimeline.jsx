@@ -91,7 +91,7 @@ export default function ProcessTimeline() {
             How We Deliver<br />Every Project
           </h2>
           <p id="bc-process-sub">
-            A proven 4-phase agile framework — transparent, predictable, and designed to ship on time, every time.
+            A proven 4-phase agile framework that is transparent, predictable, and designed to ship on time, every time.
           </p>
         </div>
 

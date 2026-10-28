@@ -39,7 +39,7 @@ export default function CtaSection() {
               Ready to Build<br />Something Iconic?
             </h2>
             <p id="bc-cta-sub">
-              Tell us your vision. We&apos;ll tell you how to execute it in 12 weeks. No fluff, no NDAs on day one — just a real conversation about your product.
+              Tell us your vision. We&apos;ll tell you how to execute it in 12 weeks. No fluff, no NDAs on day one. Just a real conversation about your product.
             </p>
             <div id="bc-cta-actions">
               <a href="mailto:hello@bosscode.agency" className="btn btn-white">

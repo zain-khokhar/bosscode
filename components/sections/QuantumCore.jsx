@@ -229,7 +229,7 @@ export default function QuantumCore() {
             Built to Perform.<br />Engineered to Last.
           </h2>
           <p id="bc-quantum-sub">
-            Every product we ship meets enterprise-grade standards — performance, security, and scalability baked in from day one, not bolted on later.
+            Every product we ship meets enterprise-grade standards with performance, security, and scalability baked in from day one, not bolted on later.
           </p>
 
           <div id="bc-quantum-grid">

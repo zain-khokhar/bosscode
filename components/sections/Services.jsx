@@ -4,7 +4,7 @@ const SERVICES = [
   {
     num: '01',
     title: 'Web & App Engineering',
-    desc: 'Production-grade web applications built with Next.js, React, and TypeScript. From SaaS platforms to e-commerce — engineered to handle millions of users.',
+    desc: 'Production-grade web applications built with Next.js, React, and TypeScript. From SaaS platforms to e-commerce, engineered to handle millions of users.',
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Redis'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -16,7 +16,7 @@ const SERVICES = [
   {
     num: '02',
     title: 'Product Strategy & UX',
-    desc: 'We don\'t just design—we solve business problems. Deep user research, competitive analysis, and data-backed design systems that convert.',
+    desc: 'We don\'t just design, we solve business problems. Deep user research, competitive analysis, and data-backed design systems that convert.',
     tags: ['Figma', 'User Research', 'Prototyping', 'A/B Testing'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -64,7 +64,7 @@ const SERVICES = [
   {
     num: '06',
     title: 'AI-Powered Features',
-    desc: 'Integrate LLMs, computer vision, and ML pipelines directly into your product. We make AI practical — not a buzzword, but a real competitive advantage.',
+    desc: 'Integrate LLMs, computer vision, and ML pipelines directly into your product. We make AI practical, not a buzzword, but a real competitive advantage.',
     tags: ['OpenAI', 'LangChain', 'Python', 'Vector DBs'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -88,7 +88,7 @@ export default function Services() {
             Full-Stack<br />Capabilities
           </h2>
           <p className="bc-section-sub">
-            End-to-end digital execution — from concept to code to cloud. We cover every discipline needed to ship world-class digital products.
+            End-to-end digital execution from concept to code to cloud. We cover every discipline needed to ship world-class digital products.
           </p>
         </div>
 

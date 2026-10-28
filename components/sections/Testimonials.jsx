@@ -2,7 +2,7 @@
 
 const TESTIMONIALS_L = [
   {
-    quote: "BossCode shipped our SaaS MVP in 8 weeks — faster than any agency we've worked with. The code quality is exceptional and the team actually understood our business goals.",
+    quote: "BossCode shipped our SaaS MVP in 8 weeks, faster than any agency we've worked with. The code quality is exceptional and the team actually understood our business goals.",
     name: 'Ahmad Hassan',
     role: 'CTO · TechFlow Inc.',
     init: 'AH',
@@ -40,7 +40,7 @@ const TESTIMONIALS_R = [
     verified: true,
   },
   {
-    quote: "They don't just execute — they push back when needed, suggest better approaches, and genuinely care about the product outcome. True partners.",
+    quote: "They don't just execute, they push back when needed, suggest better approaches, and genuinely care about the product outcome. True partners.",
     name: 'Ayesha Malik',
     role: 'CEO · EduReach Platform',
     init: 'AM',

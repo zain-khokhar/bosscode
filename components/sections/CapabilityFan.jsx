@@ -18,7 +18,7 @@ const CARDS = [
     phase: 'Phase 02',
     num: '02 / 05',
     title: 'Design System & UX',
-    desc: 'Component libraries, interaction prototypes, and brand systems delivered in Figma — pixel-perfect, handoff-ready.',
+    desc: 'Component libraries, interaction prototypes, and brand systems delivered in Figma, pixel-perfect and handoff-ready.',
     cta: 'See design work →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

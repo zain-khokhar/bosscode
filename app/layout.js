@@ -1,11 +1,11 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'BossCode — Premium Digital Agency 2026',
+  title: 'BossCode | Premium Digital Agency 2026',
   description: 'Strategy-first digital agency building high-performance web applications, SaaS platforms, and digital products that scale.',
   keywords: 'digital agency, web development, product design, Next.js, React, TypeScript',
   openGraph: {
-    title: 'BossCode — Premium Digital Agency 2026',
+    title: 'BossCode | Premium Digital Agency 2026',
     description: 'We design, engineer, and launch high-performance digital products.',
     type: 'website',
   },
