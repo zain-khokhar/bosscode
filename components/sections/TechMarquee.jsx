@@ -36,6 +36,10 @@ function Track({ items, dir }) {
 }
 
 export default function TechMarquee() {
+  // Hidden from UI and build as requested
+  return null;
+
+  /*
   return (
     <section id="bc-marquee" data-section="tech">
       <div id="bc-marquee-label">Technologies We Master</div>
@@ -45,4 +49,5 @@ export default function TechMarquee() {
       </div>
     </section>
   );
+  */
 }

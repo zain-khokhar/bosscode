@@ -9,7 +9,7 @@ import QuantumCore from '@/components/sections/QuantumCore';
 import CapabilityFan from '@/components/sections/CapabilityFan';
 import Portfolio from '@/components/sections/Portfolio';
 import ProcessTimeline from '@/components/sections/ProcessTimeline';
-import TechMarquee from '@/components/sections/TechMarquee';
+// import TechMarquee from '@/components/sections/TechMarquee';
 import Testimonials from '@/components/sections/Testimonials';
 import CtaSection from '@/components/sections/CtaSection';
 import Footer from '@/components/layout/Footer';
@@ -81,7 +81,7 @@ export default function Home() {
         <CapabilityFan />
         <Portfolio />
         <ProcessTimeline />
-        <TechMarquee />
+        {/* <TechMarquee /> */}
         <Testimonials />
         <CtaSection />
       </main>

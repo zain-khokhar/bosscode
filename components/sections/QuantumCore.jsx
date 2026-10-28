@@ -1,52 +1,24 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-const PARTICLES = 60;
-
 export default function QuantumCore() {
   const sectionRef = useRef(null);
   const bgRef      = useRef(null);
   const contentRef = useRef(null);
-  const canvasRef  = useRef(null);
-  const mouseRef   = useRef({ x: -1000, y: -1000 });
 
   useEffect(() => {
-    const canvas  = canvasRef.current;
     const section = sectionRef.current;
     const bg      = bgRef.current;
     const content = contentRef.current;
     const servicesSection = document.getElementById('bc-services');
-    if (!canvas || !section) return;
+    if (!section) return;
 
-    const ctx = canvas.getContext('2d');
-    let width, height, particles, animId;
-
+    let animId;
     // Start progress (0 = white #ffffff, 1 = deep navy #000921)
     let smoothProgress = 0;
 
-    function resize() {
-      const rect = section.getBoundingClientRect();
-      width = canvas.width = rect.width;
-      height = canvas.height = rect.height;
-    }
-
-    function initParticles() {
-      particles = Array.from({ length: PARTICLES }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        r: Math.random() * 2.5 + 0.5,
-        opacity: Math.random() * 0.5 + 0.1,
-      }));
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, width, height);
-      const mx = mouseRef.current.x;
-      const my = mouseRef.current.y;
-
-      // Lusion-style smooth background color interpolation at the START of #bc-quantum
+    function update() {
+      // Smooth background color interpolation at the START of #bc-quantum
       // As the top of #bc-quantum scrolls from 95% of viewport height up to 15% of viewport height,
       // progress smoothly moves from 0 (White) to 1 (Deep Navy #000921).
       const rect = section.getBoundingClientRect();
@@ -56,8 +28,8 @@ export default function QuantumCore() {
       const rawProgress  = (startTrigger - rect.top) / (startTrigger - endTrigger);
       const targetProgress = Math.min(Math.max(rawProgress, 0), 1);
 
-      // Silky-smooth damping factor (Lusion-like inertia)
-      smoothProgress += (targetProgress - smoothProgress) * 0.045;
+      // Silky-smooth damping factor
+      smoothProgress += (targetProgress - smoothProgress) * 0.05;
       if (Math.abs(targetProgress - smoothProgress) < 0.0005) {
         smoothProgress = targetProgress;
       }
@@ -66,7 +38,6 @@ export default function QuantumCore() {
       const t = smoothProgress * smoothProgress * (3 - 2 * smoothProgress);
 
       // Rich sapphire/navy color curve from White (255, 255, 255) -> Deep Navy (0, 9, 33)
-      // Red & Green drop faster than Blue so mid-tones pass through sleek blue/navy instead of grey
       const r = Math.round(255 * Math.pow(1 - t, 1.55));
       const g = Math.round(255 - (255 - 9) * Math.pow(t, 0.72));
       const b = Math.round(255 - (255 - 33) * Math.pow(t, 0.92));
@@ -82,90 +53,24 @@ export default function QuantumCore() {
       }
 
       if (content) {
-        // Content smoothly brightens and glides into place as the background turns deep navy
         const contentOpacity = 0.15 + 0.85 * t;
         const translateY = (1 - t) * 36;
         content.style.opacity = String(contentOpacity.toFixed(4));
         content.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0)`;
       }
 
-      // Update positions
-      for (const p of particles) {
-        // Mouse repel
-        const dx = p.x - mx;
-        const dy = p.y - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          const force = (120 - dist) / 120;
-          p.vx += (dx / dist) * force * 0.8;
-          p.vy += (dy / dist) * force * 0.8;
-        }
-
-        // Damping
-        p.vx *= 0.96;
-        p.vy *= 0.96;
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Wrap
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-      }
-
-      // Draw connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 110) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(255,255,255,${0.12 * (1 - d / 110) * t})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Draw particles
-      for (const p of particles) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${p.opacity * t})`;
-        ctx.fill();
-      }
-
-      animId = requestAnimationFrame(draw);
+      animId = requestAnimationFrame(update);
     }
 
-    resize();
-    initParticles();
-    draw();
-
-    const onResize = () => { resize(); initParticles(); };
-    window.addEventListener('resize', onResize);
+    animId = requestAnimationFrame(update);
 
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener('resize', onResize);
       if (servicesSection) {
         servicesSection.style.backgroundColor = '';
       }
     };
   }, []);
-
-  const onMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  };
-
-  const onMouseLeave = () => {
-    mouseRef.current = { x: -1000, y: -1000 };
-  };
 
   const BADGES = [
     {
@@ -213,10 +118,9 @@ export default function QuantumCore() {
   ];
 
   return (
-    <section id="bc-quantum" ref={sectionRef} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}>
+    <section id="bc-quantum" ref={sectionRef}>
       <div id="bc-quantum-bg" ref={bgRef} aria-hidden="true">
         <div className="arch-grid arch-grid--dark" />
-        <canvas id="bc-quantum-canvas" ref={canvasRef} />
       </div>
 
       <div className="container">
