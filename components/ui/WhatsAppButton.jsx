@@ -27,13 +27,7 @@ export default function WhatsAppButton() {
         aria-label={`Chat with BossCode on WhatsApp at ${WA_DISPLAY}`}
       >
         {/* Floating WhatsApp Button */}
-
-        {/* Floating Button with Radar Rings & Organic Shake */}
         <div className="bc-wa-core">
-          {/* Concentric radar rings that periodically expand & catch peripheral attention */}
-          <span className="bc-wa-radar bc-wa-radar--1" aria-hidden="true" />
-          <span className="bc-wa-radar bc-wa-radar--2" aria-hidden="true" />
-
           {/* Main button disc with official brand gradient & organic wobble */}
           <div className="bc-wa-btn">
             {/* Crisp official WhatsApp SVG glyph */}
