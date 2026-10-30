@@ -2834,70 +2834,13 @@ html.lenis body {
 }
 
 .bc-wa-anchor {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   text-decoration: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
-}
-
-/* Tooltip / Badge */
-.bc-wa-pill {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(0, 9, 33, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 999px;
-  padding: 8px 16px 8px 12px;
-  box-shadow: 0 12px 36px -8px rgba(0, 9, 33, 0.6), 0 2px 8px rgba(0, 0, 0, 0.2);
-  transform: translateX(4px);
-  transition: transform 0.35s var(--ease-expo), border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-  pointer-events: auto;
-}
-
-.bc-wa-anchor:hover .bc-wa-pill {
-  transform: translateX(-4px);
-  border-color: rgba(37, 211, 102, 0.5);
-  background: rgba(0, 9, 33, 0.98);
-  box-shadow: 0 16px 40px -8px rgba(37, 211, 102, 0.25), 0 12px 36px -8px rgba(0, 9, 33, 0.6);
-}
-
-.bc-wa-pill-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #25D366;
-  box-shadow: 0 0 12px #25D366, 0 0 4px #25D366;
-  flex-shrink: 0;
-  animation: wa-status-pulse 2s ease-in-out infinite;
-}
-
-.bc-wa-pill-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-
-.bc-wa-pill-title {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-}
-
-.bc-wa-pill-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  color: #25D366;
-  letter-spacing: 0.04em;
-  margin-top: 2px;
 }
 
 /* Button Core & Radar Rings */
@@ -3046,28 +2989,11 @@ html.lenis body {
   }
 }
 
-/* Pulsing status indicator dot */
-@keyframes wa-status-pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-    box-shadow: 0 0 10px #25D366;
-  }
-  50% {
-    transform: scale(1.28);
-    opacity: 0.8;
-    box-shadow: 0 0 16px #25D366, 0 0 6px #25D366;
-  }
-}
-
 /* Responsive adjust for mobile */
 @media (max-width: 768px) {
   .bc-wa-wrapper {
     right: 18px;
     bottom: 20px;
-  }
-  .bc-wa-pill {
-    display: none; /* Keep bottom corner clean and uncluttered on mobile */
   }
   .bc-wa-core,
   .bc-wa-btn {

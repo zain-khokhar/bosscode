@@ -26,14 +26,7 @@ export default function WhatsAppButton() {
         className="bc-wa-anchor"
         aria-label={`Chat with BossCode on WhatsApp at ${WA_DISPLAY}`}
       >
-        {/* Sleek Tooltip / Badge on Desktop */}
-        <div className="bc-wa-pill">
-          <span className="bc-wa-pill-dot" aria-hidden="true" />
-          <div className="bc-wa-pill-text">
-            <span className="bc-wa-pill-title">Chat on WhatsApp</span>
-            <span className="bc-wa-pill-num">{WA_DISPLAY}</span>
-          </div>
-        </div>
+        {/* Floating WhatsApp Button */}
 
         {/* Floating Button with Radar Rings & Organic Shake */}
         <div className="bc-wa-core">
