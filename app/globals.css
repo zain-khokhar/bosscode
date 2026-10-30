@@ -208,7 +208,7 @@ html.lenis body {
 }
 
 /* =============================================================================
-   SCROLL INDICATOR
+   SCROLL INDICATOR (Adaptive Light/Dark & Split Contrast)
    ============================================================================= */
 #scroll-indicator {
   position: fixed;
@@ -218,12 +218,12 @@ html.lenis body {
   width: 6px;
   height: 140px;
   background: var(--navy-12);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 9, 33, 0.2);
   box-shadow: 0 2px 12px var(--navy-12);
   border-radius: 999px;
   z-index: 9000;
   opacity: 1;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   pointer-events: none;
 }
 
@@ -236,6 +236,8 @@ html.lenis body {
   background: var(--navy);
   box-shadow: 0 2px 8px var(--navy-25);
   border-radius: 999px;
+  transition: box-shadow 0.2s ease;
+  will-change: top, background;
 }
 
 /* =============================================================================
