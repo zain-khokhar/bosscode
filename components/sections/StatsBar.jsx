@@ -2,10 +2,10 @@
 import { useEffect, useRef } from 'react';
 
 const STATS = [
-  { number: '150',  suffix: '+', label: 'Projects Delivered', sub: 'Across 14 industries'   },
-  { number: '98',   suffix: '%', label: 'Client Satisfaction', sub: 'Net Promoter Score 72'  },
-  { number: '8',    suffix: 'x', label: 'Average ROI',        sub: 'Measured over 12 months' },
-  { number: '2026', suffix: '',  label: 'Founded',            sub: 'Karachi · Pakistan'       },
+  { number: '24',   suffix: 'h', label: 'Reply Time',        sub: 'We answer every message'         },
+  { number: '100',  suffix: '%', label: 'You Own It',        sub: 'Your code, your data'            },
+  { number: '7',    suffix: 'd', label: 'First Design',      sub: 'See it before you decide'        },
+  { number: '2026', suffix: '',  label: 'Just Getting Started', sub: 'Full attention on every client' },
 ];
 
 function animateCount(el, target, duration = 1400) {

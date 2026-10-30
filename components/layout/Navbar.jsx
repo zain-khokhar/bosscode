@@ -11,7 +11,12 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const links = ['Work', 'Services', 'Process', 'About'];
+  const links = [
+    { id: 'work', label: 'How We Help' },
+    { id: 'services', label: 'What We Do' },
+    { id: 'process', label: 'How It Works' },
+    { id: 'about', label: 'FAQ' },
+  ];
 
   return (
     <nav id="bc-navbar" aria-label="Main navigation">
@@ -29,8 +34,8 @@ export default function Navbar() {
         {/* Links */}
         <ul id="bc-nav-links" role="list">
           {links.map((l) => (
-            <li key={l}>
-              <a className="bc-nav-link" href={`#${l.toLowerCase()}`}>{l}</a>
+            <li key={l.id}>
+              <a className="bc-nav-link" href={`#${l.id}`}>{l.label}</a>
             </li>
           ))}
         </ul>
@@ -39,10 +44,10 @@ export default function Navbar() {
         <div id="bc-nav-right">
           <div id="bc-availability-pill">
             <span id="bc-availability-dot" />
-            Available 2026
+            Taking new projects
           </div>
           <a href="#contact" className="btn btn-primary btn-sm">
-            Start a Project
+            Get a Free Check-up
           </a>
         </div>
       </div>

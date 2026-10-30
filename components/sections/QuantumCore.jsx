@@ -74,8 +74,8 @@ export default function QuantumCore() {
 
   const BADGES = [
     {
-      title: 'Performance',
-      sub: 'Core Web Vitals A+',
+      title: 'Price First',
+      sub: 'No hidden costs',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
@@ -83,8 +83,8 @@ export default function QuantumCore() {
       ),
     },
     {
-      title: 'Security',
-      sub: 'SOC 2 Ready',
+      title: 'You Own It',
+      sub: 'Your code, your data',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -93,8 +93,8 @@ export default function QuantumCore() {
       ),
     },
     {
-      title: 'Scalability',
-      sub: 'Millions of users',
+      title: 'Direct Contact',
+      sub: 'Talk to the people building it',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -104,8 +104,8 @@ export default function QuantumCore() {
       ),
     },
     {
-      title: 'Velocity',
-      sub: '3.2× faster ships',
+      title: 'Support Included',
+      sub: 'Even after launch',
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
@@ -127,13 +127,13 @@ export default function QuantumCore() {
         <div id="bc-quantum-content" ref={contentRef}>
           <div className="section-tag section-tag--dark">
             <span className="dot" />
-            Our Commitment
+            Our Promise
           </div>
           <h2 id="bc-quantum-title">
-            Built to Perform.<br />Engineered to Last.
+            Straight Talk.<br />Honest Work.
           </h2>
           <p id="bc-quantum-sub">
-            Every product we ship meets enterprise-grade standards with performance, security, and scalability baked in from day one, not bolted on later.
+            We don&apos;t talk in circles. From day one you&apos;ll know what we&apos;re building, what it costs, and how long it will take.
           </p>
 
           <div id="bc-quantum-grid">

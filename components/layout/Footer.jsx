@@ -4,19 +4,18 @@ import { useEffect, useRef } from 'react';
 const NAV_LINKS = [
   {
     heading: 'Company',
-    links: ['About BossCode', 'Our Process', 'Careers', 'Blog'],
+    links: ['About Us', 'How It Works', 'FAQ'],
   },
   {
     heading: 'Services',
-    links: ['Web Engineering', 'Product Design', 'Brand Identity', 'DevOps'],
+    links: ['Website', 'Online Store', 'Accounts System', 'Get Found on Google'],
   },
   {
-    heading: 'Global Nodes',
+    heading: 'Contact',
     type: 'offices',
     offices: [
-      { city: 'Karachi, PK', coords: '24.8607° N, 67.0011° E' },
-      { city: 'Dubai, UAE',   coords: '25.2048° N, 55.2708° E' },
-      { city: 'London, UK',   coords: '51.5074° N, 0.1278° W'  },
+      { city: 'Karachi, PK', coords: 'Our base' },
+      { city: 'Email', coords: 'hello@bosscode.agency' },
     ],
   },
 ];
@@ -53,7 +52,7 @@ export default function Footer() {
           <div id="bc-newsletter-heading">
             <div id="bc-newsletter-eyebrow">Newsletter</div>
             <div id="bc-newsletter-title">
-              Get digital insights, monthly.
+              Business tips, once a month.
             </div>
           </div>
           <form id="bc-newsletter-form" onSubmit={(e) => e.preventDefault()}>
@@ -76,7 +75,7 @@ export default function Footer() {
               <div id="bc-footer-logo-name">Boss<span>Code</span></div>
             </a>
             <p className="bc-footer-tagline">
-              Strategy-first digital agency building high-performance products that scale.
+              Helping Pakistani businesses grow online.
             </p>
             <div className="bc-footer-live-clock">
               <span className="bc-footer-clock-dot" />
@@ -117,7 +116,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div id="bc-footer-bottom">
           <span id="bc-footer-copyright">
-            © 2026 BossCode Digital Agency · All rights reserved
+            © 2026 BossCode · Made in Pakistan, for Pakistani businesses
           </span>
           <button id="bc-footer-scroll-top" onClick={scrollTop} aria-label="Scroll to top">
             <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -33,13 +33,13 @@ export default function CtaSection() {
           <div id="bc-cta-content">
             <div className="section-tag section-tag--dark">
               <span className="dot" />
-              Let&apos;s Work Together
+              Let&apos;s Talk
             </div>
             <h2 id="bc-cta-title">
-              Ready to Build<br />Something Iconic?
+              Ready to Take Your<br />Business to the Next Level?
             </h2>
             <p id="bc-cta-sub">
-              Tell us your vision. We&apos;ll tell you how to execute it in 12 weeks. No fluff, no NDAs on day one. Just a real conversation about your product.
+              Just tell us what&apos;s going on. We&apos;ll listen, and we&apos;ll be honest about what can help. If you don&apos;t need us, we&apos;ll tell you that too.
             </p>
             <div id="bc-cta-actions">
               <a href="mailto:hello@bosscode.agency" className="btn btn-white">
@@ -48,11 +48,11 @@ export default function CtaSection() {
                   <path d="M4 9h10M10 5l4 4-4 4" />
                 </svg>
               </a>
-              <a href="#" className="btn btn-ghost-white">
-                Book a Call
+              <a href="mailto:hello@bosscode.agency?subject=Free%20Business%20Check-up" className="btn btn-ghost-white">
+                Free Check-up
               </a>
             </div>
-            <p id="bc-cta-note">No commitment required · Response within 24 hours</p>
+            <p id="bc-cta-note">Free · No pressure · We reply within 24 hours</p>
           </div>
         </div>
       </div>

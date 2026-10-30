@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 
 const CARDS = [
   {
-    phase: 'Phase 01',
+    phase: 'Problem 1',
     num: '01 / 05',
-    title: 'Discovery & Strategy',
-    desc: 'Deep-dive workshops, competitor teardowns, and a solid 12-week product roadmap before a single line of code.',
-    cta: 'Start with strategy →',
+    title: 'Where Are the Customers?',
+    desc: 'Your work is good, but new people just aren\'t finding you. If someone searches Google, your name doesn\'t even show up.',
+    cta: 'Get more customers →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 3"/>
@@ -15,11 +15,11 @@ const CARDS = [
     ),
   },
   {
-    phase: 'Phase 02',
+    phase: 'Problem 2',
     num: '02 / 05',
-    title: 'Design System & UX',
-    desc: 'Component libraries, interaction prototypes, and brand systems delivered in Figma, pixel-perfect and handoff-ready.',
-    cta: 'See design work →',
+    title: 'Orders Lost in WhatsApp',
+    desc: 'Hundreds of messages a day. Some get missed, some get forgotten. Customers get upset and you get stressed.',
+    cta: 'Sort out your orders →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="14" height="14" rx="3"/><path d="M6 9h6M6 12h4"/>
@@ -27,11 +27,11 @@ const CARDS = [
     ),
   },
   {
-    phase: 'Phase 03',
+    phase: 'Problem 3',
     num: '03 / 05',
-    title: 'Engineering Sprint',
-    desc: 'Agile 2-week cycles, daily standups, and full CI/CD from day one. Transparent velocity, zero surprise delays.',
-    cta: 'View tech stack →',
+    title: 'Accounts in a Notebook',
+    desc: 'How much stock is left? Who owes you money? How much did you sell today? You\'re running it all from memory or a notebook.',
+    cta: 'Clean up your accounts →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="4 8 2 9 4 10"/><polyline points="14 8 16 9 14 10"/><line x1="10" y1="4" x2="8" y2="14"/>
@@ -39,11 +39,11 @@ const CARDS = [
     ),
   },
   {
-    phase: 'Phase 04',
+    phase: 'Problem 4',
     num: '04 / 05',
-    title: 'QA & Launch',
-    desc: 'Load testing, accessibility audits, cross-browser checks, and a zero-downtime production deployment.',
-    cta: 'Launch with us →',
+    title: 'A Website That Does Nothing',
+    desc: 'You got one made, but no one calls anymore. It\'s old, slow, or looks bad on a phone.',
+    cta: 'Fix your website →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 2l2 5h5l-4 3 1.5 5L9 12l-4.5 3L6 10 2 7h5z"/>
@@ -51,11 +51,11 @@ const CARDS = [
     ),
   },
   {
-    phase: 'Phase 05',
+    phase: 'Problem 5',
     num: '05 / 05',
-    title: 'Growth & Retention',
-    desc: 'Post-launch analytics, A/B testing, and monthly sprints to keep your product growing and users engaged.',
-    cta: 'Grow with us →',
+    title: 'Want to Grow, Not Sure How?',
+    desc: 'You have plenty of ideas but no idea where to start. That\'s actually our favourite kind of conversation.',
+    cta: 'Let\'s talk →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 13l4-4 3 3 5-5 4 4"/>
@@ -79,12 +79,12 @@ export default function CapabilityFan() {
         <div id="bc-fan-header">
           <div className="section-tag">
             <span className="dot" />
-            How We Work
+            Does This Sound Like You?
           </div>
           <div id="bc-fan-header-bottom">
-            <h2 id="bc-fan-title">Our Process,<br />Step by Step.</h2>
+            <h2 id="bc-fan-title">Problems We<br />Hear Every Day.</h2>
             <p id="bc-fan-sub">
-              A proven 5-phase delivery engine, refined across 150+ projects. Predictable timelines, no surprises.
+              If any of these sound familiar, we can help.
             </p>
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function CapabilityFan() {
             alignItems: 'center',
             gap: '16px',
           }}>
-            <button onClick={goPrev} className="btn btn-ghost btn-sm" aria-label="Previous phase">
+            <button onClick={goPrev} className="btn btn-ghost btn-sm" aria-label="Previous problem">
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}>
                 <path d="M10 7H4M6 4L3 7l3 3" />
               </svg>
@@ -160,12 +160,12 @@ export default function CapabilityFan() {
                     transition: 'width 0.3s ease, background 0.3s ease',
                     padding: 0,
                   }}
-                  aria-label={`Go to phase ${i + 1}`}
+                  aria-label={`Go to problem ${i + 1}`}
                 />
               ))}
             </div>
 
-            <button onClick={goNext} className="btn btn-ghost btn-sm" aria-label="Next phase">
+            <button onClick={goNext} className="btn btn-ghost btn-sm" aria-label="Next problem">
               <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}>
                 <path d="M4 7h10M8 4l3 3-3 3" />
               </svg>
@@ -173,7 +173,7 @@ export default function CapabilityFan() {
           </div>
         </div>
 
-        <p id="bc-fan-hint">Scroll or click to explore phases</p>
+        <p id="bc-fan-hint">Click to see the next problem</p>
       </div>
     </section>
   );

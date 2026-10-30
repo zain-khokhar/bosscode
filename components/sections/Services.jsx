@@ -3,9 +3,9 @@
 const SERVICES = [
   {
     num: '01',
-    title: 'Web & App Engineering',
-    desc: 'Production-grade web applications built with Next.js, React, and TypeScript. From SaaS platforms to e-commerce, engineered to handle millions of users.',
-    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Redis'],
+    title: 'A Website That Brings You Customers',
+    desc: 'Not just a nice-looking page. One that makes people call or message you on WhatsApp. Fast on phones and ready for Google.',
+    tags: ['Website', 'Mobile', 'WhatsApp', 'Google'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="16" height="13" rx="2"/>
@@ -15,9 +15,9 @@ const SERVICES = [
   },
   {
     num: '02',
-    title: 'Product Strategy & UX',
-    desc: 'We don\'t just design, we solve business problems. Deep user research, competitive analysis, and data-backed design systems that convert.',
-    tags: ['Figma', 'User Research', 'Prototyping', 'A/B Testing'],
+    title: 'Your Own Online Store',
+    desc: 'Sell your products online. Orders, payments (JazzCash, Easypaisa, card) and deliveries, all in one place.',
+    tags: ['Orders', 'Payments', 'Delivery', 'Stock'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="10" cy="10" r="8"/>
@@ -27,9 +27,9 @@ const SERVICES = [
   },
   {
     num: '03',
-    title: 'Brand & Visual Identity',
-    desc: 'Logos, systems, and motion identities that command attention. We build brand assets that work consistently across every digital and print touchpoint.',
-    tags: ['Logo Design', 'Brand System', 'Motion', 'Typography'],
+    title: 'Accounts & Management System',
+    desc: 'Stock, sales, dues and staff. Say goodbye to notebooks and messy Excel sheets. See everything on one clean screen.',
+    tags: ['Accounts', 'Stock', 'Staff', 'Reports'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 14l4-4 3 3 5-5 4 4"/>
@@ -39,9 +39,9 @@ const SERVICES = [
   },
   {
     num: '04',
-    title: 'Cloud Infrastructure & DevOps',
-    desc: 'Zero-downtime deployments, auto-scaling infrastructure, and CI/CD pipelines on AWS and GCP. Your product stays fast, secure, and always available.',
-    tags: ['AWS', 'Kubernetes', 'Terraform', 'GitHub Actions'],
+    title: 'Get Found on Google',
+    desc: 'When people in your city search for what you do, your name should show up. Including Google Maps and reviews.',
+    tags: ['Google Maps', 'Local SEO', 'Reviews'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M5 10a5 5 0 0 1 9.5-2H16a3 3 0 0 1 0 6H5a4 4 0 0 1 0-8"/>
@@ -50,9 +50,9 @@ const SERVICES = [
   },
   {
     num: '05',
-    title: 'E-commerce & Marketplaces',
-    desc: 'Headless Shopify, custom checkout flows, and marketplace platforms built for conversion. We engineer the complete shopping experience from search to delivery.',
-    tags: ['Shopify', 'Stripe', 'Next.js', 'Analytics'],
+    title: 'WhatsApp & Automation',
+    desc: 'No more typing the same reply again and again. Orders, reminders and follow-ups can run on their own.',
+    tags: ['WhatsApp', 'Reminders', 'Auto-reply'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M6 2L3 6v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6l-3-4z"/>
@@ -63,9 +63,9 @@ const SERVICES = [
   },
   {
     num: '06',
-    title: 'AI-Powered Features',
-    desc: 'Integrate LLMs, computer vision, and ML pipelines directly into your product. We make AI practical, not a buzzword, but a real competitive advantage.',
-    tags: ['OpenAI', 'LangChain', 'Python', 'Vector DBs'],
+    title: 'Something Custom (If You Need It)',
+    desc: 'If your work is a little different, we listen first. Then we check whether you really need to build anything at all.',
+    tags: ['Custom', 'Apps', 'Integration'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="10" cy="10" r="2"/>
@@ -82,13 +82,13 @@ export default function Services() {
         <div id="bc-services-header">
           <div className="section-tag">
             <span className="dot" />
-            What We Build
+            What We Do
           </div>
           <h2 className="bc-section-title">
-            Full-Stack<br />Capabilities
+            How We Can Help<br />Your Business
           </h2>
           <p className="bc-section-sub">
-            End-to-end digital execution from concept to code to cloud. We cover every discipline needed to ship world-class digital products.
+            We don&apos;t do everything. We only do the things that can really help your business grow.
           </p>
         </div>
 

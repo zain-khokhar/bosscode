@@ -2,31 +2,31 @@
 
 const PROJECTS = [
   {
-    cat: 'SaaS Platform',
-    client: 'TechFlow Inc.',
-    title: 'AI-Powered Analytics Dashboard',
-    desc: 'End-to-end engineering of a real-time business intelligence platform handling 2M+ daily events with sub-200ms query response times.',
-    metric: '↑ 340% faster insights',
-    tags: ['Next.js', 'Python', 'PostgreSQL', 'Kafka'],
-    visual: { name: 'TechFlow Analytics', year: '2025', accent: '#00d2ff' },
+    cat: 'Online Store',
+    client: 'Example: Clothing brand',
+    title: 'From Instagram DMs to a Real Online Store',
+    desc: 'Orders pile up in DMs and some get missed. We build an online store where customers order and pay on their own, and you see everything in one place.',
+    metric: 'All orders in one place',
+    tags: ['Store', 'JazzCash', 'Easypaisa', 'Delivery'],
+    visual: { name: 'Clothing Brand', year: 'EXAMPLE', accent: '#00d2ff' },
   },
   {
-    cat: 'E-commerce',
-    client: 'Luxe Brands',
-    title: 'Premium Headless Commerce Platform',
-    desc: 'Custom headless Shopify storefront with AI-powered product recommendations. Increased checkout conversion by 68% through UX optimizations.',
-    metric: '↑ 68% conversion rate',
-    tags: ['Shopify', 'Next.js', 'Stripe', 'Algolia'],
-    visual: { name: 'Luxe Storefront', year: '2025', accent: '#0055ff' },
+    cat: 'Booking System',
+    client: 'Example: Clinic',
+    title: 'Online Appointments Instead of Phone Calls',
+    desc: 'Appointments are taken by phone and some get forgotten. We add online booking and WhatsApp reminders so patients show up and your time is saved.',
+    metric: 'Fewer missed appointments',
+    tags: ['Booking', 'WhatsApp', 'Reminders', 'Website'],
+    visual: { name: 'Clinic', year: 'EXAMPLE', accent: '#0055ff' },
   },
   {
-    cat: 'FinTech App',
-    client: 'NovaPay',
-    title: 'Cross-Border Payment Gateway',
-    desc: 'PCI-DSS compliant payment infrastructure supporting 40+ currencies. Processed $50M+ in transactions within the first 6 months post-launch.',
-    metric: '$50M+ processed',
-    tags: ['React Native', 'Node.js', 'Stripe', 'AWS'],
-    visual: { name: 'NovaPay Gateway', year: '2026', accent: '#00d2ff' },
+    cat: 'Management System',
+    client: 'Example: Wholesaler',
+    title: 'From a Notebook to a Dashboard',
+    desc: 'Stock and dues are written in a notebook. We build a simple dashboard where stock, sales and pending payments show up on one screen.',
+    metric: 'Everything on one screen',
+    tags: ['Stock', 'Dues', 'Reports', 'Staff'],
+    visual: { name: 'Wholesaler', year: 'EXAMPLE', accent: '#00d2ff' },
   },
 ];
 
@@ -38,14 +38,14 @@ export default function Portfolio() {
           <div>
             <div className="section-tag">
               <span className="dot" />
-              Selected Work
+              How We Help
             </div>
             <h2 id="bc-portfolio-title">
-              Products We&apos;ve<br />Shipped to Market
+              Real Problems,<br />Simple Fixes.
             </h2>
           </div>
           <p id="bc-portfolio-sub">
-            Measurable outcomes, real clients, production systems. Every project here is live and growing.
+            These examples show the kind of problems we solve. Real client work will be added here soon.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export default function Portfolio() {
                     ))}
                   </div>
                   <a href="#contact" className="bc-project-cta">
-                    View case study
+                    Talk to us about this
                     <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M2 2h10v10M12 2L2 12" />
                     </svg>
@@ -113,7 +113,7 @@ export default function Portfolio() {
                   }} />
 
                   <div className="bc-project-visual-top" style={{ position: 'relative', zIndex: 2 }}>
-                    <span className="bc-project-live-tag">● LIVE {p.visual.year}</span>
+                    <span className="bc-project-live-tag">● {p.visual.year}</span>
                     <a href="#" className="bc-project-visual-link" aria-label="View project">
                       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M2 2h10v10M12 2L2 12" />
@@ -150,7 +150,7 @@ export default function Portfolio() {
 
                   <div className="bc-project-visual-bottom" style={{ position: 'relative', zIndex: 2 }}>
                     <div className="bc-project-visual-name">{p.visual.name}</div>
-                    <div className="bc-project-visual-sla">Production · SLA 99.97%</div>
+                    <div className="bc-project-visual-sla">How it works</div>
                   </div>
                 </div>
               </div>
@@ -161,7 +161,7 @@ export default function Portfolio() {
         {/* Bottom CTA */}
         <div style={{ textAlign: 'center', marginTop: '56px' }}>
           <a href="#contact" className="btn btn-primary">
-            See All Case Studies
+            Tell Us Your Problem
             <svg className="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 9h10M10 5l4 4-4 4" />
             </svg>
