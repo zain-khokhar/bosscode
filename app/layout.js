@@ -1,5 +1,6 @@
 import './globals.css';
 import './site-pages.css';
+import WhatsAppButton from '@/components/ui/WhatsAppButton';
 
 export const metadata = {
   title: 'BossCode | From Paper to Digital: Business Management & Automation Solutions',
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
       </head>
       <body suppressHydrationWarning>
         {children}
+        <WhatsAppButton />
       </body>
     </html>
   );

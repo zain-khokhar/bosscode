@@ -163,7 +163,7 @@
 .sp-more-card:hover > svg { transform: translateX(4px); }
 
 /* Sticky CTA */
-.sp-sticky-cta { position: fixed; right: 36px; bottom: 28px; z-index: 4000; display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; background: var(--blue); color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 14px; box-shadow: 0 16px 40px -8px rgba(0,85,255,.55); transition: transform .3s var(--ease-expo), background .2s ease; }
+.sp-sticky-cta { position: fixed; right: 104px; bottom: 28px; z-index: 4000; display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; background: var(--blue); color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 14px; box-shadow: 0 16px 40px -8px rgba(0,85,255,.55); transition: transform .3s var(--ease-expo), background .2s ease; }
 .sp-sticky-cta:hover { transform: translateY(-3px); background: var(--blue-hover); }
 
 /* About journey */
@@ -239,7 +239,7 @@ a.sp-contact-card:hover { transform: translateY(-3px); border-color: var(--navy-
   .sp-form-row { grid-template-columns: 1fr; }
   .sp-card { padding: 26px 20px; }
   .sp-sol-grid { grid-template-columns: 1fr; }
-  .sp-sticky-cta { right: 16px; bottom: 16px; }
+  .sp-sticky-cta { right: 18px; bottom: 86px; }
   .sp-float { display: none; }
   .sp-journey { gap: 12px; padding: 32px 12px; }
   .sp-journey-from, .sp-journey-to { width: 92px; height: 92px; }
