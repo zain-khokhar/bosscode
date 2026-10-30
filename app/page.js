@@ -83,20 +83,19 @@ export default function Home() {
         if (isTopLight && isBottomLight) {
           // Situation 1: Completely on Light/White background
           bar.style.background = '#000921';
-          bar.style.boxShadow = '0 2px 8px rgba(0, 9, 33, 0.25)';
+          bar.style.boxShadow = 'none';
           indicator.style.background = 'rgba(0, 9, 33, 0.08)';
           indicator.style.borderColor = 'rgba(0, 9, 33, 0.22)';
-          indicator.style.boxShadow = '0 2px 10px rgba(0, 9, 33, 0.08)';
+          indicator.style.boxShadow = 'none';
         } else if (!isTopLight && !isBottomLight) {
-          // Situation 2: Completely on Dark/Navy background
+          // Situation 2: Completely on Dark/Navy background (Clean Pure White, No Glow)
           bar.style.background = '#ffffff';
-          bar.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.65), 0 2px 6px rgba(0, 0, 0, 0.4)';
+          bar.style.boxShadow = 'none';
           indicator.style.background = 'rgba(255, 255, 255, 0.14)';
           indicator.style.borderColor = 'rgba(255, 255, 255, 0.45)';
-          indicator.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.35)';
+          indicator.style.boxShadow = 'none';
         } else {
-          // Situation 3: Half-and-half boundary crossing!
-          // Pinpoint the boundary between light & dark using 4-step binary search
+          // Situation 3: Half-and-half boundary crossing (Clean Split, No Glow)
           let low = barTop;
           let high = barBottom;
           for (let step = 0; step < 4; step++) {
@@ -111,16 +110,17 @@ export default function Home() {
           const boundaryY = (low + high) / 2;
           const split = Math.min(Math.max(((boundaryY - barTop) / barHeight) * 100, 0), 100).toFixed(1);
 
+          bar.style.boxShadow = 'none';
+          indicator.style.boxShadow = 'none';
+
           if (isTopLight) {
             // Top is on White (#000921), Bottom is on Dark (#ffffff)
             bar.style.background = `linear-gradient(to bottom, #000921 0%, #000921 ${split}%, #ffffff ${split}%, #ffffff 100%)`;
-            bar.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.35)';
             indicator.style.background = `linear-gradient(to bottom, rgba(0, 9, 33, 0.08) 0%, rgba(0, 9, 33, 0.08) ${split}%, rgba(255, 255, 255, 0.14) ${split}%, rgba(255, 255, 255, 0.14) 100%)`;
             indicator.style.borderColor = 'rgba(255, 255, 255, 0.45)';
           } else {
             // Top is on Dark (#ffffff), Bottom is on White (#000921)
             bar.style.background = `linear-gradient(to bottom, #ffffff 0%, #ffffff ${split}%, #000921 ${split}%, #000921 100%)`;
-            bar.style.boxShadow = '0 0 8px rgba(255, 255, 255, 0.35)';
             indicator.style.background = `linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.14) ${split}%, rgba(0, 9, 33, 0.08) ${split}%, rgba(0, 9, 33, 0.08) 100%)`;
             indicator.style.borderColor = 'rgba(255, 255, 255, 0.45)';
           }
