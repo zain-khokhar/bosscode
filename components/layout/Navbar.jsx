@@ -1,8 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
   const innerRef = useRef(null);
 
   useEffect(() => {
@@ -12,10 +15,11 @@ export default function Navbar() {
   }, []);
 
   const links = [
-    { id: 'work', label: 'How We Help' },
-    { id: 'services', label: 'What We Do' },
-    { id: 'process', label: 'How It Works' },
-    { id: 'about', label: 'FAQ' },
+    { href: '/solutions', label: 'Solutions' },
+    { href: '/#services', label: 'What We Do' },
+    { href: '/#process', label: 'How It Works' },
+    { href: '/about', label: 'About' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   return (
@@ -34,8 +38,14 @@ export default function Navbar() {
         {/* Links */}
         <ul id="bc-nav-links" role="list">
           {links.map((l) => (
-            <li key={l.id}>
-              <a className="bc-nav-link" href={`#${l.id}`}>{l.label}</a>
+            <li key={l.href}>
+              <Link
+                className="bc-nav-link"
+                href={l.href}
+                style={pathname === l.href || (l.href !== '/' && pathname.startsWith(l.href + '/')) ? { color: 'var(--navy)' } : undefined}
+              >
+                {l.label}
+              </Link>
             </li>
           ))}
         </ul>
@@ -46,9 +56,9 @@ export default function Navbar() {
             <span id="bc-availability-dot" />
             Taking new projects
           </div>
-          <a href="#contact" className="btn btn-primary btn-sm">
+          <Link href="/contact" className="btn btn-primary btn-sm">
             Get a Free Check-up
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

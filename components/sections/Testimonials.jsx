@@ -30,7 +30,7 @@ const FAQ_R = [
   },
   {
     q: 'Do you take on every kind of project?',
-    a: 'No. We only do work that helps a business grow. We don\'t do student projects or random software.',
+    a: 'No. We focus on helping businesses move from paper to digital and automate their work. We don\'t do student projects or random software.',
   },
   {
     q: 'Does the first conversation cost anything?',

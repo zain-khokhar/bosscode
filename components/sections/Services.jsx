@@ -3,9 +3,9 @@
 const SERVICES = [
   {
     num: '01',
-    title: 'A Website That Brings You Customers',
-    desc: 'Not just a nice-looking page. One that makes people call or message you on WhatsApp. Fast on phones and ready for Google.',
-    tags: ['Website', 'Mobile', 'WhatsApp', 'Google'],
+    title: 'Move From Paper to Digital',
+    desc: 'Replace registers, notebooks and loose files with one simple system. Everything is saved, easy to find and safe.',
+    tags: ['Digital Records', 'Registers', 'Files', 'Backup'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="3" width="16" height="13" rx="2"/>
@@ -15,9 +15,9 @@ const SERVICES = [
   },
   {
     num: '02',
-    title: 'Your Own Online Store',
-    desc: 'Sell your products online. Orders, payments (JazzCash, Easypaisa, card) and deliveries, all in one place.',
-    tags: ['Orders', 'Payments', 'Delivery', 'Stock'],
+    title: 'Manage Your Work Better',
+    desc: 'Keep orders, tasks and staff in one place, so nothing gets missed or forgotten.',
+    tags: ['Orders', 'Tasks', 'Staff', 'Reports'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="10" cy="10" r="8"/>
@@ -27,9 +27,9 @@ const SERVICES = [
   },
   {
     num: '03',
-    title: 'Accounts & Management System',
-    desc: 'Stock, sales, dues and staff. Say goodbye to notebooks and messy Excel sheets. See everything on one clean screen.',
-    tags: ['Accounts', 'Stock', 'Staff', 'Reports'],
+    title: 'Accounts & Stock System',
+    desc: 'Sales, stock, dues and expenses on one clean screen. No more notebooks and messy Excel sheets.',
+    tags: ['Accounts', 'Stock', 'Dues', 'Reports'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 14l4-4 3 3 5-5 4 4"/>
@@ -39,9 +39,9 @@ const SERVICES = [
   },
   {
     num: '04',
-    title: 'Get Found on Google',
-    desc: 'When people in your city search for what you do, your name should show up. Including Google Maps and reviews.',
-    tags: ['Google Maps', 'Local SEO', 'Reviews'],
+    title: 'Automate Repetitive Work',
+    desc: 'Bills, reports and follow-ups that someone types by hand every day can run on their own.',
+    tags: ['Billing', 'Reports', 'Follow-ups', 'Automation'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M5 10a5 5 0 0 1 9.5-2H16a3 3 0 0 1 0 6H5a4 4 0 0 1 0-8"/>
@@ -50,8 +50,8 @@ const SERVICES = [
   },
   {
     num: '05',
-    title: 'WhatsApp & Automation',
-    desc: 'No more typing the same reply again and again. Orders, reminders and follow-ups can run on their own.',
+    title: 'WhatsApp & Messaging Automation',
+    desc: 'Order confirmations, payment reminders and common replies can go out automatically.',
     tags: ['WhatsApp', 'Reminders', 'Auto-reply'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -63,9 +63,9 @@ const SERVICES = [
   },
   {
     num: '06',
-    title: 'Something Custom (If You Need It)',
-    desc: 'If your work is a little different, we listen first. Then we check whether you really need to build anything at all.',
-    tags: ['Custom', 'Apps', 'Integration'],
+    title: 'Websites & Custom Tools',
+    desc: 'Need a website, or a tool made just for the way you work? We build it once we understand your work.',
+    tags: ['Website', 'Custom', 'Apps', 'Integration'],
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="10" cy="10" r="2"/>
@@ -85,10 +85,10 @@ export default function Services() {
             What We Do
           </div>
           <h2 className="bc-section-title">
-            How We Can Help<br />Your Business
+            We Move Your Work<br />From Paper to Digital
           </h2>
           <p className="bc-section-sub">
-            We don&apos;t do everything. We only do the things that can really help your business grow.
+            We help you manage your work more efficiently and automate the repetitive parts.
           </p>
         </div>
 

@@ -1,14 +1,24 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 const NAV_LINKS = [
   {
     heading: 'Company',
-    links: ['About Us', 'How It Works', 'FAQ'],
+    links: [
+      { label: 'About Us', href: '/about' },
+      { label: 'Contact Us', href: '/contact' },
+      { label: 'Policies', href: '/policies' },
+    ],
   },
   {
-    heading: 'Services',
-    links: ['Website', 'Online Store', 'Accounts System', 'Get Found on Google'],
+    heading: 'Solutions',
+    links: [
+      { label: 'ShopLedger', href: '/solutions/shopledger' },
+      { label: 'ClinicFlow', href: '/solutions/clinicflow' },
+      { label: 'BillBot', href: '/solutions/billbot' },
+      { label: 'All solutions', href: '/solutions' },
+    ],
   },
   {
     heading: 'Contact',
@@ -75,7 +85,7 @@ export default function Footer() {
               <div id="bc-footer-logo-name">Boss<span>Code</span></div>
             </a>
             <p className="bc-footer-tagline">
-              Helping Pakistani businesses grow online.
+              Helping businesses move from paper to digital.
             </p>
             <div className="bc-footer-live-clock">
               <span className="bc-footer-clock-dot" />
@@ -100,12 +110,12 @@ export default function Footer() {
                 <div className="bc-footer-col-heading">{col.heading}</div>
                 <div className="bc-footer-links">
                   {col.links.map((l) => (
-                    <a className="bc-footer-link" href="#" key={l}>
-                      {l}
+                    <Link className="bc-footer-link" href={l.href} key={l.href}>
+                      {l.label}
                       <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M2 2h8v8M10 2L2 10" />
                       </svg>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

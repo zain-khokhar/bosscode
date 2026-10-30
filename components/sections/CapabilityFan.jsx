@@ -5,9 +5,9 @@ const CARDS = [
   {
     phase: 'Problem 1',
     num: '01 / 05',
-    title: 'Where Are the Customers?',
-    desc: 'Your work is good, but new people just aren\'t finding you. If someone searches Google, your name doesn\'t even show up.',
-    cta: 'Get more customers →',
+    title: 'Paper Everywhere',
+    desc: 'Registers, bills and files piled up. Finding one old record takes forever, and if it gets lost, it\'s gone.',
+    cta: 'Go digital →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 3"/>
@@ -18,8 +18,8 @@ const CARDS = [
     phase: 'Problem 2',
     num: '02 / 05',
     title: 'Orders Lost in WhatsApp',
-    desc: 'Hundreds of messages a day. Some get missed, some get forgotten. Customers get upset and you get stressed.',
-    cta: 'Sort out your orders →',
+    desc: 'Orders arrive in messages and calls. Some get missed, some get forgotten, and customers get upset.',
+    cta: 'Track every order →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="14" height="14" rx="3"/><path d="M6 9h6M6 12h4"/>
@@ -41,9 +41,9 @@ const CARDS = [
   {
     phase: 'Problem 4',
     num: '04 / 05',
-    title: 'A Website That Does Nothing',
-    desc: 'You got one made, but no one calls anymore. It\'s old, slow, or looks bad on a phone.',
-    cta: 'Fix your website →',
+    title: 'The Same Work, Every Day',
+    desc: 'Typing the same bills, reports and reminders by hand, again and again. It eats your time and mistakes slip in.',
+    cta: 'Automate it →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 2l2 5h5l-4 3 1.5 5L9 12l-4.5 3L6 10 2 7h5z"/>
@@ -53,8 +53,8 @@ const CARDS = [
   {
     phase: 'Problem 5',
     num: '05 / 05',
-    title: 'Want to Grow, Not Sure How?',
-    desc: 'You have plenty of ideas but no idea where to start. That\'s actually our favourite kind of conversation.',
+    title: 'Not Sure Where to Start?',
+    desc: 'You know your work is messy, but you don\'t know what to change first. That\'s a good place for us to start.',
     cta: 'Let\'s talk →',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">

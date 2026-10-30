@@ -36,10 +36,10 @@ export default function CtaSection() {
               Let&apos;s Talk
             </div>
             <h2 id="bc-cta-title">
-              Ready to Take Your<br />Business to the Next Level?
+              Ready to Move Your<br />Business Off Paper?
             </h2>
             <p id="bc-cta-sub">
-              Just tell us what&apos;s going on. We&apos;ll listen, and we&apos;ll be honest about what can help. If you don&apos;t need us, we&apos;ll tell you that too.
+              Just tell us how you work today. We&apos;ll listen, and we&apos;ll be honest about what can be made digital or automated. If you don&apos;t need us, we&apos;ll tell you that too.
             </p>
             <div id="bc-cta-actions">
               <a href="mailto:hello@bosscode.agency" className="btn btn-white">

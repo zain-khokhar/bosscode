@@ -1,12 +1,13 @@
 import './globals.css';
+import './site-pages.css';
 
 export const metadata = {
-  title: 'BossCode | Grow Your Business Online: Websites, Online Stores & Business Systems',
-  description: 'A Karachi-based team helping small and mid-sized Pakistani businesses grow with websites, online stores, and simple business systems. Your first chat is free.',
-  keywords: 'website development Karachi, online store Pakistan, business software Pakistan, local SEO Pakistan, business growth Pakistan',
+  title: 'BossCode | From Paper to Digital: Business Management & Automation Solutions',
+  description: 'A Karachi-based team helping Pakistani businesses move from paper-based processes to digital solutions, manage their work efficiently and automate operations. Your first chat is free.',
+  keywords: 'paper to digital Pakistan, business management software Pakistan, business automation Pakistan, accounts and stock software, digital transformation Karachi',
   openGraph: {
-    title: 'BossCode | Grow Your Business Online',
-    description: 'Websites, online stores and simple business systems that help your business grow.',
+    title: 'BossCode | From Paper to Digital',
+    description: 'We help businesses move from paper-based processes to digital solutions, manage work efficiently and automate operations.',
     type: 'website',
   },
 };

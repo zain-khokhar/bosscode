@@ -46,14 +46,14 @@ function CodeContent({ tab }) {
   if (tab === 'solution') {
     return (
       <div id="bc-device-content">
-        <div className="bc-code-comment">{'// What we build for you'}</div>
+        <div className="bc-code-comment">{'// What we set up for you'}</div>
         <br />
         {[
-          { layer: 'Website', val: 'Brings you enquiries' },
-          { layer: 'Store', val: 'Orders + payments' },
+          { layer: 'Records', val: 'Digital & searchable' },
           { layer: 'Accounts', val: 'Stock, sales, dues' },
-          { layer: 'Google', val: 'Show up on Maps' },
-          { layer: 'WhatsApp', val: 'Auto replies, reminders' },
+          { layer: 'Orders', val: 'Tracked in one place' },
+          { layer: 'Reports', val: 'Made automatically' },
+          { layer: 'WhatsApp', val: 'Auto messages, reminders' },
           { layer: 'Support', val: 'Even after launch' },
         ].map((r) => (
           <div className="bc-arch-row" key={r.layer}>
@@ -69,11 +69,11 @@ function CodeContent({ tab }) {
     return (
       <div id="bc-device-content">
         {[
-          { label: 'More customers', val: 'From Google', icon: ICON_SEARCH },
-          { label: 'Order tracking', val: 'One place', icon: ICON_BOOK },
-          { label: 'Reply time', val: '24 hours', icon: ICON_CLOCK },
-          { label: 'Your workload', val: 'Lighter', icon: ICON_USERS },
-          { label: 'Your business', val: 'Growing', icon: ICON_UP },
+          { label: 'Time saved', val: 'Every day', icon: ICON_CLOCK },
+          { label: 'Manual mistakes', val: 'Fewer', icon: ICON_UP },
+          { label: 'Your records', val: 'Safe & searchable', icon: ICON_SEARCH },
+          { label: 'Daily routine', val: 'Automated', icon: ICON_BOOK },
+          { label: 'Your work', val: 'Organized', icon: ICON_USERS },
         ].map((r) => (
           <div className="bc-telemetry-row" key={r.label}>
             <span className="bc-telemetry-label">
@@ -90,12 +90,12 @@ function CodeContent({ tab }) {
   // problem (default)
   return (
     <div id="bc-device-content">
-      <div className="bc-code-comment">{'// Your business right now'}</div>
+      <div className="bc-code-comment">{'// How work runs today'}</div>
       <br />
       <div>
-        <span className="bc-code-keyword">orders </span>
+        <span className="bc-code-keyword">records </span>
         {'= '}
-        <span className="bc-code-type">lost in WhatsApp</span>
+        <span className="bc-code-type">piles of paper</span>
       </div>
       <div>
         <span className="bc-code-keyword">accounts </span>
@@ -103,17 +103,17 @@ function CodeContent({ tab }) {
         <span className="bc-code-type">in a notebook</span>
       </div>
       <div>
-        <span className="bc-code-keyword">google </span>
+        <span className="bc-code-keyword">orders </span>
         {'= '}
-        <span className="bc-code-type">no one finds you</span>
+        <span className="bc-code-type">lost in WhatsApp</span>
       </div>
       <div>
-        <span className="bc-code-keyword">new customers </span>
+        <span className="bc-code-keyword">daily tasks </span>
         {'= '}
-        <span className="bc-code-number">few</span>
+        <span className="bc-code-number">done by hand</span>
       </div>
       <br />
-      <div className="bc-code-comment">{'// All of this can be fixed'}</div>
+      <div className="bc-code-comment">{'// All of this can go digital'}</div>
       <div>
         <span className="bc-code-keyword">first chat </span>
         {'= '}
@@ -165,14 +165,14 @@ export default function Hero() {
             </div>
 
             <h1 id="bc-hero-title">
-              We Help Your<br />
-              <span className="gradient-word">Business Grow</span><br />
-              Online.
+              From Paper<br />
+              <span className="gradient-word">To Digital</span><br />
+              Made Simple.
             </h1>
 
             <p id="bc-hero-sub">
-              We help you reach more customers and run your business with less stress.
-              First we listen to you. Then we tell you honestly what will actually help.
+              We help businesses move from paper-based work to digital solutions.
+              We help you manage your work more efficiently and automate your daily operations.
             </p>
 
             <div id="bc-hero-actions">
