@@ -4,13 +4,16 @@ import Icon from '@/components/ui/Icon';
 
 export const metadata = {
   title: 'Contact Us | BossCode',
-  description: 'Book your free first chat with BossCode. Tell us how you work today — we reply within 24 hours.',
+  description: 'Start your free first chat with BossCode on WhatsApp or email. We reply within 24 hours.',
 };
 
+const WA_LINK =
+  'https://wa.me/923197542768?text=Assalam%20o%20Alaikum%20BossCode%2C%20mujhe%20apne%20business%20software%20k%20mutalliq%20baat%20karni%20hai.';
+
 const NEXT = [
-  { icon: 'send', title: 'You send a message', text: 'Takes one minute.' },
-  { icon: 'clock', title: 'We reply in 24 hours', text: 'On WhatsApp or email.' },
-  { icon: 'message', title: 'Free chat', text: 'We listen and give honest advice.' },
+  { title: 'Pick your problem', text: 'Takes 30 seconds.' },
+  { title: 'Reply in 24 hours', text: 'On WhatsApp or call.' },
+  { title: 'Free honest advice', text: 'Clear price & plan.' },
 ];
 
 export default async function ContactPage({ searchParams }) {
@@ -27,6 +30,7 @@ export default async function ContactPage({ searchParams }) {
             Let&apos;s have a<br />
             <span className="gradient-word">free chat.</span>
           </h1>
+          <p className="sp-lead">Tell us how you work today. No pressure, no hidden costs.</p>
         </div>
       </section>
 
@@ -37,6 +41,15 @@ export default async function ContactPage({ searchParams }) {
           </div>
 
           <aside className="sp-contact-side">
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sp-contact-card"
+            >
+              <span className="sp-feat-icon"><Icon name="message" size={20} /></span>
+              <div><small>WhatsApp (Fastest)</small><strong>0319 7542768</strong></div>
+            </a>
             <a href="mailto:hello@bosscode.agency" className="sp-contact-card">
               <span className="sp-feat-icon"><Icon name="mail" size={20} /></span>
               <div><small>Email</small><strong>hello@bosscode.agency</strong></div>
@@ -44,10 +57,6 @@ export default async function ContactPage({ searchParams }) {
             <div className="sp-contact-card">
               <span className="sp-feat-icon"><Icon name="pin" size={20} /></span>
               <div><small>Based in</small><strong>Karachi, Pakistan</strong></div>
-            </div>
-            <div className="sp-contact-card">
-              <span className="sp-feat-icon"><Icon name="clock" size={20} /></span>
-              <div><small>Reply time</small><strong>Within 24 hours</strong></div>
             </div>
 
             <div className="sp-next">

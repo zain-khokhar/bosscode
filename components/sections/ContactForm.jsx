@@ -1,39 +1,63 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Icon from '@/components/ui/Icon';
 import { SOLUTIONS } from '@/lib/solutions';
 
 const NEEDS = [
   ...SOLUTIONS.map((s) => ({ id: s.slug, label: s.name, icon: s.icon })),
-  { id: 'custom', label: 'Something else', icon: 'sparkles' },
+  { id: 'custom', label: 'Custom Tool', icon: 'sparkles' },
 ];
 
 export default function ContactForm({ initial = '' }) {
   const [need, setNeed] = useState(NEEDS.some((n) => n.id === initial) ? initial : '');
-  const [sent, setSent] = useState(false);
+  const [sentMode, setSentMode] = useState('');
+  const formRef = useRef(null);
 
-  function onSubmit(e) {
+  function buildPayload(formEl) {
+    const f = new FormData(formEl);
+    const label = NEEDS.find((n) => n.id === need)?.label || 'Free Check-up';
+    const name = f.get('name') || '';
+    const phone = f.get('phone') || '';
+    const business = f.get('business') || '-';
+    const message = f.get('message') || '';
+
+    const text = [
+      'Assalam o Alaikum BossCode,',
+      `Name: ${name}`,
+      `WhatsApp: ${phone}`,
+      `Business: ${business}`,
+      `Looking for: ${label}`,
+      message ? `Note: ${message}` : '',
+    ]
+      .filter(Boolean)
+      .join('\n');
+
+    return { label, text };
+  }
+
+  function onSubmitWhatsApp(e) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const label = NEEDS.find((n) => n.id === need)?.label || 'Not sure yet';
-    const body = [
-      `Name: ${f.get('name')}`,
-      `WhatsApp/Phone: ${f.get('phone')}`,
-      `Business: ${f.get('business') || '-'}`,
-      `Interested in: ${label}`,
-      '',
-      f.get('message') || '',
-    ].join('\n');
+    if (!formRef.current) return;
+    const { text } = buildPayload(formRef.current);
+    const waUrl = `https://wa.me/923197542768?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    setSentMode('whatsapp');
+  }
+
+  function onSendEmail() {
+    if (!formRef.current) return;
+    if (!formRef.current.reportValidity()) return;
+    const { label, text } = buildPayload(formRef.current);
     window.location.href = `mailto:hello@bosscode.agency?subject=${encodeURIComponent(
       'Free chat request — ' + label
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    )}&body=${encodeURIComponent(text)}`;
+    setSentMode('email');
   }
 
   return (
-    <form className="sp-form" onSubmit={onSubmit} id="contact-form">
+    <form className="sp-form" ref={formRef} onSubmit={onSubmitWhatsApp} id="contact-form">
       <fieldset className="sp-need">
-        <legend>What do you need help with?</legend>
+        <legend>1. Tap what you want to fix</legend>
         <div className="sp-need-grid">
           {NEEDS.map((n) => (
             <button
@@ -61,19 +85,29 @@ export default function ContactForm({ initial = '' }) {
         </label>
       </div>
       <label>
-        Your business <span>(optional)</span>
-        <input name="business" placeholder="e.g. General store, Gulshan" />
+        Business type <span>(optional)</span>
+        <input name="business" placeholder="e.g. Retail store, Clinic, Wholesaler" />
       </label>
       <label>
-        Tell us in a line <span>(optional)</span>
-        <textarea name="message" rows={3} placeholder="e.g. I keep my sales in a register and want to stop." />
+        One-line note <span>(optional)</span>
+        <textarea name="message" rows={2} placeholder="e.g. Want to replace my sales & stock register." />
       </label>
 
-      <button type="submit" className="btn btn-primary sp-form-submit">
-        Request a free chat <Icon name="arrow" size={16} />
-      </button>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
+        <button type="submit" className="btn btn-primary sp-form-submit">
+          Start Chat on WhatsApp <Icon name="arrow" size={16} />
+        </button>
+        <button type="button" onClick={onSendEmail} className="btn btn-ghost">
+          Or Send via Email
+        </button>
+      </div>
+
       <p className="sp-form-note" role="status">
-        {sent ? 'Your email app should open now. If it did not, write to hello@bosscode.agency.' : 'Free · No pressure · We reply within 24 hours'}
+        {sentMode === 'whatsapp'
+          ? 'WhatsApp opened with your details. We reply within a few hours!'
+          : sentMode === 'email'
+          ? 'Opening your email app — or email hello@bosscode.agency directly.'
+          : 'Free first chat · No pressure · Reply within 24 hours'}
       </p>
     </form>
   );

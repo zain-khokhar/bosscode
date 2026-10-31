@@ -2,13 +2,13 @@
 import { useEffect, useRef } from 'react';
 
 const STATS = [
-  { number: '24',   suffix: 'h', label: 'Reply Time',        sub: 'We answer every message'         },
-  { number: '100',  suffix: '%', label: 'You Own It',        sub: 'Your code, your data'            },
-  { number: '7',    suffix: 'd', label: 'First Design',      sub: 'See it before you decide'        },
-  { number: '2026', suffix: '',  label: 'Just Getting Started', sub: 'Full attention on every client' },
+  { number: '24',   suffix: 'h', label: 'Fast Reply',       sub: 'On WhatsApp or call'            },
+  { number: '100',  suffix: '%', label: 'You Own It',       sub: 'Your records, your data'        },
+  { number: '1',    suffix: 'd', label: 'Staff Training',   sub: 'Simple enough to learn in a day' },
+  { number: '2026', suffix: '',  label: 'Karachi Team',     sub: 'Direct support after launch'    },
 ];
 
-function animateCount(el, target, duration = 1400) {
+function animateCount(el, target, duration = 1200) {
   const start = performance.now();
   const isFloat = String(target).includes('.');
   const step = (now) => {
@@ -40,7 +40,7 @@ export default function StatsBar() {
               item.style.opacity = '1';
               item.style.transform = 'translateY(0)';
               item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            }, i * 120);
+            }, i * 100);
           });
 
           el.querySelectorAll('.bc-stat-number[data-target]').forEach((num) => {
@@ -49,7 +49,7 @@ export default function StatsBar() {
           });
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
 
     observer.observe(el);

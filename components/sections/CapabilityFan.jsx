@@ -1,77 +1,69 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
-const CARDS = [
+const PROBLEMS = [
   {
-    phase: 'Problem 1',
-    num: '01 / 05',
-    title: 'Paper Everywhere',
-    desc: 'Registers, bills and files piled up. Finding one old record takes forever, and if it gets lost, it\'s gone.',
-    cta: 'Go digital →',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 3"/>
-      </svg>
-    ),
+    id: 'paper',
+    num: '01',
+    icon: 'file',
+    title: 'Paper Registers Everywhere',
+    pain: 'Bills and old records buried in notebooks. If a register is lost, everything is gone.',
+    fix: 'Every bill and record saved in 3 taps, backed up in the cloud, and searchable in 2 seconds.',
+    tool: 'ShopLedger',
+    href: '/solutions/shopledger',
+    metric: 'Find any bill in 2 sec',
   },
   {
-    phase: 'Problem 2',
-    num: '02 / 05',
+    id: 'whatsapp',
+    num: '02',
+    icon: 'message',
     title: 'Orders Lost in WhatsApp',
-    desc: 'Orders arrive in messages and calls. Some get missed, some get forgotten, and customers get upset.',
-    cta: 'Track every order →',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="14" height="14" rx="3"/><path d="M6 9h6M6 12h4"/>
-      </svg>
-    ),
+    pain: 'Customer orders arrive in chats and calls. Some get missed and deadlines slip.',
+    fix: 'Every order tracked on one shared board from New → Working → Ready → Delivered.',
+    tool: 'OrderTrack',
+    href: '/solutions/ordertrack',
+    metric: 'Zero missed orders',
   },
   {
-    phase: 'Problem 3',
-    num: '03 / 05',
-    title: 'Accounts in a Notebook',
-    desc: 'How much stock is left? Who owes you money? How much did you sell today? You\'re running it all from memory or a notebook.',
-    cta: 'Clean up your accounts →',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="4 8 2 9 4 10"/><polyline points="14 8 16 9 14 10"/><line x1="10" y1="4" x2="8" y2="14"/>
-      </svg>
-    ),
+    id: 'udhaar',
+    num: '03',
+    icon: 'wallet',
+    title: 'Stock & Udhaar in Memory',
+    pain: 'Guessing how much stock is left and who owes money from a diary or memory.',
+    fix: 'Live low-stock warnings plus an exact customer udhaar list with 1-tap reminders.',
+    tool: 'ShopLedger',
+    href: '/solutions/shopledger',
+    metric: '100% dues visibility',
   },
   {
-    phase: 'Problem 4',
-    num: '04 / 05',
-    title: 'The Same Work, Every Day',
-    desc: 'Typing the same bills, reports and reminders by hand, again and again. It eats your time and mistakes slip in.',
-    cta: 'Automate it →',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 2l2 5h5l-4 3 1.5 5L9 12l-4.5 3L6 10 2 7h5z"/>
-      </svg>
-    ),
+    id: 'typing',
+    num: '04',
+    icon: 'clock',
+    title: 'Same Manual Typing Daily',
+    pain: 'Hours wasted typing repeat bills, chasing payments, and building reports at night.',
+    fix: 'Scheduled invoices, polite WhatsApp nudges, and morning summaries run on autopilot.',
+    tool: 'BillBot',
+    href: '/solutions/billbot',
+    metric: '2+ hours saved daily',
   },
   {
-    phase: 'Problem 5',
-    num: '05 / 05',
+    id: 'unsure',
+    num: '05',
+    icon: 'sparkles',
     title: 'Not Sure Where to Start?',
-    desc: 'You know your work is messy, but you don\'t know what to change first. That\'s a good place for us to start.',
-    cta: 'Let\'s talk →',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 13l4-4 3 3 5-5 4 4"/>
-      </svg>
-    ),
+    pain: 'You know paper is slowing you down, but don\'t want something complicated for your staff.',
+    fix: 'We sit with you for a free 15-minute check-up and show the simplest first step.',
+    tool: 'Free Check-up',
+    href: '/contact',
+    metric: 'Free · No obligation',
   },
 ];
 
 export default function CapabilityFan() {
-  const [current, setCurrent] = useState(0);
-  const deckRef = useRef(null);
-
-  const goNext = () => setCurrent((c) => (c + 1) % CARDS.length);
-  const goPrev = () => setCurrent((c) => (c - 1 + CARDS.length) % CARDS.length);
-
-  const card = CARDS[current];
+  const [active, setActive] = useState(0);
+  const current = PROBLEMS[active];
 
   return (
     <section id="bc-fan" data-section="capabilities">
@@ -79,101 +71,76 @@ export default function CapabilityFan() {
         <div id="bc-fan-header">
           <div className="section-tag">
             <span className="dot" />
-            Does This Sound Like You?
+            Sound Familiar?
           </div>
           <div id="bc-fan-header-bottom">
-            <h2 id="bc-fan-title">Problems We<br />Hear Every Day.</h2>
+            <h2 id="bc-fan-title">Tap Your Problem.<br />See Our Fix.</h2>
             <p id="bc-fan-sub">
-              If any of these sound familiar, we can help.
+              Pick the headache you deal with today to see how we solve it.
             </p>
           </div>
         </div>
 
-        <div id="bc-fan-stage">
-          {/* Single active card */}
-          <div id="bc-fan-deck" ref={deckRef}>
-            {/* Stack preview cards (decorative) */}
-            {[2, 1].map((offset) => (
-              <div
-                key={offset}
-                className="bc-fan-card"
-                style={{
-                  transform: `translate(${offset * 14}px, ${offset * -10}px) rotate(${offset * 3}deg)`,
-                  opacity: 1 - offset * 0.3,
-                  zIndex: 3 - offset,
-                  pointerEvents: 'none',
-                }}
-              />
+        <div id="bc-fan-interactive">
+          {/* Left: 5 Clickable Problem Tabs */}
+          <div className="bc-fan-tabs" role="tablist" aria-label="Common business problems">
+            {PROBLEMS.map((p, idx) => (
+              <button
+                key={p.id}
+                role="tab"
+                aria-selected={active === idx}
+                className={`bc-fan-tab${active === idx ? ' active' : ''}`}
+                onClick={() => setActive(idx)}
+              >
+                <span className="bc-fan-tab-num">{p.num}</span>
+                <span className="bc-fan-tab-icon">
+                  <Icon name={p.icon} size={18} />
+                </span>
+                <span className="bc-fan-tab-title">{p.title}</span>
+                <Icon name="arrow" size={15} className="bc-fan-tab-arrow" />
+              </button>
             ))}
-
-            {/* Active card */}
-            <div
-              className="bc-fan-card"
-              style={{ zIndex: 4 }}
-            >
-              <div>
-                <div className="bc-fan-card-top">
-                  <span className="bc-fan-card-phase">{card.phase}</span>
-                  <span className="bc-fan-card-num">{card.num}</span>
-                </div>
-                <div className="bc-fan-card-icon-wrap">{card.icon}</div>
-                <h3 className="bc-fan-card-title">{card.title}</h3>
-                <p className="bc-fan-card-desc">{card.desc}</p>
-              </div>
-              <div className="bc-fan-card-footer">
-                <span>{card.cta}</span>
-                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 7h10M8 4l3 3-3 3" />
-                </svg>
-              </div>
-            </div>
           </div>
 
-          {/* Navigation */}
-          <div style={{
-            position: 'absolute',
-            bottom: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px',
-          }}>
-            <button onClick={goPrev} className="btn btn-ghost btn-sm" aria-label="Previous problem">
-              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}>
-                <path d="M10 7H4M6 4L3 7l3 3" />
-              </svg>
-            </button>
-
-            <div style={{ display: 'flex', gap: '6px' }}>
-              {CARDS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  style={{
-                    width: i === current ? 20 : 6,
-                    height: 6,
-                    borderRadius: 999,
-                    background: i === current ? 'var(--navy)' : 'var(--navy-18)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    transition: 'width 0.3s ease, background 0.3s ease',
-                    padding: 0,
-                  }}
-                  aria-label={`Go to problem ${i + 1}`}
-                />
-              ))}
+          {/* Right: Visual Before vs. After Card */}
+          <div className="bc-fan-panel" key={current.id} role="tabpanel">
+            <div className="bc-fan-panel-top">
+              <span className="bc-fan-panel-badge">
+                <Icon name={current.icon} size={14} /> Problem {current.num}
+              </span>
+              <span className="bc-fan-panel-metric">
+                <Icon name="check" size={14} /> {current.metric}
+              </span>
             </div>
 
-            <button onClick={goNext} className="btn btn-ghost btn-sm" aria-label="Next problem">
-              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}>
-                <path d="M4 7h10M8 4l3 3-3 3" />
-              </svg>
-            </button>
+            <h3 className="bc-fan-panel-title">{current.title}</h3>
+
+            <div className="bc-fan-compare">
+              <div className="bc-fan-box bc-fan-box--pain">
+                <div className="bc-fan-box-label">
+                  <Icon name="x" size={15} /> On Paper Today
+                </div>
+                <p>{current.pain}</p>
+              </div>
+
+              <div className="bc-fan-box bc-fan-box--fix">
+                <div className="bc-fan-box-label">
+                  <Icon name="check" size={15} /> With {current.tool}
+                </div>
+                <p>{current.fix}</p>
+              </div>
+            </div>
+
+            <div className="bc-fan-panel-actions">
+              <Link href={current.href} className="btn btn-primary">
+                Explore {current.tool} <Icon name="arrow" size={16} />
+              </Link>
+              <Link href="/contact" className="btn btn-ghost">
+                Ask on WhatsApp
+              </Link>
+            </div>
           </div>
         </div>
-
-        <p id="bc-fan-hint">Click to see the next problem</p>
       </div>
     </section>
   );

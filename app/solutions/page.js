@@ -7,13 +7,13 @@ import Link from 'next/link';
 export const metadata = {
   title: 'Solutions | BossCode',
   description:
-    'Simple software for Pakistani businesses: accounts & stock, appointments, billing, orders and WhatsApp automation. Pick your problem and see how it works.',
+    'Simple software for Pakistani businesses: accounts & stock, clinic appointments, auto billing, orders, and WhatsApp automation.',
 };
 
 export default function SolutionsPage() {
   return (
     <PageShell>
-      <section className="sp-hero">
+      <section className="sp-hero sp-hero--short">
         <div className="arch-grid" aria-hidden="true" />
         <div className="container sp-hero-inner">
           <div className="section-tag"><span className="dot" />Our Solutions</div>
@@ -21,7 +21,7 @@ export default function SolutionsPage() {
             Pick your problem.<br />
             <span className="gradient-word">See the fix.</span>
           </h1>
-          <p className="sp-lead">Ready-to-use software for everyday business work. Tap one to see it in action.</p>
+          <p className="sp-lead">Ready-to-use tools for daily work. Tap any screen to preview.</p>
         </div>
       </section>
 
@@ -36,11 +36,11 @@ export default function SolutionsPage() {
           <Reveal className="sp-banner">
             <div className="sp-banner-icon"><Icon name="sparkles" size={26} /></div>
             <div className="sp-banner-text">
-              <h2>Don&apos;t see your exact work?</h2>
-              <p>We also build custom tools around the way you already work.</p>
+              <h2>Need a custom tool?</h2>
+              <p>We also build software around the exact way your team works.</p>
             </div>
-            <Link href="/contact" className="btn btn-white">
-              Tell us about it <Icon name="arrow" size={16} />
+            <Link href="/contact?solution=custom" className="btn btn-white">
+              Ask for Custom <Icon name="arrow" size={16} />
             </Link>
           </Reveal>
         </div>

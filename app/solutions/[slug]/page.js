@@ -22,11 +22,13 @@ export default async function SolutionPage({ params }) {
   const s = getSolution(slug);
   if (!s) notFound();
   const others = SOLUTIONS.filter((x) => x.slug !== s.slug).slice(0, 3);
-  const mail = `mailto:hello@bosscode.agency?subject=${encodeURIComponent(`${s.name} — I want to know more`)}`;
+  const waUrl = `https://wa.me/923197542768?text=${encodeURIComponent(
+    `Assalam o Alaikum BossCode, mujhe ${s.name} (${s.category}) k mutalliq maloomat chahiye.`
+  )}`;
 
   return (
     <PageShell>
-      {/* 1 · WHAT IS IT — answer first */}
+      {/* 1 · ABOVE THE FOLD — Visual UI + Instant Answer */}
       <section className="sp-hero sp-hero--product">
         <div className="arch-grid" aria-hidden="true" />
         <div className="container sp-product-grid">
@@ -41,26 +43,33 @@ export default async function SolutionPage({ params }) {
               <Link href={`/contact?solution=${s.slug}`} className="btn btn-primary">
                 Get {s.name} <Icon name="arrow" size={16} />
               </Link>
-              <a href={mail} className="btn btn-ghost">Ask a question</a>
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+              >
+                Ask on WhatsApp
+              </a>
             </div>
-            <ul className="sp-for">
+            <ul className="sp-for" aria-label="Built for">
               {s.forWho.map((w) => <li key={w}>{w}</li>)}
             </ul>
           </div>
           <div className="sp-product-visual">
             <ProductMock solution={s} />
-            <div className="sp-float sp-float--a"><Icon name="check" size={14} /> Saved automatically</div>
-            <div className="sp-float sp-float--b"><Icon name="clock" size={14} /> Hours saved daily</div>
+            <div className="sp-float sp-float--a"><Icon name="check" size={14} /> Auto-saved</div>
+            <div className="sp-float sp-float--b"><Icon name="clock" size={14} /> 2+ hrs saved daily</div>
           </div>
         </div>
       </section>
 
-      {/* 2 · BEFORE / AFTER */}
+      {/* 2 · VISUAL BEFORE / AFTER */}
       <section className="sp-section sp-section--tight">
         <div className="container">
           <Reveal className="sp-ba">
             <div className="sp-ba-col sp-ba-before">
-              <h2><Icon name="x" size={18} /> Today</h2>
+              <h2><Icon name="x" size={18} /> On Paper Today</h2>
               <ul>{s.before.map((t) => <li key={t}>{t}</li>)}</ul>
             </div>
             <div className="sp-ba-arrow" aria-hidden="true"><Icon name="arrow" size={22} /></div>
@@ -72,7 +81,7 @@ export default async function SolutionPage({ params }) {
         </div>
       </section>
 
-      {/* 3 · WHAT YOU GET */}
+      {/* 3 · WHAT YOU GET (6 Micro-Cards) */}
       <section className="sp-section">
         <div className="container">
           <Reveal>
@@ -80,7 +89,7 @@ export default async function SolutionPage({ params }) {
           </Reveal>
           <div className="sp-feat-grid">
             {s.features.map((f, n) => (
-              <Reveal key={f.title} delay={n * 60} className="sp-feat">
+              <Reveal key={f.title} delay={n * 50} className="sp-feat">
                 <span className="sp-feat-icon"><Icon name={f.icon} size={22} /></span>
                 <h3>{f.title}</h3>
                 <p>{f.text}</p>
@@ -90,14 +99,14 @@ export default async function SolutionPage({ params }) {
         </div>
       </section>
 
-      {/* 4 · HOW IT GOES */}
+      {/* 4 · 3-STEP SETUP */}
       <section className="sp-section sp-dark">
         <div className="arch-grid arch-grid--dark" aria-hidden="true" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <Reveal><h2 className="sp-h2 sp-h2--light">Up and running in 3 steps</h2></Reveal>
+          <Reveal><h2 className="sp-h2 sp-h2--light">Live in 3 simple steps</h2></Reveal>
           <div className="sp-steps">
             {s.steps.map((st, n) => (
-              <Reveal key={st.title} delay={n * 90} className="sp-step">
+              <Reveal key={st.title} delay={n * 80} className="sp-step">
                 <span className="sp-step-num">{n + 1}</span>
                 <h3>{st.title}</h3>
                 <p>{st.text}</p>
@@ -107,13 +116,13 @@ export default async function SolutionPage({ params }) {
         </div>
       </section>
 
-      {/* 5 · FAQ */}
+      {/* 5 · QUICK ANSWERS */}
       <section className="sp-section">
         <div className="container sp-narrow">
           <Reveal><h2 className="sp-h2">Quick answers</h2></Reveal>
           <div className="sp-faq">
-            {s.faqs.map((f) => (
-              <details key={f.q}>
+            {s.faqs.map((f, idx) => (
+              <details key={f.q} open={idx === 0}>
                 <summary>{f.q}<Icon name="arrow" size={16} className="chev" /></summary>
                 <p>{f.a}</p>
               </details>
@@ -122,17 +131,17 @@ export default async function SolutionPage({ params }) {
         </div>
       </section>
 
-      {/* 6 · CTA + MORE */}
+      {/* 6 · CTA + OTHER TOOLS */}
       <section className="sp-section sp-section--tight">
         <div className="container">
           <Reveal className="sp-banner">
             <div className="sp-banner-icon"><Icon name={s.icon} size={26} /></div>
             <div className="sp-banner-text">
               <h2>Want {s.name} for your business?</h2>
-              <p>Your first chat is free. We&apos;ll tell you honestly if it fits.</p>
+              <p>Free first chat. Honest advice, zero pressure.</p>
             </div>
             <Link href={`/contact?solution=${s.slug}`} className="btn btn-white">
-              Start a free chat <Icon name="arrow" size={16} />
+              Start Free Chat <Icon name="arrow" size={16} />
             </Link>
           </Reveal>
 

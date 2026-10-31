@@ -1,32 +1,36 @@
 'use client';
+import Link from 'next/link';
+import ProductMock from '@/components/ui/ProductMock';
+import Icon from '@/components/ui/Icon';
+import { getSolution } from '@/lib/solutions';
 
 const PROJECTS = [
   {
-    cat: 'Paper to Digital',
-    client: 'Example: Retail shop',
-    title: 'From Registers to One Simple System',
-    desc: 'Sales and stock live in paper registers. We move them into one system, so any record can be found in seconds.',
-    metric: 'Every record searchable',
-    tags: ['Records', 'Stock', 'Sales', 'Backup'],
-    visual: { name: 'Retail Shop', year: 'EXAMPLE', accent: '#00d2ff' },
+    slug: 'shopledger',
+    cat: 'Retail & Stores',
+    client: 'ShopLedger',
+    title: 'Registers Replaced With 1-Tap Billing & Stock',
+    desc: 'Sales, low-stock warnings, and customer udhaar on one clean screen.',
+    metric: 'Every bill & balance found in 2 seconds',
+    tags: ['3-Tap Billing', 'Live Stock', 'Udhaar Tracker'],
   },
   {
-    cat: 'Work Management',
-    client: 'Example: Clinic',
-    title: 'Appointments and Records in One Place',
-    desc: 'Appointments are in a diary and patient files are on paper. We bring both into one system, with automatic WhatsApp reminders.',
-    metric: 'Fewer missed appointments',
-    tags: ['Appointments', 'Records', 'WhatsApp', 'Reminders'],
-    visual: { name: 'Clinic', year: 'EXAMPLE', accent: '#0055ff' },
+    slug: 'clinicflow',
+    cat: 'Clinics & Labs',
+    client: 'ClinicFlow',
+    title: 'Patient Queue, History & Auto WhatsApp Alerts',
+    desc: 'Moved diary bookings and paper files into one screen with auto reminders.',
+    metric: 'Fewer missed patient appointments',
+    tags: ['Token Queue', 'Patient Files', 'WhatsApp Reminders'],
   },
   {
-    cat: 'Automation',
-    client: 'Example: Wholesaler',
-    title: 'Bills and Reports on Autopilot',
-    desc: 'Bills, dues and daily reports are made by hand. We automate them so they are ready without anyone typing.',
-    metric: 'Less manual work every day',
-    tags: ['Billing', 'Dues', 'Reports', 'Automation'],
-    visual: { name: 'Wholesaler', year: 'EXAMPLE', accent: '#00d2ff' },
+    slug: 'billbot',
+    cat: 'Wholesalers & B2B',
+    client: 'BillBot',
+    title: 'Invoices, Payment Nudges & Reports on Autopilot',
+    desc: 'Automated repeat bills, polite WhatsApp follow-ups, and morning summaries.',
+    metric: '2+ hours of daily typing saved',
+    tags: ['Auto Invoices', 'Dues Board', 'Morning Brief'],
   },
 ];
 
@@ -38,134 +42,87 @@ export default function Portfolio() {
           <div>
             <div className="section-tag">
               <span className="dot" />
-              How We Help
+              Ready-to-Use Systems
             </div>
             <h2 id="bc-portfolio-title">
-              Real Problems,<br />Simple Fixes.
+              Real Problems.<br />Visual Fixes.
             </h2>
           </div>
           <p id="bc-portfolio-sub">
-            These examples show the kind of problems we solve. Real client work will be added here soon.
+            See how our tools replace registers and manual typing. Tap any system to try it.
           </p>
         </div>
 
         <div id="bc-portfolio-list">
-          {PROJECTS.map((p, i) => (
-            <article className="bc-project-card" key={i}>
-              {/* Info */}
-              <div className="bc-project-info">
-                <div>
-                  <div className="bc-project-meta">
-                    <span className="bc-project-cat">{p.cat}</span>
-                    <span className="bc-project-client">{p.client}</span>
+          {PROJECTS.map((p) => {
+            const sol = getSolution(p.slug);
+            return (
+              <article className="bc-project-card" key={p.slug}>
+                {/* Left Info */}
+                <div className="bc-project-info">
+                  <div>
+                    <div className="bc-project-meta">
+                      <span className="bc-project-cat">{p.cat}</span>
+                      <span className="bc-project-client">{p.client}</span>
+                    </div>
+                    <h3 className="bc-project-title">{p.title}</h3>
+                    <p className="bc-project-desc">{p.desc}</p>
+                    <div className="bc-project-metric">
+                      <Icon name="check" size={14} />
+                      {p.metric}
+                    </div>
                   </div>
-                  <h3 className="bc-project-title">{p.title}</h3>
-                  <p className="bc-project-desc">{p.desc}</p>
-                  <div className="bc-project-metric">
-                    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M2 10l3-4 3 2 3-4 3 2" />
-                    </svg>
-                    {p.metric}
-                  </div>
-                </div>
-                <div className="bc-project-bottom">
-                  <div className="bc-project-tags">
-                    {p.tags.map((t) => (
-                      <span className="bc-tag" key={t}>{t}</span>
-                    ))}
-                  </div>
-                  <a href="#contact" className="bc-project-cta">
-                    Talk to us about this
-                    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M2 2h10v10M12 2L2 12" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              {/* Visual */}
-              <div className="bc-project-visual">
-                <div className="bc-project-visual-inner" style={{
-                  background: `linear-gradient(135deg, var(--navy) 0%, var(--navy-surface) 100%)`,
-                }}>
-                  {/* Glow blobs */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '-60px',
-                    right: '-60px',
-                    width: '200px',
-                    height: '200px',
-                    borderRadius: '50%',
-                    background: `${p.visual.accent}22`,
-                    filter: 'blur(48px)',
-                    pointerEvents: 'none',
-                  }} />
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '-40px',
-                    left: '-40px',
-                    width: '160px',
-                    height: '160px',
-                    borderRadius: '50%',
-                    background: 'rgba(0,85,255,0.18)',
-                    filter: 'blur(40px)',
-                    pointerEvents: 'none',
-                  }} />
-
-                  <div className="bc-project-visual-top" style={{ position: 'relative', zIndex: 2 }}>
-                    <span className="bc-project-live-tag">● {p.visual.year}</span>
-                    <a href="#" className="bc-project-visual-link" aria-label="View project">
+                  <div className="bc-project-bottom">
+                    <div className="bc-project-tags">
+                      {p.tags.map((t) => (
+                        <span className="bc-tag" key={t}>{t}</span>
+                      ))}
+                    </div>
+                    <Link href={`/solutions/${p.slug}`} className="bc-project-cta">
+                      See {p.client}
                       <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M2 2h10v10M12 2L2 12" />
                       </svg>
-                    </a>
-                  </div>
-
-                  {/* Center logo mark */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '22px',
-                    background: 'rgba(255,255,255,0.07)',
-                    border: '1px solid rgba(255,255,255,0.15)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 2,
-                  }}>
-                    <span style={{
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 900,
-                      fontSize: '22px',
-                      color: 'var(--white)',
-                      letterSpacing: '-0.04em',
-                    }}>
-                      {p.visual.name.charAt(0)}
-                    </span>
-                  </div>
-
-                  <div className="bc-project-visual-bottom" style={{ position: 'relative', zIndex: 2 }}>
-                    <div className="bc-project-visual-name">{p.visual.name}</div>
-                    <div className="bc-project-visual-sla">How it works</div>
+                    </Link>
                   </div>
                 </div>
-              </div>
-            </article>
-          ))}
+
+                {/* Right Live Interactive UI Preview */}
+                <Link
+                  href={`/solutions/${p.slug}`}
+                  className="bc-project-visual"
+                  aria-label={`Preview ${p.client}`}
+                >
+                  <div className="bc-project-visual-inner">
+                    <div className="bc-project-visual-top">
+                      <span className="bc-project-live-tag">● LIVE PREVIEW · {p.client}</span>
+                      <span className="bc-project-visual-link">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M2 2h10v10M12 2L2 12" />
+                        </svg>
+                      </span>
+                    </div>
+
+                    {sol && (
+                      <div className="bc-project-mock-wrap">
+                        <ProductMock solution={sol} compact />
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              </article>
+            );
+          })}
         </div>
 
         {/* Bottom CTA */}
-        <div style={{ textAlign: 'center', marginTop: '56px' }}>
-          <a href="#contact" className="btn btn-primary">
-            Tell Us Your Problem
+        <div style={{ textAlign: 'center', marginTop: '48px' }}>
+          <Link href="/solutions" className="btn btn-primary">
+            See All 5 Solutions
             <svg className="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 9h10M10 5l4 4-4 4" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

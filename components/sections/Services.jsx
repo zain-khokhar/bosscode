@@ -1,77 +1,61 @@
 'use client';
+import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 const SERVICES = [
   {
     num: '01',
-    title: 'Move From Paper to Digital',
-    desc: 'Replace registers, notebooks and loose files with one simple system. Everything is saved, easy to find and safe.',
-    tags: ['Digital Records', 'Registers', 'Files', 'Backup'],
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="3" width="16" height="13" rx="2"/>
-        <path d="M8 7l-2 2 2 2M12 7l2 2-2 2M10 7v6"/>
-      </svg>
-    ),
+    title: 'Paper to Digital',
+    desc: 'Turn paper registers into one safe, searchable screen.',
+    tags: ['Registers', 'Files', 'Cloud Backup'],
+    icon: 'file',
+    href: '/solutions/shopledger',
+    cta: 'See ShopLedger',
   },
   {
     num: '02',
-    title: 'Manage Your Work Better',
-    desc: 'Keep orders, tasks and staff in one place, so nothing gets missed or forgotten.',
-    tags: ['Orders', 'Tasks', 'Staff', 'Reports'],
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="10" cy="10" r="8"/>
-        <path d="M10 6v4l3 3"/>
-      </svg>
-    ),
+    title: 'Orders & Staff Tasks',
+    desc: 'Track every order, worker task, and deadline on one board.',
+    tags: ['Order Board', 'Staff', 'Deadlines'],
+    icon: 'clipboard',
+    href: '/solutions/ordertrack',
+    cta: 'See OrderTrack',
   },
   {
     num: '03',
-    title: 'Accounts & Stock System',
-    desc: 'Sales, stock, dues and expenses on one clean screen. No more notebooks and messy Excel sheets.',
-    tags: ['Accounts', 'Stock', 'Dues', 'Reports'],
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 14l4-4 3 3 5-5 4 4"/>
-        <path d="M18 6l-2 2"/>
-      </svg>
-    ),
+    title: 'Accounts, Stock & Udhaar',
+    desc: 'Live sales, low-stock alerts, and customer dues in one tap.',
+    tags: ['Billing', 'Stock', 'Udhaar'],
+    icon: 'store',
+    href: '/solutions/shopledger',
+    cta: 'See ShopLedger',
   },
   {
     num: '04',
-    title: 'Automate Repetitive Work',
-    desc: 'Bills, reports and follow-ups that someone types by hand every day can run on their own.',
-    tags: ['Billing', 'Reports', 'Follow-ups', 'Automation'],
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M5 10a5 5 0 0 1 9.5-2H16a3 3 0 0 1 0 6H5a4 4 0 0 1 0-8"/>
-      </svg>
-    ),
+    title: 'Appointments & Patient Files',
+    desc: 'Daily patient queue, history, and WhatsApp slot reminders.',
+    tags: ['Clinics', 'Patient History', 'Reminders'],
+    icon: 'stethoscope',
+    href: '/solutions/clinicflow',
+    cta: 'See ClinicFlow',
   },
   {
     num: '05',
-    title: 'WhatsApp & Messaging Automation',
-    desc: 'Order confirmations, payment reminders and common replies can go out automatically.',
-    tags: ['WhatsApp', 'Reminders', 'Auto-reply'],
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M6 2L3 6v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6l-3-4z"/>
-        <line x1="3" y1="6" x2="17" y2="6"/>
-        <path d="M12 10a2 2 0 0 1-4 0"/>
-      </svg>
-    ),
+    title: 'Auto Bills & WhatsApp',
+    desc: 'Scheduled invoices, payment nudges, and 2-second auto-replies.',
+    tags: ['BillBot', 'ChatPilot', 'WhatsApp'],
+    icon: 'message',
+    href: '/solutions/chatpilot',
+    cta: 'See ChatPilot',
   },
   {
     num: '06',
-    title: 'Websites & Custom Tools',
-    desc: 'Need a website, or a tool made just for the way you work? We build it once we understand your work.',
-    tags: ['Website', 'Custom', 'Apps', 'Integration'],
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="10" cy="10" r="2"/>
-        <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42"/>
-      </svg>
-    ),
+    title: 'Custom Business Tools',
+    desc: 'Websites and software built around how your team already works.',
+    tags: ['Custom App', 'Website', 'Setup'],
+    icon: 'sparkles',
+    href: '/contact?solution=custom',
+    cta: 'Request Custom Tool',
   },
 ];
 
@@ -85,19 +69,21 @@ export default function Services() {
             What We Do
           </div>
           <h2 className="bc-section-title">
-            We Move Your Work<br />From Paper to Digital
+            One Simple System<br />For Your Daily Work.
           </h2>
           <p className="bc-section-sub">
-            We help you manage your work more efficiently and automate the repetitive parts.
+            Pick a ready-to-use tool or let us build one around your business.
           </p>
         </div>
 
         <div id="bc-services-grid">
-          {SERVICES.map((s, i) => (
-            <article className="bc-card" key={i} tabIndex={0} role="article">
+          {SERVICES.map((s) => (
+            <Link href={s.href} className="bc-card" key={s.num}>
               <div>
                 <div className="bc-card-header">
-                  <div className="bc-card-icon">{s.icon}</div>
+                  <div className="bc-card-icon">
+                    <Icon name={s.icon} size={20} />
+                  </div>
                   <span className="bc-card-num">{s.num}</span>
                 </div>
                 <h3 className="bc-card-title">{s.title}</h3>
@@ -110,13 +96,13 @@ export default function Services() {
                   ))}
                 </div>
                 <div className="bc-card-link">
-                  Learn more
+                  {s.cta}
                   <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M2 7h10M8 4l3 3-3 3" />
                   </svg>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

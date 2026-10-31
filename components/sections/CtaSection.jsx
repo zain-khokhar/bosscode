@@ -1,10 +1,10 @@
 'use client';
+import Link from 'next/link';
+
+const WA_LINK =
+  'https://wa.me/923197542768?text=Assalam%20o%20Alaikum%20BossCode%2C%20mujhe%20free%20business%20check-up%20chahiye.';
 
 export default function CtaSection() {
-  function scrollTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
   return (
     <section id="bc-cta" data-section="contact">
       <div className="container">
@@ -39,20 +39,25 @@ export default function CtaSection() {
               Ready to Move Your<br />Business Off Paper?
             </h2>
             <p id="bc-cta-sub">
-              Just tell us how you work today. We&apos;ll listen, and we&apos;ll be honest about what can be made digital or automated. If you don&apos;t need us, we&apos;ll tell you that too.
+              Tell us how you work today. Your first chat is 100% free, with honest advice and zero pressure.
             </p>
             <div id="bc-cta-actions">
-              <a href="mailto:hello@bosscode.agency" className="btn btn-white">
-                hello@bosscode.agency
+              <Link href="/contact" className="btn btn-white">
+                Get a Free Check-up
                 <svg className="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 9h10M10 5l4 4-4 4" />
                 </svg>
-              </a>
-              <a href="mailto:hello@bosscode.agency?subject=Free%20Business%20Check-up" className="btn btn-ghost-white">
-                Free Check-up
+              </Link>
+              <a
+                href={WA_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost-white"
+              >
+                Chat on WhatsApp
               </a>
             </div>
-            <p id="bc-cta-note">Free · No pressure · We reply within 24 hours</p>
+            <p id="bc-cta-note">Free · No pressure · Reply within 24 hours</p>
           </div>
         </div>
       </div>
