@@ -1,84 +1,113 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import Icon from '@/components/ui/Icon';
 
-const TABS = [
-  { id: 'today', label: '1. Paper Today' },
-  { id: 'digital', label: '2. Digital App' },
-  { id: 'result', label: '3. Your Result' },
-];
+const TABS = ['problem', 'solution', 'result'];
 
-const SCREENS = {
-  today: {
-    title: 'How work runs on paper today',
-    stats: [
-      { l: 'Registers', v: '3–4 Books' },
-      { l: 'Daily typing', v: '2+ hrs' },
-      { l: 'Missed dues', v: 'High risk' },
-    ],
-    rows: [
-      { icon: 'file', a: 'Sales & Bills', b: 'Written by hand in registers', tag: 'Slow', tone: 'bad' },
-      { icon: 'wallet', a: 'Customer Udhaar', b: 'Remembered in head or diary', tag: 'Risky', tone: 'warn' },
-      { icon: 'message', a: 'WhatsApp Orders', b: 'Buried inside daily chats', tag: 'Missed', tone: 'bad' },
-      { icon: 'boxes', a: 'Stock Count', b: 'Checked only when items run out', tag: 'Late', tone: 'warn' },
-    ],
-  },
-  digital: {
-    title: 'Everything on one clean screen',
-    stats: [
-      { l: 'Today\'s Sales', v: 'Rs 84,500' },
-      { l: 'Bills Made', v: '36' },
-      { l: 'Auto-WhatsApp', v: 'Active' },
-    ],
-    rows: [
-      { icon: 'receipt', a: 'Bill #1042 · Cash', b: 'Saved & receipt sent in 3 taps', tag: 'Paid', tone: 'ok' },
-      { icon: 'boxes', a: 'Cooking Oil 5L', b: '3 left · Low stock alert', tag: 'Restock', tone: 'warn' },
-      { icon: 'bell', a: 'Ali Traders · Rs 32,000', b: 'Polite WhatsApp reminder sent', tag: 'Auto', tone: 'ok' },
-      { icon: 'cloud', a: 'Daily Cloud Backup', b: 'Safe on phone & computer 24/7', tag: 'Safe', tone: 'ok' },
-    ],
-  },
-  result: {
-    title: 'What changes in your business',
-    stats: [
-      { l: 'Time Saved', v: '2+ hrs/day' },
-      { l: 'Staff Training', v: '1 Day' },
-      { l: 'Data Ownership', v: '100% Yours' },
-    ],
-    rows: [
-      { icon: 'clock', a: 'Evening Closing', b: 'Sales & profit ready in 1 click', tag: 'Instant', tone: 'ok' },
-      { icon: 'search', a: 'Find Any Record', b: 'Search by name, phone, or bill #', tag: '2 Sec', tone: 'ok' },
-      { icon: 'shield', a: 'Zero Lost Udhaar', b: 'Every customer balance tracked live', tag: 'Clear', tone: 'ok' },
-      { icon: 'phone', a: 'Local Karachi Support', b: 'Real humans help your team', tag: 'Included', tone: 'ok' },
-    ],
-  },
+const svgProps = {
+  viewBox: '0 0 24 24',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 2,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
 };
 
+const ICON_BOOK = (
+  <svg {...svgProps}>
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z" />
+  </svg>
+);
+const ICON_SEARCH = (
+  <svg {...svgProps}>
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.3-4.3" />
+  </svg>
+);
+const ICON_CLOCK = (
+  <svg {...svgProps}>
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+const ICON_UP = (
+  <svg {...svgProps}>
+    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+    <polyline points="16 7 22 7 22 13" />
+  </svg>
+);
+
+function CodeContent({ tab }) {
+  if (tab === 'solution') {
+    return (
+      <div id="bc-device-content">
+        {[
+          { layer: 'Records', val: 'Digital & searchable' },
+          { layer: 'Accounts', val: 'Live stock & dues' },
+          { layer: 'Orders', val: 'Tracked in one place' },
+          { layer: 'WhatsApp', val: 'Auto bills & alerts' },
+        ].map((r) => (
+          <div className="bc-arch-row" key={r.layer}>
+            <span className="bc-arch-layer">{r.layer}</span>
+            <span className="bc-arch-val">{r.val}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (tab === 'result') {
+    return (
+      <div id="bc-device-content">
+        {[
+          { label: 'Time saved', val: '2+ hrs / day', icon: ICON_CLOCK },
+          { label: 'Mistakes', val: 'Zero missed dues', icon: ICON_UP },
+          { label: 'Records', val: 'Found in 2 sec', icon: ICON_SEARCH },
+          { label: 'Daily work', val: '100% organized', icon: ICON_BOOK },
+        ].map((r) => (
+          <div className="bc-telemetry-row" key={r.label}>
+            <span className="bc-telemetry-label">
+              {r.icon}
+              {r.label}
+            </span>
+            <span className="bc-telemetry-value">{r.val}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // problem (default)
+  return (
+    <div id="bc-device-content">
+      {[
+        { layer: 'Records', val: 'Piles of paper' },
+        { layer: 'Accounts', val: 'In a notebook' },
+        { layer: 'Orders', val: 'Lost in WhatsApp' },
+        { layer: 'Daily work', val: 'Typed by hand' },
+      ].map((r) => (
+        <div className="bc-arch-row" key={r.layer}>
+          <span className="bc-arch-layer">{r.layer}</span>
+          <span className="bc-arch-val">{r.val}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function Hero() {
-  const [tab, setTab] = useState('digital');
-  const [paused, setPaused] = useState(false);
+  const [tab, setTab] = useState('problem');
   const wrapperRef = useRef(null);
 
-  /* Auto-cycle tabs so non-tech visitors see the story without clicking */
-  useEffect(() => {
-    if (paused) return;
-    const order = ['today', 'digital', 'result'];
-    const id = setInterval(() => {
-      setTab((curr) => order[(order.indexOf(curr) + 1) % order.length]);
-    }, 3800);
-    return () => clearInterval(id);
-  }, [paused]);
-
-  /* Subtle 2.5D tilt on desktop hover */
+  /* 2.5D tilt on hover */
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
 
     const onMove = (e) => {
       const rect = el.getBoundingClientRect();
-      const dx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
-      const dy = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-      el.style.transform = `perspective(900px) rotateY(${dx * 8}deg) rotateX(${-dy * 6}deg) scale(1.01)`;
+      const dx = (e.clientX - (rect.left + rect.width  / 2)) / (rect.width  / 2);
+      const dy = (e.clientY - (rect.top  + rect.height / 2)) / (rect.height / 2);
+      el.style.transform = `perspective(900px) rotateY(${dx * 10}deg) rotateX(${-dy * 8}deg) scale(1.02)`;
     };
     const onLeave = () => {
       el.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg) scale(1)';
@@ -92,19 +121,18 @@ export default function Hero() {
     };
   }, []);
 
-  const current = SCREENS[tab];
-
   return (
     <section id="bc-hero" data-section="hero">
       <div className="arch-grid" aria-hidden="true" />
 
       <div className="container">
         <div id="bc-hero-grid">
-          {/* ── LEFT COLUMN (Minimal Text, Instant Clarity) ── */}
+
+          {/* ── LEFT COLUMN ── */}
           <div id="bc-hero-left">
             <div id="bc-hero-badge">
               <span id="bc-hero-badge-dot" />
-              Built for Pakistani Businesses
+              Built for Pakistani businesses
             </div>
 
             <h1 id="bc-hero-title">
@@ -114,113 +142,73 @@ export default function Hero() {
             </h1>
 
             <p id="bc-hero-sub">
-              Leave registers and messy chats behind. Manage sales, stock, and daily work on one simple screen.
+              Move from paper registers to one simple digital system.
             </p>
 
             <div id="bc-hero-actions">
-              <Link href="/contact" className="btn btn-primary">
+              <a href="#contact" className="btn btn-primary">
                 Get a Free Check-up
                 <svg className="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 9h10M10 5l4 4-4 4" />
                 </svg>
-              </Link>
-              <Link href="/solutions" className="btn btn-ghost">
-                Explore Solutions
-              </Link>
+              </a>
+              <a href="#work" className="btn btn-ghost">See How We Help</a>
             </div>
 
             <div id="bc-hero-proof">
               <div id="bc-hero-avatars">
-                {[
-                  { i: 'BC', c: 'var(--navy)' },
-                  { i: '24h', c: 'var(--blue)' },
-                  { i: 'PK', c: 'var(--navy)' },
-                  { i: '✓', c: 'var(--blue)' },
-                ].map((a, n) => (
+                {[{ i: 'BC', c: 'var(--navy)' }, { i: '24', c: 'var(--blue)' }, { i: '7d', c: 'var(--navy)' }, { i: '✓', c: 'var(--blue)' }].map((a, n) => (
                   <div className="bc-avatar" key={n} style={{ background: a.c }}>{a.i}</div>
                 ))}
               </div>
               <div id="bc-hero-proof-text">
-                <strong>Free first chat · No pressure</strong>
-                Works on phone or PC · Staff learns in 1 day
+                <strong>First chat is free</strong>
+                No pressure, no hidden costs
               </div>
             </div>
           </div>
 
-          {/* ── RIGHT COLUMN — Interactive Visual Business Board ── */}
+          {/* ── RIGHT COLUMN — Device ── */}
           <div id="bc-hero-right">
-            <div
-              id="bc-device-wrapper"
-              ref={wrapperRef}
-              style={{ transition: 'transform 0.18s ease' }}
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-            >
+            <div id="bc-device-wrapper" ref={wrapperRef} style={{ transition: 'transform 0.18s ease' }}>
               <div id="bc-device">
+
                 <div id="bc-device-topbar">
                   <div id="bc-device-dots">
                     <div className="bc-dot" style={{ background: '#ff5f57' }} />
                     <div className="bc-dot" style={{ background: '#febc2e' }} />
                     <div className="bc-dot" style={{ background: '#28c840' }} />
                   </div>
-                  <div id="bc-device-tabs" role="tablist" aria-label="Business transformation preview">
+                  <div id="bc-device-tabs">
                     {TABS.map((t) => (
                       <button
-                        key={t.id}
-                        role="tab"
-                        aria-selected={tab === t.id}
-                        className={`bc-device-tab${tab === t.id ? ' active' : ''}`}
-                        onClick={() => {
-                          setTab(t.id);
-                          setPaused(true);
-                        }}
+                        key={t}
+                        className={`bc-device-tab${tab === t ? ' active' : ''}`}
+                        onClick={() => setTab(t)}
                       >
-                        {t.label}
+                        {t}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                {/* Live Visual Dashboard Content */}
-                <div className="bc-hero-board" key={tab}>
-                  <div className="bc-hero-board-title">{current.title}</div>
-
-                  <div className="bc-hero-kpis">
-                    {current.stats.map((st) => (
-                      <div className="bc-hero-kpi" key={st.l}>
-                        <strong>{st.v}</strong>
-                        <span>{st.l}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="bc-hero-rows">
-                    {current.rows.map((r) => (
-                      <div className="bc-hero-row" key={r.a}>
-                        <div className="bc-hero-row-left">
-                          <span className="bc-hero-row-icon">
-                            <Icon name={r.icon} size={15} />
-                          </span>
-                          <div>
-                            <strong>{r.a}</strong>
-                            <small>{r.b}</small>
-                          </div>
-                        </div>
-                        <em className={`bc-pill tone-${r.tone}`}>{r.tag}</em>
-                      </div>
-                    ))}
-                  </div>
+                {/* Animated panel */}
+                <div style={{ transition: 'opacity 0.2s ease' }}>
+                  <CodeContent tab={tab} />
                 </div>
               </div>
 
               {/* Floating badge */}
               <div id="bc-device-badge">
                 <div id="bc-device-badge-icon">
-                  <Icon name="check" size={16} />
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="1 4 8 8 15 4" />
+                    <path d="M1 4v8l7 4 7-4V4" />
+                  </svg>
                 </div>
                 <div>
-                  <div id="bc-device-badge-label">Fast Response</div>
-                  <div id="bc-device-badge-value">Reply within 24 hours ✓</div>
+                  <div id="bc-device-badge-label">Reply</div>
+                  <div id="bc-device-badge-value">Within 24 hours ✓</div>
                 </div>
               </div>
             </div>

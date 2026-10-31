@@ -7,6 +7,7 @@ const WA_LINK =
 export default function CtaSection() {
   return (
     <section id="bc-cta" data-section="contact">
+      <div id="contact" style={{ position: 'relative', top: '-90px' }} aria-hidden="true" />
       <div className="container">
         <div id="bc-cta-banner">
           {/* BC watermark */}
@@ -39,7 +40,7 @@ export default function CtaSection() {
               Ready to Move Your<br />Business Off Paper?
             </h2>
             <p id="bc-cta-sub">
-              Tell us how you work today. Your first chat is 100% free, with honest advice and zero pressure.
+              Tell us how you work today. First chat is 100% free.
             </p>
             <div id="bc-cta-actions">
               <Link href="/contact" className="btn btn-white">

@@ -4,36 +4,36 @@ import Icon from '@/components/ui/Icon';
 
 const PHASES = [
   {
-    phase: 'Step 01',
+    phase: 'Phase 01',
     duration: 'Day 1 · Free',
-    title: 'Free Chat',
-    desc: 'Tell us how you work today. Zero pressure.',
+    title: 'Let\'s Talk',
+    desc: 'Tell us how you work today.',
     icon: 'message',
-    deliverables: ['Clear plan', 'Fixed price', 'Timeline'],
+    deliverables: ['Clear plan', 'Fixed price'],
   },
   {
-    phase: 'Step 02',
+    phase: 'Phase 02',
     duration: 'Week 1',
-    title: 'See the Screens',
-    desc: 'Preview how it looks on your phone before we build.',
+    title: 'See the Design',
+    desc: 'Preview the screens before we build.',
     icon: 'mobile',
-    deliverables: ['Visual preview', 'Your feedback', 'Final sign-off'],
+    deliverables: ['Visual preview', 'Your approval'],
   },
   {
-    phase: 'Step 03',
+    phase: 'Phase 03',
     duration: 'Week 2–4',
-    title: 'We Set It Up',
-    desc: 'We build it, move your old records, and test everything.',
+    title: 'We Build It',
+    desc: 'We build and share weekly updates.',
     icon: 'zap',
-    deliverables: ['Data imported', 'Ready system', 'Weekly updates'],
+    deliverables: ['Weekly updates', 'Tested system'],
   },
   {
-    phase: 'Step 04',
-    duration: 'Launch+',
-    title: 'Train & Support',
-    desc: 'We train your staff in 1 day and stay for support.',
+    phase: 'Phase 04',
+    duration: 'After launch',
+    title: 'Go Live & Support',
+    desc: 'We launch, train your staff, and stay.',
     icon: 'heart',
-    deliverables: ['1-day staff training', 'Cloud backup', 'Direct support'],
+    deliverables: ['Staff training', 'Ongoing support'],
   },
 ];
 
@@ -53,7 +53,7 @@ export default function ProcessTimeline() {
             setTimeout(() => {
               card.style.opacity = '1';
               card.style.transform = 'translateY(0)';
-            }, i * 100);
+            }, i * 120);
           });
         }
       },
@@ -66,6 +66,7 @@ export default function ProcessTimeline() {
 
   return (
     <section id="bc-process" data-section="process">
+      <div id="process" style={{ position: 'relative', top: '-90px' }} aria-hidden="true" />
       <div className="container" ref={containerRef}>
         <div id="bc-process-header">
           <div className="section-tag" style={{ margin: '0 auto 20px' }}>
@@ -73,16 +74,16 @@ export default function ProcessTimeline() {
             How It Works
           </div>
           <h2 id="bc-process-title">
-            Up and Running<br />In 4 Simple Steps.
+            You Always Know<br />What&apos;s Happening
           </h2>
           <p id="bc-process-sub">
-            No surprises. You see and approve everything step by step.
+            No surprises. We check with you at every step.
           </p>
         </div>
 
         <div id="bc-process-grid">
           {PHASES.map((p, i) => (
-            <div className="bc-process-card" key={p.phase} style={{ transitionDelay: `${i * 70}ms` }}>
+            <div className="bc-process-card" key={p.phase} style={{ transitionDelay: `${i * 80}ms` }}>
               <div>
                 <div className="bc-process-card-top">
                   <span className="bc-process-phase">{p.phase}</span>
@@ -95,7 +96,7 @@ export default function ProcessTimeline() {
                 <p className="bc-process-desc">{p.desc}</p>
               </div>
               <div className="bc-process-deliverables">
-                <div className="bc-deliverables-label">You Get</div>
+                <div className="bc-deliverables-label">What You Get</div>
                 {p.deliverables.map((d) => (
                   <div className="bc-deliverable-item" key={d}>{d}</div>
                 ))}

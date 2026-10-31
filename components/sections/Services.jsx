@@ -6,8 +6,8 @@ const SERVICES = [
   {
     num: '01',
     title: 'Paper to Digital',
-    desc: 'Turn paper registers into one safe, searchable screen.',
-    tags: ['Registers', 'Files', 'Cloud Backup'],
+    desc: 'Turn registers into one searchable screen.',
+    tags: ['Registers', 'Backup'],
     icon: 'file',
     href: '/solutions/shopledger',
     cta: 'See ShopLedger',
@@ -15,53 +15,54 @@ const SERVICES = [
   {
     num: '02',
     title: 'Orders & Staff Tasks',
-    desc: 'Track every order, worker task, and deadline on one board.',
-    tags: ['Order Board', 'Staff', 'Deadlines'],
+    desc: 'Track orders and tasks in one place.',
+    tags: ['Orders', 'Staff'],
     icon: 'clipboard',
     href: '/solutions/ordertrack',
     cta: 'See OrderTrack',
   },
   {
     num: '03',
-    title: 'Accounts, Stock & Udhaar',
-    desc: 'Live sales, low-stock alerts, and customer dues in one tap.',
-    tags: ['Billing', 'Stock', 'Udhaar'],
+    title: 'Accounts & Stock',
+    desc: 'Sales, stock, and dues on one screen.',
+    tags: ['Stock', 'Dues'],
     icon: 'store',
     href: '/solutions/shopledger',
     cta: 'See ShopLedger',
   },
   {
     num: '04',
-    title: 'Appointments & Patient Files',
-    desc: 'Daily patient queue, history, and WhatsApp slot reminders.',
-    tags: ['Clinics', 'Patient History', 'Reminders'],
+    title: 'Clinic Bookings',
+    desc: 'Daily patient queue and WhatsApp reminders.',
+    tags: ['Bookings', 'WhatsApp'],
     icon: 'stethoscope',
     href: '/solutions/clinicflow',
     cta: 'See ClinicFlow',
   },
   {
     num: '05',
-    title: 'Auto Bills & WhatsApp',
-    desc: 'Scheduled invoices, payment nudges, and 2-second auto-replies.',
-    tags: ['BillBot', 'ChatPilot', 'WhatsApp'],
+    title: 'WhatsApp Automation',
+    desc: 'Auto bills, reminders, and instant replies.',
+    tags: ['WhatsApp', 'Auto-reply'],
     icon: 'message',
     href: '/solutions/chatpilot',
     cta: 'See ChatPilot',
   },
   {
     num: '06',
-    title: 'Custom Business Tools',
-    desc: 'Websites and software built around how your team already works.',
-    tags: ['Custom App', 'Website', 'Setup'],
+    title: 'Websites & Custom Tools',
+    desc: 'Built around how your business works.',
+    tags: ['Website', 'Custom'],
     icon: 'sparkles',
     href: '/contact?solution=custom',
-    cta: 'Request Custom Tool',
+    cta: 'Ask Us',
   },
 ];
 
 export default function Services() {
   return (
     <section id="bc-services" data-section="services">
+      <div id="services" style={{ position: 'relative', top: '-90px' }} aria-hidden="true" />
       <div className="container">
         <div id="bc-services-header">
           <div className="section-tag">
@@ -69,10 +70,10 @@ export default function Services() {
             What We Do
           </div>
           <h2 className="bc-section-title">
-            One Simple System<br />For Your Daily Work.
+            We Move Your Work<br />From Paper to Digital
           </h2>
           <p className="bc-section-sub">
-            Pick a ready-to-use tool or let us build one around your business.
+            Simple tools to manage and automate your daily work.
           </p>
         </div>
 

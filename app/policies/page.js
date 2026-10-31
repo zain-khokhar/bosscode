@@ -4,7 +4,7 @@ import Icon from '@/components/ui/Icon';
 
 export const metadata = {
   title: 'Policies | BossCode',
-  description: 'Our privacy, data ownership, terms, and payment rules in plain, simple words.',
+  description: 'Our privacy, data ownership, terms, and payment rules in plain words.',
 };
 
 const POLICIES = [
@@ -12,52 +12,50 @@ const POLICIES = [
     id: 'privacy',
     icon: 'lock',
     title: 'Privacy',
-    short: 'We only collect what is needed and never sell your details.',
+    short: 'We never share or sell your contact details.',
     points: [
-      { q: 'What do we collect?', a: 'Only your name, phone, and business details so we can set up your system.' },
-      { q: 'Who can see it?', a: 'Only our team. We never share or sell your contact info to anyone.' },
-      { q: 'Can I delete my info?', a: 'Yes. Message us anytime and we will remove your details immediately.' },
+      { q: 'What do we collect?', a: 'Only your name, phone, and business details.' },
+      { q: 'Who can see it?', a: 'Only our team. Never shared with third parties.' },
     ],
   },
   {
     id: 'data',
     icon: 'shield',
     title: 'Your Data',
-    short: '100% of your business records belong to you. Always.',
+    short: '100% of your business records belong to you.',
     points: [
-      { q: 'Who owns my sales & customer records?', a: 'You do — every bill, patient file, stock count, and customer list is yours.' },
-      { q: 'Can I export a copy anytime?', a: 'Yes. You can download your full business records whenever you want.' },
-      { q: 'How is it kept safe?', a: 'Protected with staff-only logins and automatic cloud backups.' },
+      { q: 'Who owns my records?', a: 'You do — every bill, file, and customer list is yours.' },
+      { q: 'Can I export a copy?', a: 'Yes, download your full data anytime.' },
     ],
   },
   {
     id: 'terms',
     icon: 'file',
     title: 'Terms of Work',
-    short: 'Clear scope, fixed price, and timeline agreed in writing.',
+    short: 'Fixed price and timeline agreed in writing.',
     points: [
-      { q: 'What do we agree before starting?', a: 'Exact features, delivery timeline, and fixed cost — written down clearly.' },
-      { q: 'What if I want small changes?', a: 'Small tweaks during setup are included. Bigger additions are agreed upfront.' },
+      { q: 'What is agreed upfront?', a: 'Exact features, delivery timeline, and fixed cost.' },
+      { q: 'What about small changes?', a: 'Small tweaks during setup are included free.' },
     ],
   },
   {
     id: 'payments',
     icon: 'wallet',
     title: 'Payments & Refunds',
-    short: 'Step-by-step milestone payments. Zero hidden charges.',
+    short: 'Milestone payments. Zero hidden charges.',
     points: [
-      { q: 'How do payments work?', a: 'Split into clear milestones: start, preview approval, and go-live.' },
-      { q: 'What if something does not match our agreement?', a: 'We fix it promptly at no extra cost until it matches what we promised.' },
+      { q: 'How do payments work?', a: 'In 3 parts: start, preview approval, and launch.' },
+      { q: 'What if something is off?', a: 'We fix it at no extra cost until it matches.' },
     ],
   },
   {
     id: 'support',
     icon: 'phone',
     title: 'Support',
-    short: 'A real person in Karachi answers even after launch.',
+    short: 'Real humans in Karachi answer after launch.',
     points: [
-      { q: 'How do I reach support?', a: 'WhatsApp 0319 7542768 or email hello@bosscode.agency. We reply within 24 hours.' },
-      { q: 'Is staff training included?', a: 'Yes. We train your team at launch and stay available when you need help.' },
+      { q: 'How do I reach support?', a: 'WhatsApp 0319 7542768 or bosscodeofficial@gmail.com.' },
+      { q: 'Is staff training included?', a: 'Yes, we train your team and stay for support.' },
     ],
   },
 ];
@@ -106,7 +104,7 @@ export default function PoliciesPage() {
                 </div>
               </Reveal>
             ))}
-            <p className="sp-updated">Updated 2026 · WhatsApp 0319 7542768 · hello@bosscode.agency</p>
+            <p className="sp-updated">Updated 2026 · WhatsApp 0319 7542768 · bosscodeofficial@gmail.com</p>
           </div>
         </div>
       </section>

@@ -14,13 +14,12 @@ import CtaSection from '@/components/sections/CtaSection';
 import Footer from '@/components/layout/Footer';
 
 export default function Home() {
-  /* Smooth scroll + dynamic adaptive scroll indicator (optimized to only sample on scroll change) */
+  /* Smooth scroll + dynamic adaptive scroll indicator */
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     let lenisInstance = null;
     let rafId = null;
-    let lastScrollY = -1;
 
     const indicator = document.getElementById('scroll-indicator');
     const bar = document.getElementById('scroll-indicator-bar');
@@ -53,11 +52,8 @@ export default function Home() {
       return 255;
     }
 
-    const updateIndicator = (force = false) => {
+    const onScroll = () => {
       const scrollTop = window.scrollY;
-      if (!force && Math.abs(scrollTop - lastScrollY) < 0.5) return;
-      lastScrollY = scrollTop;
-
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
       if (indicator) indicator.style.opacity = '1';
@@ -122,9 +118,6 @@ export default function Home() {
       }
     };
 
-    const onScroll = () => updateIndicator(false);
-    const onResize = () => updateIndicator(true);
-
     import('lenis').then((mod) => {
       const Lenis = mod.default;
       lenisInstance = new Lenis({ lerp: 0.1, smoothWheel: true });
@@ -132,22 +125,21 @@ export default function Home() {
 
       function raf(time) {
         lenisInstance.raf(time);
+        onScroll();
         rafId = requestAnimationFrame(raf);
       }
       rafId = requestAnimationFrame(raf);
-    }).catch(() => {
-      // native scroll fallback
-    });
+    }).catch(() => {});
 
-    updateIndicator(true);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
 
     return () => {
       lenisInstance?.destroy();
       if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
+      window.removeEventListener('resize', onScroll);
     };
   }, []);
 
@@ -165,9 +157,9 @@ export default function Home() {
         <Hero />
         <StatsBar />
         <Services />
+        <QuantumCore />
         <CapabilityFan />
         <Portfolio />
-        <QuantumCore />
         <ProcessTimeline />
         <Testimonials />
         <CtaSection />
