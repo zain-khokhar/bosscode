@@ -5,9 +5,9 @@ import Icon from '@/components/ui/Icon';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Solutions | BossCode',
+  title: 'Concept Previews | BossCode',
   description:
-    'Simple software for Pakistani businesses: accounts & stock, clinic appointments, auto billing, orders, and WhatsApp automation.',
+    'Concept previews showing how your business software will look when BossCode custom-builds it for you: accounts & stock, clinic queue, auto billing, orders, and WhatsApp automation.',
 };
 
 export default function SolutionsPage() {
@@ -16,12 +16,17 @@ export default function SolutionsPage() {
       <section className="sp-hero sp-hero--short">
         <div className="arch-grid" aria-hidden="true" />
         <div className="container sp-hero-inner">
-          <div className="section-tag"><span className="dot" />Our Solutions</div>
+          <div className="section-tag">
+            <span className="dot" />
+            Concept Previews · What We Can Build
+          </div>
           <h1 className="sp-h1">
-            Pick your problem.<br />
-            <span className="gradient-word">See the fix.</span>
+            How Your System<br />
+            <span className="gradient-word">Will Look.</span>
           </h1>
-          <p className="sp-lead">Ready-to-use tools for daily work. Tap any screen to preview.</p>
+          <p className="sp-lead">
+            These are concept designs showing how your software will look if we build it for your business.
+          </p>
         </div>
       </section>
 
@@ -36,11 +41,11 @@ export default function SolutionsPage() {
           <Reveal className="sp-banner">
             <div className="sp-banner-icon"><Icon name="sparkles" size={26} /></div>
             <div className="sp-banner-text">
-              <h2>Need a custom tool?</h2>
-              <p>We also build software around the exact way your team works.</p>
+              <h2>Want us to build a system for your work?</h2>
+              <p>Tell us how you work today. We design and build it around your exact routine.</p>
             </div>
             <Link href="/contact?solution=custom" className="btn btn-white">
-              Ask for Custom <Icon name="arrow" size={16} />
+              Start Free Chat <Icon name="arrow" size={16} />
             </Link>
           </Reveal>
         </div>

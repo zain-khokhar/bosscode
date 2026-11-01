@@ -1,38 +1,194 @@
 'use client';
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
-const PROJECTS = [
+const CONCEPTS = [
   {
-    cat: 'Paper to Digital',
-    client: 'Retail Shop',
-    title: 'From Registers to One System',
-    desc: 'Sales, stock, and customer dues in one screen.',
-    metric: 'Every record in 2 sec',
-    tags: ['Records', 'Stock', 'Sales'],
+    cat: 'Concept 01 · Retail & Stores',
+    client: 'How it looks if we build it',
+    title: 'Shop Counter, Stock & Udhaar System',
+    desc: 'If we build your shop system, your daily sales, stock alerts, and customer udhaar will sit on one simple screen.',
+    metric: 'Outcome: Any bill or udhaar found in 2 seconds',
+    tags: ['3-Tap Bill', 'Stock Alerts', 'Udhaar Khata'],
     href: '/solutions/shopledger',
-    visual: { name: 'ShopLedger', year: 'LIVE DEMO', accent: '#00d2ff' },
+    preview: {
+      badge: 'CONCEPT PREVIEW · SHOP SYSTEM',
+      kind: 'shop',
+      kpis: [
+        { l: 'Today\'s Sales', v: 'Rs 84,500' },
+        { l: 'Total Udhaar', v: 'Rs 1.4L' },
+      ],
+      bill: {
+        title: 'Bill #1042 · Ali Traders',
+        sub: '2× Oil 5L + 1× Rice 25kg',
+        amt: 'Rs 12,200',
+        status: 'WhatsApp Slip Sent ✓',
+      },
+      meter: {
+        label: 'Cooking Oil 5L Stock',
+        note: 'Only 3 cartons left · Low alert',
+        pct: 18,
+      },
+    },
   },
   {
-    cat: 'Work Management',
-    client: 'Clinic',
-    title: 'Appointments & Files in One Place',
-    desc: 'Bookings, patient files, and auto WhatsApp reminders.',
-    metric: '68% fewer missed visits',
-    tags: ['Bookings', 'Files', 'WhatsApp'],
+    cat: 'Concept 02 · Clinics & Labs',
+    client: 'How it looks if we build it',
+    title: 'Patient Token Queue & Digital Files',
+    desc: 'If we build your clinic system, reception and doctors will see live tokens, past prescriptions, and auto WhatsApp reminders.',
+    metric: 'Outcome: Zero lost files & fewer missed visits',
+    tags: ['Live Token Board', 'Patient History', 'Auto Reminders'],
     href: '/solutions/clinicflow',
-    visual: { name: 'ClinicFlow', year: 'LIVE DEMO', accent: '#0055ff' },
+    preview: {
+      badge: 'CONCEPT PREVIEW · CLINIC DESK',
+      kind: 'clinic',
+      tokens: [
+        { num: '#13', label: 'Done', state: 'done' },
+        { num: '#14', label: 'In Cabin', state: 'active' },
+        { num: '#15', label: 'Waiting', state: 'todo' },
+      ],
+      patient: {
+        name: 'Token #14 · Ayesha Khan',
+        sub: '3rd Visit · Last Rx & Blood Report attached',
+        tag: 'In Cabin',
+      },
+      reminder: '✓ Auto WhatsApp alert sent to Token #15 (5:30 PM)',
+    },
   },
   {
-    cat: 'Automation',
-    client: 'Wholesaler',
-    title: 'Bills & Reports on Autopilot',
-    desc: 'Daily bills, dues, and WhatsApp alerts automated.',
-    metric: 'Zero manual typing',
-    tags: ['Billing', 'Dues', 'Reports'],
+    cat: 'Concept 03 · Wholesalers & Workshops',
+    client: 'How it looks if we build it',
+    title: 'Auto Invoices, Order Stages & WhatsApp',
+    desc: 'If we build your automation, repeat party bills, workshop order stages, and polite payment nudges will run on schedule.',
+    metric: 'Outcome: 2+ hours of manual typing saved daily',
+    tags: ['Auto Invoices', 'Order Pipeline', 'WhatsApp Nudges'],
     href: '/solutions/billbot',
-    visual: { name: 'BillBot', year: 'LIVE DEMO', accent: '#00d2ff' },
+    preview: {
+      badge: 'CONCEPT PREVIEW · AUTOPILOT',
+      kind: 'autopilot',
+      stages: [
+        { name: 'Booked', state: 'done' },
+        { name: 'In Work', state: 'active' },
+        { name: 'Ready', state: 'todo' },
+      ],
+      invoice: {
+        party: 'Invoice #089 · Rehman Mart',
+        sub: '45 Wholesale Cartons · Auto-generated',
+        amt: 'Rs 70,000',
+      },
+      chat: '"Assalam o Alaikum, Invoice #089 (Rs 70,000) PDF attached hai."',
+    },
   },
 ];
+
+function ConceptVisual({ p }) {
+  const { preview } = p;
+
+  return (
+    <div className="bc-concept-window">
+      <div className="bc-concept-topbar">
+        <span className="bc-concept-pill">
+          <i /> {preview.badge}
+        </span>
+        <span className="bc-concept-tag">Example UI</span>
+      </div>
+
+      {preview.kind === 'shop' && (
+        <div className="bc-concept-body">
+          <div className="bc-concept-kpis">
+            {preview.kpis.map((k) => (
+              <div key={k.l} className="bc-concept-kpi">
+                <span>{k.l}</span>
+                <strong>{k.v}</strong>
+              </div>
+            ))}
+          </div>
+
+          <div className="bc-concept-card">
+            <div className="bc-concept-card-row">
+              <div>
+                <strong>{preview.bill.title}</strong>
+                <small>{preview.bill.sub}</small>
+              </div>
+              <b className="bc-concept-amt">{preview.bill.amt}</b>
+            </div>
+            <div className="bc-concept-foot-ok">{preview.bill.status}</div>
+          </div>
+
+          <div className="bc-concept-meter">
+            <div className="bc-concept-meter-top">
+              <strong>{preview.meter.label}</strong>
+              <span>{preview.meter.note}</span>
+            </div>
+            <div className="bc-concept-meter-track">
+              <div style={{ width: `${preview.meter.pct}%` }} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {preview.kind === 'clinic' && (
+        <div className="bc-concept-body">
+          <div className="bc-concept-steps">
+            {preview.tokens.map((t) => (
+              <div key={t.num} className={`bc-concept-step is-${t.state}`}>
+                <b>{t.num}</b>
+                <span>{t.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="bc-concept-card">
+            <div className="bc-concept-card-row">
+              <div>
+                <strong>{preview.patient.name}</strong>
+                <small>{preview.patient.sub}</small>
+              </div>
+              <span className="bc-concept-status">{preview.patient.tag}</span>
+            </div>
+          </div>
+
+          <div className="bc-concept-note">{preview.reminder}</div>
+        </div>
+      )}
+
+      {preview.kind === 'autopilot' && (
+        <div className="bc-concept-body">
+          <div className="bc-concept-steps">
+            {preview.stages.map((s, idx) => (
+              <div key={s.name} className={`bc-concept-step is-${s.state}`}>
+                <b>0{idx + 1}</b>
+                <span>{s.name}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="bc-concept-card">
+            <div className="bc-concept-card-row">
+              <div>
+                <strong>{preview.invoice.party}</strong>
+                <small>{preview.invoice.sub}</small>
+              </div>
+              <b className="bc-concept-amt">{preview.invoice.amt}</b>
+            </div>
+          </div>
+
+          <div className="bc-concept-chat">
+            <span>Auto WhatsApp Message</span>
+            <p>{preview.chat}</p>
+          </div>
+        </div>
+      )}
+
+      <div className="bc-concept-bottombar">
+        <span>How it will look when we build it</span>
+        <Link href={p.href} className="bc-concept-open">
+          Interactive preview <Icon name="arrow" size={13} />
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 export default function Portfolio() {
   return (
@@ -43,21 +199,21 @@ export default function Portfolio() {
           <div>
             <div className="section-tag">
               <span className="dot" />
-              How We Help
+              Concept Previews · What We Can Build
             </div>
             <h2 id="bc-portfolio-title">
-              Real Problems,<br />Simple Fixes.
+              How Your System<br />Will Look.
             </h2>
           </div>
           <p id="bc-portfolio-sub">
-            Simple systems built for daily work.
+            We haven&apos;t added past client work yet — these concept designs show how your software will look if we build it for you.
           </p>
         </div>
 
         <div id="bc-portfolio-list">
-          {PROJECTS.map((p, i) => (
+          {CONCEPTS.map((p, i) => (
             <article className="bc-project-card" key={i}>
-              {/* Info */}
+              {/* Left Info */}
               <div className="bc-project-info">
                 <div>
                   <div className="bc-project-meta">
@@ -80,7 +236,7 @@ export default function Portfolio() {
                     ))}
                   </div>
                   <Link href={p.href} className="bc-project-cta">
-                    View interactive demo
+                    Explore concept preview
                     <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M2 2h10v10M12 2L2 12" />
                     </svg>
@@ -88,75 +244,15 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Visual */}
+              {/* Right Bespoke Concept Preview */}
               <div className="bc-project-visual">
-                <div className="bc-project-visual-inner" style={{
-                  background: `linear-gradient(135deg, var(--navy) 0%, var(--navy-surface) 100%)`,
-                }}>
-                  {/* Glow blobs */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '-60px',
-                    right: '-60px',
-                    width: '200px',
-                    height: '200px',
-                    borderRadius: '50%',
-                    background: `${p.visual.accent}22`,
-                    filter: 'blur(48px)',
-                    pointerEvents: 'none',
-                  }} />
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '-40px',
-                    left: '-40px',
-                    width: '160px',
-                    height: '160px',
-                    borderRadius: '50%',
-                    background: 'rgba(0,85,255,0.18)',
-                    filter: 'blur(40px)',
-                    pointerEvents: 'none',
-                  }} />
-
-                  <div className="bc-project-visual-top" style={{ position: 'relative', zIndex: 2 }}>
-                    <span className="bc-project-live-tag">● {p.visual.year}</span>
-                    <Link href={p.href} className="bc-project-visual-link" aria-label={`View ${p.visual.name}`}>
-                      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M2 2h10v10M12 2L2 12" />
-                      </svg>
-                    </Link>
-                  </div>
-
-                  {/* Center logo mark */}
-                  <div style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: '22px',
-                    background: 'rgba(255,255,255,0.07)',
-                    border: '1px solid rgba(255,255,255,0.15)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 2,
-                  }}>
-                    <span style={{
-                      fontFamily: 'var(--font-display)',
-                      fontWeight: 900,
-                      fontSize: '22px',
-                      color: 'var(--white)',
-                      letterSpacing: '-0.04em',
-                    }}>
-                      {p.visual.name.charAt(0)}
-                    </span>
-                  </div>
-
-                  <div className="bc-project-visual-bottom" style={{ position: 'relative', zIndex: 2 }}>
-                    <div className="bc-project-visual-name">{p.visual.name}</div>
-                    <div className="bc-project-visual-sla">Tap to preview</div>
-                  </div>
+                <div
+                  className="bc-project-visual-inner"
+                  style={{
+                    background: 'linear-gradient(135deg, var(--navy) 0%, var(--navy-surface) 100%)',
+                  }}
+                >
+                  <ConceptVisual p={p} />
                 </div>
               </div>
             </article>
@@ -165,12 +261,12 @@ export default function Portfolio() {
 
         {/* Bottom CTA */}
         <div style={{ textAlign: 'center', marginTop: '56px' }}>
-          <a href="#contact" className="btn btn-primary">
-            Tell Us Your Problem
+          <Link href="/solutions" className="btn btn-primary">
+            See All 5 Concept Previews
             <svg className="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 9h10M10 5l4 4-4 4" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

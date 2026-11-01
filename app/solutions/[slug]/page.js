@@ -14,7 +14,10 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const s = getSolution(slug);
   if (!s) return {};
-  return { title: `${s.name} | BossCode`, description: `${s.tagline} ${s.short}` };
+  return {
+    title: `${s.name} (Concept Preview) | BossCode`,
+    description: `${s.tagline} ${s.short}`,
+  };
 }
 
 export default async function SolutionPage({ params }) {
@@ -25,19 +28,19 @@ export default async function SolutionPage({ params }) {
 
   return (
     <PageShell>
-      {/* 1 · ABOVE THE FOLD — Visual UI + Clear Primary Action */}
+      {/* 1 · ABOVE THE FOLD — Honest Concept Preview + Interactive Screen */}
       <section className="sp-hero sp-hero--product">
         <div className="arch-grid" aria-hidden="true" />
         <div className="container sp-product-grid">
           <div className="sp-product-copy">
             <div className="sp-back-row">
               <Link href="/solutions" className="sp-back">
-                <Icon name="arrow" size={14} className="flip" /> All solutions
+                <Icon name="arrow" size={14} className="flip" /> All concept previews
               </Link>
             </div>
             <div className="section-tag">
               <span className="dot" />
-              {s.category}
+              Concept Preview · Built If You Hire Us
             </div>
             <h1 className="sp-h1 sp-h1--md">
               <span className="gradient-word">{s.name}</span>
@@ -45,8 +48,8 @@ export default async function SolutionPage({ params }) {
             <p className="sp-lead sp-lead--strong">{s.tagline}</p>
 
             <div className="sp-for-wrap">
-              <span className="sp-for-label">Built for</span>
-              <ul className="sp-for" aria-label="Built for">
+              <span className="sp-for-label">Designed for</span>
+              <ul className="sp-for" aria-label="Designed for">
                 {s.forWho.map((w) => (
                   <li key={w}>{w}</li>
                 ))}
@@ -55,16 +58,16 @@ export default async function SolutionPage({ params }) {
 
             <div className="sp-actions">
               <Link href={`/contact?solution=${s.slug}`} className="btn btn-primary">
-                Get {s.name} <Icon name="arrow" size={16} />
+                Build This For My Business <Icon name="arrow" size={16} />
               </Link>
               <a href="#how-it-works" className="btn btn-ghost">
-                See How It Works
+                See Before &amp; After
               </a>
             </div>
 
             <div className="sp-hero-trust">
               <span className="sp-hero-trust-dot" />
-              Free first chat · Setup in days · 100% your data
+              Concept design — we custom-build this around your exact workflow
             </div>
           </div>
 
@@ -84,18 +87,18 @@ export default async function SolutionPage({ params }) {
             </div>
             <div className="sp-ba-arrow" aria-hidden="true"><Icon name="arrow" size={22} /></div>
             <div className="sp-ba-col sp-ba-after">
-              <h2><Icon name="check" size={18} /> With {s.name}</h2>
+              <h2><Icon name="check" size={18} /> When We Build This For You</h2>
               <ul>{s.after.map((t) => <li key={t}>{t}</li>)}</ul>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 3 · WHAT YOU GET (3 Core Micro-Cards) */}
+      {/* 3 · WHAT WE CAN INCLUDE (3 Core Micro-Cards) */}
       <section className="sp-section">
         <div className="container">
           <Reveal>
-            <h2 className="sp-h2">What you get</h2>
+            <h2 className="sp-h2">What we will build into your system</h2>
           </Reveal>
           <div className="sp-feat-grid">
             {s.features.map((f, n) => (
@@ -113,7 +116,7 @@ export default async function SolutionPage({ params }) {
       <section className="sp-section sp-dark">
         <div className="arch-grid arch-grid--dark" aria-hidden="true" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <Reveal><h2 className="sp-h2 sp-h2--light">Live in 3 simple steps</h2></Reveal>
+          <Reveal><h2 className="sp-h2 sp-h2--light">How we build it in 3 steps</h2></Reveal>
           <div className="sp-steps">
             {s.steps.map((st, n) => (
               <Reveal key={st.title} delay={n * 80} className="sp-step">
@@ -134,28 +137,28 @@ export default async function SolutionPage({ params }) {
             {s.faqs.map((f, idx) => (
               <details key={f.q} open={idx === 0}>
                 <summary>{f.q}<Icon name="arrow" size={16} className="chev" /></summary>
-                <p>{ptOrA(f)}</p>
+                <p>{f.a}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 6 · CTA + OTHER TOOLS */}
+      {/* 6 · CTA + OTHER CONCEPTS */}
       <section className="sp-section sp-section--tight">
         <div className="container">
           <Reveal className="sp-banner">
             <div className="sp-banner-icon"><Icon name={s.icon} size={26} /></div>
             <div className="sp-banner-text">
-              <h2>Want {s.name} for your business?</h2>
-              <p>Free first chat. Honest advice, zero pressure.</p>
+              <h2>Want us to build a system like this for you?</h2>
+              <p>Free first chat. We design it around how your business works.</p>
             </div>
             <Link href={`/contact?solution=${s.slug}`} className="btn btn-white">
-              Get {s.name} <Icon name="arrow" size={16} />
+              Build This For Me <Icon name="arrow" size={16} />
             </Link>
           </Reveal>
 
-          <h2 className="sp-h3">Other solutions</h2>
+          <h2 className="sp-h3">Other concept previews</h2>
           <div className="sp-more">
             {others.map((o) => (
               <Link key={o.slug} href={`/solutions/${o.slug}`} className="sp-more-card">
@@ -169,8 +172,4 @@ export default async function SolutionPage({ params }) {
       </section>
     </PageShell>
   );
-}
-
-function ptOrA(f) {
-  return f.a;
 }

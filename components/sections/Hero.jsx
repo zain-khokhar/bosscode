@@ -1,101 +1,111 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
-const TABS = ['problem', 'solution', 'result'];
+const TABS = [
+  { id: 'digital', label: 'Your Future System' },
+  { id: 'paper', label: 'On Paper Today' },
+];
 
-const svgProps = {
-  viewBox: '0 0 24 24',
-  fill: 'none',
-  stroke: 'currentColor',
-  strokeWidth: 2,
-  strokeLinecap: 'round',
-  strokeLinejoin: 'round',
-};
-
-const ICON_BOOK = (
-  <svg {...svgProps}>
-    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z" />
-  </svg>
-);
-const ICON_SEARCH = (
-  <svg {...svgProps}>
-    <circle cx="11" cy="11" r="8" />
-    <path d="m21 21-4.3-4.3" />
-  </svg>
-);
-const ICON_CLOCK = (
-  <svg {...svgProps}>
-    <circle cx="12" cy="12" r="10" />
-    <polyline points="12 6 12 12 16 14" />
-  </svg>
-);
-const ICON_UP = (
-  <svg {...svgProps}>
-    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-    <polyline points="16 7 22 7 22 13" />
-  </svg>
-);
-
-function CodeContent({ tab }) {
-  if (tab === 'solution') {
+function HeroPreviewContent({ tab }) {
+  if (tab === 'paper') {
     return (
-      <div id="bc-device-content">
-        {[
-          { layer: 'Records', val: 'Digital & searchable' },
-          { layer: 'Accounts', val: 'Live stock & dues' },
-          { layer: 'Orders', val: 'Tracked in one place' },
-          { layer: 'WhatsApp', val: 'Auto bills & alerts' },
-        ].map((r) => (
-          <div className="bc-arch-row" key={r.layer}>
-            <span className="bc-arch-layer">{r.layer}</span>
-            <span className="bc-arch-val">{r.val}</span>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (tab === 'result') {
-    return (
-      <div id="bc-device-content">
-        {[
-          { label: 'Time saved', val: '2+ hrs / day', icon: ICON_CLOCK },
-          { label: 'Mistakes', val: 'Zero missed dues', icon: ICON_UP },
-          { label: 'Records', val: 'Found in 2 sec', icon: ICON_SEARCH },
-          { label: 'Daily work', val: '100% organized', icon: ICON_BOOK },
-        ].map((r) => (
-          <div className="bc-telemetry-row" key={r.label}>
-            <span className="bc-telemetry-label">
-              {r.icon}
-              {r.label}
-            </span>
-            <span className="bc-telemetry-value">{r.val}</span>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  // problem (default)
-  return (
-    <div id="bc-device-content">
-      {[
-        { layer: 'Records', val: 'Piles of paper' },
-        { layer: 'Accounts', val: 'In a notebook' },
-        { layer: 'Orders', val: 'Lost in WhatsApp' },
-        { layer: 'Daily work', val: 'Typed by hand' },
-      ].map((r) => (
-        <div className="bc-arch-row" key={r.layer}>
-          <span className="bc-arch-layer">{r.layer}</span>
-          <span className="bc-arch-val">{r.val}</span>
+      <div id="bc-device-content" className="bc-hero-preview-body">
+        <div className="bc-hero-preview-head">
+          <span>How daily work feels on paper</span>
+          <em className="bc-hero-tag bc-hero-tag--muted">Manual &amp; Slow</em>
         </div>
-      ))}
+
+        <div className="bc-hero-paper-list">
+          {[
+            {
+              icon: 'file',
+              title: 'Sales & Udhaar in Paper Registers',
+              sub: 'Takes 15 minutes to flip pages and find old dues',
+              badge: 'Lost records',
+            },
+            {
+              icon: 'message',
+              title: 'Customer Orders Buried in WhatsApp',
+              sub: 'Orders missed inside 50+ unread voice notes & chats',
+              badge: 'Missed orders',
+            },
+            {
+              icon: 'clock',
+              title: 'Counting Stock & Cash at Night',
+              sub: '2 hours spent typing bills and tallying registers by hand',
+              badge: '2+ hrs wasted',
+            },
+          ].map((item) => (
+            <div key={item.title} className="bc-hero-paper-row">
+              <span className="bc-hero-paper-icon">
+                <Icon name={item.icon} size={16} />
+              </span>
+              <div className="bc-hero-paper-text">
+                <strong>{item.title}</strong>
+                <small>{item.sub}</small>
+              </div>
+              <span className="bc-hero-paper-pill">{item.badge}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Default: 'digital' — How your system will look when we build it
+  return (
+    <div id="bc-device-content" className="bc-hero-preview-body">
+      <div className="bc-hero-preview-head">
+        <span>How your screen looks if we build it</span>
+        <em className="bc-hero-tag bc-hero-tag--cyan">Concept Preview</em>
+      </div>
+
+      <div className="bc-hero-stats-strip">
+        <div className="bc-hero-stat-box">
+          <span>Today&apos;s Sales</span>
+          <strong>Rs 84,500</strong>
+        </div>
+        <div className="bc-hero-stat-box">
+          <span>Pending Udhaar</span>
+          <strong>Rs 18,200</strong>
+        </div>
+        <div className="bc-hero-stat-box">
+          <span>Saved Daily</span>
+          <strong>2+ Hours</strong>
+        </div>
+      </div>
+
+      <div className="bc-hero-live-slip">
+        <div className="bc-hero-live-slip-top">
+          <div>
+            <strong>Bill #1042 · Ali Traders</strong>
+            <small>Saved in 3 taps · Stock updated automatically</small>
+          </div>
+          <b>Rs 12,200</b>
+        </div>
+        <div className="bc-hero-live-slip-foot">
+          <span><Icon name="check" size={13} /> PDF Bill &amp; Reminder sent on WhatsApp</span>
+          <em>Auto ✓</em>
+        </div>
+      </div>
+
+      <div className="bc-hero-stock-bar">
+        <div className="bc-hero-stock-top">
+          <strong>Low Stock Warning · Cooking Oil 5L</strong>
+          <span>Only 3 cartons left</span>
+        </div>
+        <div className="bc-hero-stock-track">
+          <div style={{ width: '22%' }} />
+        </div>
+      </div>
     </div>
   );
 }
 
 export default function Hero() {
-  const [tab, setTab] = useState('problem');
+  const [tab, setTab] = useState('digital');
   const wrapperRef = useRef(null);
 
   /* 2.5D tilt on hover */
@@ -146,13 +156,13 @@ export default function Hero() {
             </p>
 
             <div id="bc-hero-actions">
-              <a href="#contact" className="btn btn-primary">
+              <Link href="/contact" className="btn btn-primary">
                 Get a Free Check-up
                 <svg className="btn-icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 9h10M10 5l4 4-4 4" />
                 </svg>
-              </a>
-              <a href="#work" className="btn btn-ghost">See How We Help</a>
+              </Link>
+              <a href="#work" className="btn btn-ghost">See How It Will Look</a>
             </div>
 
             <div id="bc-hero-proof">
@@ -168,25 +178,23 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── RIGHT COLUMN — Device ── */}
+          {/* ── RIGHT COLUMN — Interactive Concept Device ── */}
           <div id="bc-hero-right">
             <div id="bc-device-wrapper" ref={wrapperRef} style={{ transition: 'transform 0.18s ease' }}>
               <div id="bc-device">
 
                 <div id="bc-device-topbar">
-                  <div id="bc-device-dots">
-                    <div className="bc-dot" style={{ background: '#ff5f57' }} />
-                    <div className="bc-dot" style={{ background: '#febc2e' }} />
-                    <div className="bc-dot" style={{ background: '#28c840' }} />
+                  <div className="bc-hero-concept-pill">
+                    <i /> EXAMPLE CONCEPT
                   </div>
                   <div id="bc-device-tabs">
                     {TABS.map((t) => (
                       <button
-                        key={t}
-                        className={`bc-device-tab${tab === t ? ' active' : ''}`}
-                        onClick={() => setTab(t)}
+                        key={t.id}
+                        className={`bc-device-tab${tab === t.id ? ' active' : ''}`}
+                        onClick={() => setTab(t.id)}
                       >
-                        {t}
+                        {t.label}
                       </button>
                     ))}
                   </div>
@@ -194,7 +202,7 @@ export default function Hero() {
 
                 {/* Animated panel */}
                 <div style={{ transition: 'opacity 0.2s ease' }}>
-                  <CodeContent tab={tab} />
+                  <HeroPreviewContent tab={tab} />
                 </div>
               </div>
 
@@ -207,8 +215,8 @@ export default function Hero() {
                   </svg>
                 </div>
                 <div>
-                  <div id="bc-device-badge-label">Reply</div>
-                  <div id="bc-device-badge-value">Within 24 hours ✓</div>
+                  <div id="bc-device-badge-label">Custom Built</div>
+                  <div id="bc-device-badge-value">Around your work ✓</div>
                 </div>
               </div>
             </div>

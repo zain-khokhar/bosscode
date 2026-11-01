@@ -10,7 +10,7 @@ const SERVICES = [
     tags: ['Registers', 'Backup'],
     icon: 'file',
     href: '/solutions/shopledger',
-    cta: 'See ShopLedger',
+    cta: 'See concept preview',
   },
   {
     num: '02',
@@ -19,7 +19,7 @@ const SERVICES = [
     tags: ['Orders', 'Staff'],
     icon: 'clipboard',
     href: '/solutions/ordertrack',
-    cta: 'See OrderTrack',
+    cta: 'See concept preview',
   },
   {
     num: '03',
@@ -28,7 +28,7 @@ const SERVICES = [
     tags: ['Stock', 'Dues'],
     icon: 'store',
     href: '/solutions/shopledger',
-    cta: 'See ShopLedger',
+    cta: 'See concept preview',
   },
   {
     num: '04',
@@ -37,7 +37,7 @@ const SERVICES = [
     tags: ['Bookings', 'WhatsApp'],
     icon: 'stethoscope',
     href: '/solutions/clinicflow',
-    cta: 'See ClinicFlow',
+    cta: 'See concept preview',
   },
   {
     num: '05',
@@ -46,7 +46,7 @@ const SERVICES = [
     tags: ['WhatsApp', 'Auto-reply'],
     icon: 'message',
     href: '/solutions/chatpilot',
-    cta: 'See ChatPilot',
+    cta: 'See concept preview',
   },
   {
     num: '06',
@@ -55,7 +55,7 @@ const SERVICES = [
     tags: ['Website', 'Custom'],
     icon: 'sparkles',
     href: '/contact?solution=custom',
-    cta: 'Ask Us',
+    cta: 'Ask us to build',
   },
 ];
 
@@ -73,7 +73,7 @@ export default function Services() {
             We Move Your Work<br />From Paper to Digital
           </h2>
           <p className="bc-section-sub">
-            Simple tools to manage and automate your daily work.
+            Tap any card to see how your system will look when we build it.
           </p>
         </div>
 
