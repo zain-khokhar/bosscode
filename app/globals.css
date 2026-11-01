@@ -1358,14 +1358,15 @@ html.lenis body {
   align-items: center;
   justify-content: center;
   color: var(--white);
-  transition: all 0.3s ease;
+  box-shadow: none;
+  transition: background 0.3s ease, border-color 0.3s ease;
   margin-bottom: 2px;
 }
 
 .bc-quantum-badge:hover .bc-quantum-badge-icon {
   background: rgba(255, 255, 255, 0.16);
   border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+  box-shadow: none;
 }
 
 .bc-quantum-badge svg {
