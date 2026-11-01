@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import HeroReveal from './HeroReveal';
 
 const TABS = ['problem', 'solution', 'result'];
 
@@ -122,7 +123,9 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="bc-hero" data-section="hero">
+    <>
+    <HeroReveal />
+    <section id="bc-hero" data-section="hero-detail">
       <div className="arch-grid" aria-hidden="true" />
 
       <div className="container">
@@ -135,11 +138,10 @@ export default function Hero() {
               Built for Pakistani businesses
             </div>
 
-            <h1 id="bc-hero-title">
-              From Paper<br />
-              <span className="gradient-word">To Digital</span><br />
-              Made Simple.
-            </h1>
+            <h2 id="bc-hero-title">
+              Your Daily Work,<br />
+              <span className="gradient-word">One Simple Screen.</span>
+            </h2>
 
             <p id="bc-hero-sub">
               Move from paper registers to one simple digital system.
@@ -217,5 +219,6 @@ export default function Hero() {
         </div>
       </div>
     </section>
+    </>
   );
 }
