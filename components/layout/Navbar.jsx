@@ -12,43 +12,25 @@ const LINKS = [
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const [onDarkHero, setOnDarkHero] = useState(pathname === '/');
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
   const innerRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => {
-      const revealEl = document.getElementById('bc-reveal');
-      if (revealEl) {
-        const rect = revealEl.getBoundingClientRect();
-        const insideReveal = rect.bottom > 88;
-        setOnDarkHero(insideReveal);
-        setScrolled(!insideReveal && window.scrollY > 40);
-      } else {
-        setOnDarkHero(false);
-        setScrolled(window.scrollY > 40);
-      }
-    };
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
-  }, [pathname]);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
 
-  const innerClass = menuOpen || scrolled ? 'scrolled' : onDarkHero ? 'on-dark' : '';
-
   return (
     <nav id="bc-navbar" aria-label="Main navigation">
-      <div id="bc-navbar-inner" ref={innerRef} className={innerClass}>
+      <div id="bc-navbar-inner" ref={innerRef} className={scrolled || menuOpen ? 'scrolled' : ''}>
         {/* Logo */}
         <Link id="bc-logo" href="/">
           <div id="bc-logo-mark">BC</div>
