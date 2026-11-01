@@ -5,9 +5,9 @@ import Icon from '@/components/ui/Icon';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Concept Previews | BossCode',
+  title: 'Solutions | BossCode',
   description:
-    'Concept previews showing how your business software will look when BossCode custom-builds it for you: accounts & stock, clinic queue, auto billing, orders, and WhatsApp automation.',
+    'Examples of what BossCode can build for your business: accounts & stock, clinic bookings, auto billing, orders, and WhatsApp automation.',
 };
 
 export default function SolutionsPage() {
@@ -18,14 +18,14 @@ export default function SolutionsPage() {
         <div className="container sp-hero-inner">
           <div className="section-tag">
             <span className="dot" />
-            Concept Previews · What We Can Build
+            How We Help
           </div>
           <h1 className="sp-h1">
-            How Your System<br />
-            <span className="gradient-word">Will Look.</span>
+            Real Problems.<br />
+            <span className="gradient-word">Simple Fixes.</span>
           </h1>
           <p className="sp-lead">
-            These are concept designs showing how your software will look if we build it for your business.
+            Examples of systems we can build around your business.
           </p>
         </div>
       </section>
@@ -41,11 +41,11 @@ export default function SolutionsPage() {
           <Reveal className="sp-banner">
             <div className="sp-banner-icon"><Icon name="sparkles" size={26} /></div>
             <div className="sp-banner-text">
-              <h2>Want us to build a system for your work?</h2>
-              <p>Tell us how you work today. We design and build it around your exact routine.</p>
+              <h2>Need something built for your work?</h2>
+              <p>Tell us how you work today. First chat is free.</p>
             </div>
             <Link href="/contact?solution=custom" className="btn btn-white">
-              Start Free Chat <Icon name="arrow" size={16} />
+              Tell Us Your Problem <Icon name="arrow" size={16} />
             </Link>
           </Reveal>
         </div>

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
   const s = getSolution(slug);
   if (!s) return {};
   return {
-    title: `${s.name} (Concept Preview) | BossCode`,
+    title: `${s.name} | BossCode`,
     description: `${s.tagline} ${s.short}`,
   };
 }
@@ -28,19 +28,19 @@ export default async function SolutionPage({ params }) {
 
   return (
     <PageShell>
-      {/* 1 · ABOVE THE FOLD — Honest Concept Preview + Interactive Screen */}
+      {/* 1 · ABOVE THE FOLD — Minimal Copy + Minimal Branded Visual */}
       <section className="sp-hero sp-hero--product">
         <div className="arch-grid" aria-hidden="true" />
         <div className="container sp-product-grid">
           <div className="sp-product-copy">
             <div className="sp-back-row">
               <Link href="/solutions" className="sp-back">
-                <Icon name="arrow" size={14} className="flip" /> All concept previews
+                <Icon name="arrow" size={14} className="flip" /> All solutions
               </Link>
             </div>
             <div className="section-tag">
               <span className="dot" />
-              Concept Preview · Built If You Hire Us
+              {s.category} · Example
             </div>
             <h1 className="sp-h1 sp-h1--md">
               <span className="gradient-word">{s.name}</span>
@@ -48,8 +48,7 @@ export default async function SolutionPage({ params }) {
             <p className="sp-lead sp-lead--strong">{s.tagline}</p>
 
             <div className="sp-for-wrap">
-              <span className="sp-for-label">Designed for</span>
-              <ul className="sp-for" aria-label="Designed for">
+              <ul className="sp-for" aria-label="Built for">
                 {s.forWho.map((w) => (
                   <li key={w}>{w}</li>
                 ))}
@@ -58,16 +57,13 @@ export default async function SolutionPage({ params }) {
 
             <div className="sp-actions">
               <Link href={`/contact?solution=${s.slug}`} className="btn btn-primary">
-                Build This For My Business <Icon name="arrow" size={16} />
+                Talk to Us About This <Icon name="arrow" size={16} />
               </Link>
-              <a href="#how-it-works" className="btn btn-ghost">
-                See Before &amp; After
-              </a>
             </div>
 
             <div className="sp-hero-trust">
               <span className="sp-hero-trust-dot" />
-              Concept design — we custom-build this around your exact workflow
+              Example — we build this around your work
             </div>
           </div>
 
@@ -77,28 +73,28 @@ export default async function SolutionPage({ params }) {
         </div>
       </section>
 
-      {/* 2 · VISUAL BEFORE / AFTER */}
+      {/* 2 · BEFORE / AFTER */}
       <section id="how-it-works" className="sp-section sp-section--tight">
         <div className="container">
           <Reveal className="sp-ba">
             <div className="sp-ba-col sp-ba-before">
-              <h2><Icon name="x" size={18} /> On Paper Today</h2>
+              <h2><Icon name="x" size={18} /> Today</h2>
               <ul>{s.before.map((t) => <li key={t}>{t}</li>)}</ul>
             </div>
             <div className="sp-ba-arrow" aria-hidden="true"><Icon name="arrow" size={22} /></div>
             <div className="sp-ba-col sp-ba-after">
-              <h2><Icon name="check" size={18} /> When We Build This For You</h2>
+              <h2><Icon name="check" size={18} /> When We Build It</h2>
               <ul>{s.after.map((t) => <li key={t}>{t}</li>)}</ul>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* 3 · WHAT WE CAN INCLUDE (3 Core Micro-Cards) */}
+      {/* 3 · 3 CORE CARDS */}
       <section className="sp-section">
         <div className="container">
           <Reveal>
-            <h2 className="sp-h2">What we will build into your system</h2>
+            <h2 className="sp-h2">What we set up</h2>
           </Reveal>
           <div className="sp-feat-grid">
             {s.features.map((f, n) => (
@@ -112,11 +108,11 @@ export default async function SolutionPage({ params }) {
         </div>
       </section>
 
-      {/* 4 · 3-STEP SETUP */}
+      {/* 4 · 3 SIMPLE STEPS */}
       <section className="sp-section sp-dark">
         <div className="arch-grid arch-grid--dark" aria-hidden="true" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <Reveal><h2 className="sp-h2 sp-h2--light">How we build it in 3 steps</h2></Reveal>
+          <Reveal><h2 className="sp-h2 sp-h2--light">How it works</h2></Reveal>
           <div className="sp-steps">
             {s.steps.map((st, n) => (
               <Reveal key={st.title} delay={n * 80} className="sp-step">
@@ -129,36 +125,21 @@ export default async function SolutionPage({ params }) {
         </div>
       </section>
 
-      {/* 5 · QUICK ANSWERS */}
-      <section className="sp-section">
-        <div className="container sp-narrow">
-          <Reveal><h2 className="sp-h2">Quick answers</h2></Reveal>
-          <div className="sp-faq">
-            {s.faqs.map((f, idx) => (
-              <details key={f.q} open={idx === 0}>
-                <summary>{f.q}<Icon name="arrow" size={16} className="chev" /></summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6 · CTA + OTHER CONCEPTS */}
+      {/* 5 · CTA + OTHER EXAMPLES */}
       <section className="sp-section sp-section--tight">
         <div className="container">
           <Reveal className="sp-banner">
             <div className="sp-banner-icon"><Icon name={s.icon} size={26} /></div>
             <div className="sp-banner-text">
-              <h2>Want us to build a system like this for you?</h2>
-              <p>Free first chat. We design it around how your business works.</p>
+              <h2>Want this built for your business?</h2>
+              <p>First chat is free. No pressure.</p>
             </div>
             <Link href={`/contact?solution=${s.slug}`} className="btn btn-white">
-              Build This For Me <Icon name="arrow" size={16} />
+              Tell Us Your Problem <Icon name="arrow" size={16} />
             </Link>
           </Reveal>
 
-          <h2 className="sp-h3">Other concept previews</h2>
+          <h2 className="sp-h3">Other examples</h2>
           <div className="sp-more">
             {others.map((o) => (
               <Link key={o.slug} href={`/solutions/${o.slug}`} className="sp-more-card">

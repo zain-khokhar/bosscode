@@ -11,7 +11,7 @@ export default function SolutionsExplorer() {
 
   return (
     <>
-      <div className="sp-chips" role="tablist" aria-label="What do you want us to build?">
+      <div className="sp-chips" role="tablist" aria-label="Filter solutions">
         {FILTERS.map((f) => (
           <button
             key={f.id}
@@ -34,12 +34,12 @@ export default function SolutionsExplorer() {
             <div className="sp-sol-info">
               <div className="sp-sol-top">
                 <span className="sp-sol-icon"><Icon name={s.icon} size={18} /></span>
-                <span className="sp-sol-cat">{s.category}</span>
+                <span className="sp-sol-cat">{s.category} · Example</span>
               </div>
               <h3>{s.name}</h3>
               <p>{s.short}</p>
               <span className="sp-sol-go">
-                See how it will look <Icon name="arrow" size={15} />
+                See how it works <Icon name="arrow" size={15} />
               </span>
             </div>
           </Link>

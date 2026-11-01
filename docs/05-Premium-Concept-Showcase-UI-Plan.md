@@ -57,3 +57,4 @@ Instead of a fake code/terminal box, the right column of the Hero shows a clean 
   - Clean primary button in the Hero left column (`Build This For My Business →`).
   - Integrated footer bar inside the `ProductMock` window (`Concept preview — custom built for you` + `Request This System →`).
   - Zero floating buttons next to the bottom-right WhatsApp icon.
+
