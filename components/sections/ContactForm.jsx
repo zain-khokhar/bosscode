@@ -48,7 +48,7 @@ export default function ContactForm({ initial = '' }) {
     if (!formRef.current) return;
     if (!formRef.current.reportValidity()) return;
     const { label, text } = buildPayload(formRef.current);
-    window.location.href = `mailto:hello@bosscode.agency?subject=${encodeURIComponent(
+    window.location.href = `mailto:bosscodeofficial@gmail.com?subject=${encodeURIComponent(
       'Free chat request — ' + label
     )}&body=${encodeURIComponent(text)}`;
     setSentMode('email');
@@ -106,7 +106,7 @@ export default function ContactForm({ initial = '' }) {
         {sentMode === 'whatsapp'
           ? 'WhatsApp opened with your details. We reply within a few hours!'
           : sentMode === 'email'
-          ? 'Opening your email app — or email hello@bosscode.agency directly.'
+          ? 'Opening your email app — or email bosscodeofficial@gmail.com directly.'
           : 'Free first chat · No pressure · Reply within 24 hours'}
       </p>
     </form>

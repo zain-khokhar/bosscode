@@ -50,9 +50,9 @@ export default async function ContactPage({ searchParams }) {
               <span className="sp-feat-icon"><Icon name="message" size={20} /></span>
               <div><small>WhatsApp (Fastest)</small><strong>0319 7542768</strong></div>
             </a>
-            <a href="mailto:hello@bosscode.agency" className="sp-contact-card">
+            <a href="mailto:bosscodeofficial@gmail.com" className="sp-contact-card">
               <span className="sp-feat-icon"><Icon name="mail" size={20} /></span>
-              <div><small>Email</small><strong>hello@bosscode.agency</strong></div>
+              <div><small>Email</small><strong>bosscodeofficial@gmail.com</strong></div>
             </a>
             <div className="sp-contact-card">
               <span className="sp-feat-icon"><Icon name="pin" size={20} /></span>

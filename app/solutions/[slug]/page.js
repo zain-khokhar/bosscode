@@ -22,50 +22,60 @@ export default async function SolutionPage({ params }) {
   const s = getSolution(slug);
   if (!s) notFound();
   const others = SOLUTIONS.filter((x) => x.slug !== s.slug).slice(0, 3);
-  const waUrl = `https://wa.me/923197542768?text=${encodeURIComponent(
-    `Assalam o Alaikum BossCode, mujhe ${s.name} (${s.category}) k mutalliq maloomat chahiye.`
-  )}`;
 
   return (
     <PageShell>
-      {/* 1 · ABOVE THE FOLD — Visual UI + Instant Answer */}
+      {/* 1 · ABOVE THE FOLD — Visual UI + Clear Primary Action */}
       <section className="sp-hero sp-hero--product">
         <div className="arch-grid" aria-hidden="true" />
         <div className="container sp-product-grid">
-          <div>
-            <Link href="/solutions" className="sp-back"><Icon name="arrow" size={14} className="flip" /> All solutions</Link>
-            <div className="section-tag"><span className="dot" />{s.category}</div>
+          <div className="sp-product-copy">
+            <div className="sp-back-row">
+              <Link href="/solutions" className="sp-back">
+                <Icon name="arrow" size={14} className="flip" /> All solutions
+              </Link>
+            </div>
+            <div className="section-tag">
+              <span className="dot" />
+              {s.category}
+            </div>
             <h1 className="sp-h1 sp-h1--md">
               <span className="gradient-word">{s.name}</span>
             </h1>
             <p className="sp-lead sp-lead--strong">{s.tagline}</p>
+
+            <div className="sp-for-wrap">
+              <span className="sp-for-label">Built for</span>
+              <ul className="sp-for" aria-label="Built for">
+                {s.forWho.map((w) => (
+                  <li key={w}>{w}</li>
+                ))}
+              </ul>
+            </div>
+
             <div className="sp-actions">
               <Link href={`/contact?solution=${s.slug}`} className="btn btn-primary">
                 Get {s.name} <Icon name="arrow" size={16} />
               </Link>
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-ghost"
-              >
-                Ask on WhatsApp
+              <a href="#how-it-works" className="btn btn-ghost">
+                See How It Works
               </a>
             </div>
-            <ul className="sp-for" aria-label="Built for">
-              {s.forWho.map((w) => <li key={w}>{w}</li>)}
-            </ul>
+
+            <div className="sp-hero-trust">
+              <span className="sp-hero-trust-dot" />
+              Free first chat · Setup in days · 100% your data
+            </div>
           </div>
+
           <div className="sp-product-visual">
             <ProductMock solution={s} />
-            <div className="sp-float sp-float--a"><Icon name="check" size={14} /> Auto-saved</div>
-            <div className="sp-float sp-float--b"><Icon name="clock" size={14} /> 2+ hrs saved daily</div>
           </div>
         </div>
       </section>
 
       {/* 2 · VISUAL BEFORE / AFTER */}
-      <section className="sp-section sp-section--tight">
+      <section id="how-it-works" className="sp-section sp-section--tight">
         <div className="container">
           <Reveal className="sp-ba">
             <div className="sp-ba-col sp-ba-before">
@@ -81,7 +91,7 @@ export default async function SolutionPage({ params }) {
         </div>
       </section>
 
-      {/* 3 · WHAT YOU GET (6 Micro-Cards) */}
+      {/* 3 · WHAT YOU GET (3 Core Micro-Cards) */}
       <section className="sp-section">
         <div className="container">
           <Reveal>
@@ -124,7 +134,7 @@ export default async function SolutionPage({ params }) {
             {s.faqs.map((f, idx) => (
               <details key={f.q} open={idx === 0}>
                 <summary>{f.q}<Icon name="arrow" size={16} className="chev" /></summary>
-                <p>{f.a}</p>
+                <p>{ptOrA(f)}</p>
               </details>
             ))}
           </div>
@@ -141,7 +151,7 @@ export default async function SolutionPage({ params }) {
               <p>Free first chat. Honest advice, zero pressure.</p>
             </div>
             <Link href={`/contact?solution=${s.slug}`} className="btn btn-white">
-              Start Free Chat <Icon name="arrow" size={16} />
+              Get {s.name} <Icon name="arrow" size={16} />
             </Link>
           </Reveal>
 
@@ -157,10 +167,10 @@ export default async function SolutionPage({ params }) {
           </div>
         </div>
       </section>
-
-      <Link href={`/contact?solution=${s.slug}`} className="sp-sticky-cta" aria-label={`Get ${s.name}`}>
-        Get {s.name} <Icon name="arrow" size={15} />
-      </Link>
     </PageShell>
   );
+}
+
+function ptOrA(f) {
+  return f.a;
 }

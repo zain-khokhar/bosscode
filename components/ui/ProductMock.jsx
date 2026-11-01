@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import Icon from '@/components/ui/Icon';
 
 /* Looks like the real product. Tabs auto-cycle so the visitor "gets it" without reading. */
@@ -70,6 +71,18 @@ export default function ProductMock({ solution, compact = false }) {
           ))}
         </div>
       </div>
+
+      {!compact && (
+        <div className="sp-mock-footer">
+          <div className="sp-mock-badges">
+            <span><Icon name="check" size={13} /> Auto-saved</span>
+            <span><Icon name="clock" size={13} /> 2+ hrs saved daily</span>
+          </div>
+          <Link href={`/contact?solution=${solution.slug}`} className="sp-mock-cta">
+            Get {solution.name} <Icon name="arrow" size={14} />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
