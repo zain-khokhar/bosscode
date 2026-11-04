@@ -15,7 +15,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const innerRef = useRef(null);
+  const navRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -28,9 +28,27 @@ export default function Navbar() {
     setMenuOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    const onPointerDown = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [menuOpen]);
+
   return (
-    <nav id="bc-navbar" aria-label="Main navigation">
-      <div id="bc-navbar-inner" ref={innerRef} className={scrolled || menuOpen ? 'scrolled' : ''}>
+    <nav id="bc-navbar" ref={navRef} aria-label="Main navigation">
+      <div id="bc-navbar-inner" className={scrolled || menuOpen ? 'scrolled' : ''}>
         {/* Logo */}
         <Link id="bc-logo" href="/">
           <div id="bc-logo-mark">BC</div>

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import './globals.css';
 import './site-pages.css';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
         {/* Preconnect for faster font load */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Google Fonts — loaded via <link> NOT @import to keep globals.css clean for Tailwind v4 */}
+        {/* Google Fonts — loaded via <link> in RootLayout (App Router) */}
         <link
           href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300..700&display=swap"
           rel="stylesheet"

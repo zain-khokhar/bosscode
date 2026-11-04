@@ -30,7 +30,7 @@ const NAV_LINKS = [
     offices: [
       { city: 'Karachi, Pakistan', coords: 'Local team · PKT (GMT+5)' },
       { city: 'WhatsApp', coords: '0319 7542768', href: WA_LINK },
-      { city: 'Email', coords: 'hello@bosscode.agency', href: 'mailto:hello@bosscode.agency' },
+      { city: 'Email', coords: 'bosscodeofficial@gmail.com', href: 'mailto:bosscodeofficial@gmail.com' },
     ],
   },
 ];
