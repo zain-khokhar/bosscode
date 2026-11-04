@@ -27,9 +27,8 @@ flowchart TD
   2. Yehi `bgColor` (`rgb(r, g, b)`) **dono sections** (`#bc-quantum` aur `#bc-services`) ke inline `style.backgroundColor` par lagaya jata hai taake dono sections ke darmiyan koi hard seam ya line nazar na aaye.
   3. Right side par maujood `#scroll-indicator` aur `#scroll-indicator-bar` (`app/page.js` aur `components/layout/PageShell.jsx` mein) `document.elementsFromPoint(x, y)` aur `window.getComputedStyle(el).backgroundColor` ke zariye bar ke top aur bottom points ki **luminance (`0.299R + 0.587G + 0.114B`)** check karte hain.
   4. Jab background light hota hai (`luminance >= 120`), scrollbar `#000921` (Deep Navy) rehta hai; jab `QuantumCore` background ko dark (`luminance < 120`) kar deta hai, scrollbar automatically `#ffffff` (White) ho jata hai; aur jab bar kisi light/dark boundary ke bilkul upar hota hai to **4-step binary search** se exact split percentage nikal kar `linear-gradient` banata hai.
-- **Optimization Applied (Bina Link Tore):**
-  - Pehle `QuantumCore.jsx` ek infinite `requestAnimationFrame` loop 24/7 chala raha tha, aur `app/page.js` + `PageShell.jsx` mein 120 lines ki adaptive scroll logic duplicate thi.
-  - Ab humne `lib/useAdaptiveScroll.js` mein shared hook banaya hai aur `QuantumCore.jsx` ko **demand-driven RAF loop** par shift kiya hai jo sirf scroll/damping ke waqt 60/120fps par chalta hai, har color change par `window.dispatchEvent(new Event('bc:bg-shift'))` bhejta hai (taake damping rukne tak `#scroll-indicator` har frame par sync rahe), aur jaise hi color settle hota hai **0% CPU** par pause ho jata hai.
+- **Preserved 60fps Smooth RAF Loop (Zero Stutter):**
+  - `QuantumCore.jsx`, `app/page.js`, aur `components/layout/PageShell.jsx` ke original continuous `requestAnimationFrame` loops ko 100% intact rakha gaya hai taake scroll, color transition, aur `#scroll-indicator` bilkul मक्खन (buttery smooth) chalein aur kahin bhi frame drop ya stutter na aaye.
 
 ### Link 2: Dynamic Runtime CSS Classes (Jinhein Remove Nahi Kiya Ja Sakta)
 Static CSS audit ke dauran yeh dynamic classes identify ki gayin jo JavaScript ya external libraries runtime par lagati hain — inhein `globals.css` aur `site-pages.css` mein **100% mehfooz (preserve)** rakha gaya hai:
@@ -67,21 +66,16 @@ Pehle project mein 2 CSS files mil kar **4,577 lines (91.1 KB)** par phaili hui 
    - Headings (`h1, h2, h3, .bc-section-title, .sp-h1, .sp-h2, .sp-h3`) par `text-wrap: balance` lagaya gaya taake multi-line titles mein orphan words na aayein.
    - Subtitles aur lead paragraphs (`.bc-section-sub, #bc-hero-sub, #bc-quantum-sub, #bc-cta-sub, .sp-lead`) par `text-wrap: pretty` lagaya gaya.
    - Keyboard accessibility ke liye `a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible` par `outline: 2px solid var(--blue); outline-offset: 2px;` add kiya gaya.
-   - `@media (prefers-reduced-motion: reduce)` global support add ki gayi.
+   - Windows OS ke `prefers-reduced-motion: reduce` override ko hata diya gaya hai taake `StartOverlay` loading animation, `"Whatever's On Your Mind, Just Ask."` (`Testimonials.jsx`) ke moving marquee cards, aur tamam card transitions har PC par 100% smooth chalein.
 
 ---
 
-## 3. Codebase & Performance Optimizations
+## 3. Codebase & UX Enhancements
 
-1. **Shared Adaptive Scroll Hook ([`lib/useAdaptiveScroll.js`](file:///d:/softwares/bosscode/lib/useAdaptiveScroll.js)):**
-   - [`app/page.js`](file:///d:/softwares/bosscode/app/page.js) aur [`components/layout/PageShell.jsx`](file:///d:/softwares/bosscode/components/layout/PageShell.jsx) dono mein 125+ lines ka Lenis + `#scroll-indicator` luminance code repeat ho raha tha.
-   - Ab dono files clean 1-line `useAdaptiveScroll()` call use karti hain jo `'bc:bg-shift'` custom event ke zariye `QuantumCore.jsx` ke saath real-time sync rehta hai.
-2. **Demand-Driven `QuantumCore` Animation ([`components/sections/QuantumCore.jsx`](file:///d:/softwares/bosscode/components/sections/QuantumCore.jsx)):**
-   - Idle state mein `requestAnimationFrame` loop automatically band ho jata hai (0% CPU drain) aur scroll ya resize par foran wake hota hai.
-3. **App Router Font Loading & Zero Build Warnings ([`app/layout.js`](file:///d:/softwares/bosscode/app/layout.js)):**
+1. **Continuous 60fps Scroll & Color Sync ([`app/page.js`](file:///d:/softwares/bosscode/app/page.js), [`components/layout/PageShell.jsx`](file:///d:/softwares/bosscode/components/layout/PageShell.jsx), [`components/sections/QuantumCore.jsx`](file:///d:/softwares/bosscode/components/sections/QuantumCore.jsx)):**
+   - Original Lenis + `requestAnimationFrame` scroll aur `QuantumCore` background color interpolation ko 100% intact rakha gaya hai taake koi animation stutter na kare.
+2. **App Router Font Loading & Zero Build Warnings ([`app/layout.js`](file:///d:/softwares/bosscode/app/layout.js)):**
    - Google Fonts (`Space Grotesk`, `DM Sans`, `JetBrains Mono`) ko `preconnect` ke saath global `RootLayout` mein load kiya gaya hai aur App Router ke liye legacy Pages Router lint warning (`@next/next/no-page-custom-font`) ko cleanly configure kiya gaya hai taake `next build` zero warnings ke saath compile ho.
-4. **Navbar & Footer Enhancements ([`components/layout/Navbar.jsx`](file:///d:/softwares/bosscode/components/layout/Navbar.jsx), [`components/layout/Footer.jsx`](file:///d:/softwares/bosscode/components/layout/Footer.jsx)):**
+3. **Navbar & Footer Enhancements ([`components/layout/Navbar.jsx`](file:///d:/softwares/bosscode/components/layout/Navbar.jsx), [`components/layout/Footer.jsx`](file:///d:/softwares/bosscode/components/layout/Footer.jsx)):**
    - `Navbar.jsx` mein mobile menu ke liye `Escape` key aur outside-click (`pointerdown`) close handlers add kiye gaye.
    - `Footer.jsx` mein email address ko `bosscodeofficial@gmail.com` ke saath unify kiya gaya taake Contact page, Policies page, aur Footer mein ek hi official email ho.
-5. **Dead Component Files Cleaned Up:**
-   - 7 unused/duplicate files (`components/sections/StartOverlay.jsx`, `components/sections/TechMarquee.jsx`, `components/ui/AnimatedText.jsx`, `components/ui/CrossIcon.jsx`, `components/ui/CustomCursor.jsx`, `components/ui/GlassCard.jsx`, `components/ui/MagneticButton.jsx`) jo poore project mein kahin import nahi ho rahi thin, unhein clean kar diya gaya.

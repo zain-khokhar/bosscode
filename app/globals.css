@@ -377,6 +377,3 @@ section, [data-section] { scroll-margin-top: 100px; }
 h1, h2, h3, .bc-section-title { text-wrap: balance; }
 .bc-section-sub, #bc-hero-sub, #bc-quantum-sub, #bc-cta-sub { text-wrap: pretty; }
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-}

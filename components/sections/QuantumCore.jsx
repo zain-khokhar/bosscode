@@ -13,13 +13,11 @@ export default function QuantumCore() {
     const servicesSection = document.getElementById('bc-services');
     if (!section) return;
 
-    let animId = null;
+    let animId;
     // Start progress (0 = white #ffffff, 1 = deep navy #000921)
     let smoothProgress = 0;
-    let lastBgColor = '';
 
     function update() {
-      animId = null;
       const rect = section.getBoundingClientRect();
       const vh = window.innerHeight || 1;
       const startTrigger = vh * 0.95;
@@ -27,10 +25,8 @@ export default function QuantumCore() {
       const rawProgress  = (startTrigger - rect.top) / (startTrigger - endTrigger);
       const targetProgress = Math.min(Math.max(rawProgress, 0), 1);
 
-      const diff = targetProgress - smoothProgress;
-      if (Math.abs(diff) > 0.0005) {
-        smoothProgress += diff * 0.05;
-      } else {
+      smoothProgress += (targetProgress - smoothProgress) * 0.05;
+      if (Math.abs(targetProgress - smoothProgress) < 0.0005) {
         smoothProgress = targetProgress;
       }
 
@@ -57,30 +53,13 @@ export default function QuantumCore() {
         content.style.transform = `translate3d(0, ${translateY.toFixed(2)}px, 0)`;
       }
 
-      if (bgColor !== lastBgColor) {
-        lastBgColor = bgColor;
-        window.dispatchEvent(new Event('bc:bg-shift'));
-      }
-
-      if (Math.abs(targetProgress - smoothProgress) > 0.0005) {
-        animId = requestAnimationFrame(update);
-      }
+      animId = requestAnimationFrame(update);
     }
 
-    function wakeLoop() {
-      if (animId === null) {
-        animId = requestAnimationFrame(update);
-      }
-    }
-
-    update();
-    window.addEventListener('scroll', wakeLoop, { passive: true });
-    window.addEventListener('resize', wakeLoop, { passive: true });
+    animId = requestAnimationFrame(update);
 
     return () => {
-      if (animId !== null) cancelAnimationFrame(animId);
-      window.removeEventListener('scroll', wakeLoop);
-      window.removeEventListener('resize', wakeLoop);
+      cancelAnimationFrame(animId);
       if (servicesSection) {
         servicesSection.style.backgroundColor = '';
       }

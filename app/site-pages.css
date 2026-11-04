@@ -2,10 +2,6 @@
 .flip { transform: rotate(180deg); }
 .sp-reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease-expo), transform .8s var(--ease-expo); }
 .sp-reveal.is-in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) {
-  .sp-reveal { opacity: 1; transform: none; transition: none; }
-  .sp-journey-line i { animation: none !important; }
-}
 .sp-h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(42px, 6.5vw, 84px); letter-spacing: -0.04em; line-height: 1; color: var(--navy); margin-bottom: 24px; }
 .sp-h1--md { font-size: clamp(44px, 5.5vw, 74px); margin-bottom: 18px; }
 .sp-h1 .gradient-word { background: linear-gradient(135deg, var(--navy), var(--blue)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
