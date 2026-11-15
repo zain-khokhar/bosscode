@@ -145,11 +145,6 @@ const CSS = `
   .bcp-phone { height: min(44vh, 400px); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bcp-m, .bcp-typing span { animation: none; }
-  .bcp-pb i, .bcp-txt { transition: none; }
-}
-
 `;
 
 /* ------------------------------------------------------------------
@@ -349,17 +344,12 @@ export default function ProcessTimeline() {
   const fillRef = useRef(null);
   const threadRef = useRef(null);
   const timers = useRef([]);
-  const reduceRef = useRef(false);
 
   const [active, setActive] = useState(-1); // -1 = section not reached yet
   const [txtIdx, setTxtIdx] = useState(0);
   const [swap, setSwap] = useState(false);
   const [thread, setThread] = useState([]);
   const [typing, setTyping] = useState(false);
-
-  useEffect(() => {
-    reduceRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }, []);
 
   const clearTimers = () => {
     timers.current.forEach(clearTimeout);
@@ -368,10 +358,6 @@ export default function ProcessTimeline() {
 
   /* play a list of messages one after another, with typing dots */
   const play = useCallback((items) => {
-    if (reduceRef.current) {
-      setThread((t) => [...t, ...items.map((m) => ({ id: nid(), m, instant: true }))]);
-      return;
-    }
     let at = 0;
     items.forEach((m) => {
       const agency = m.t !== 'c' && m.t !== 'img';
@@ -399,7 +385,10 @@ export default function ProcessTimeline() {
       const pr = Math.min(1, Math.max(0, -r.top / total));
       if (fillRef.current) fillRef.current.style.setProperty('--p', pr);
       setActive((prev) => {
-        if (prev < 0) return r.top < window.innerHeight * 0.5 ? 0 : -1;
+        if (prev < 0) {
+          if (r.top >= window.innerHeight * 0.5) return -1;
+          return Math.min(PHASES.length - 1, Math.floor(pr * PHASES.length));
+        }
         const n = Math.min(PHASES.length - 1, Math.floor(pr * PHASES.length));
         return n === prev ? prev : n;
       });
@@ -439,10 +428,6 @@ export default function ProcessTimeline() {
   /* fade the text block when the phase changes */
   useEffect(() => {
     if (active < 0) return undefined;
-    if (reduceRef.current) {
-      setTxtIdx(active);
-      return undefined;
-    }
     setSwap(true);
     const id = setTimeout(() => {
       setTxtIdx(active);
@@ -454,7 +439,7 @@ export default function ProcessTimeline() {
   /* keep the newest message in view inside the phone */
   useEffect(() => {
     const el = threadRef.current;
-    if (el) el.scrollTo({ top: el.scrollHeight, behavior: reduceRef.current ? 'auto' : 'smooth' });
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
   }, [thread, typing]);
 
   const goTo = (i) => {
@@ -464,7 +449,7 @@ export default function ProcessTimeline() {
     const total = track.offsetHeight - window.innerHeight;
     window.scrollTo({
       top: window.scrollY + r.top + ((i + 0.5) / PHASES.length) * total,
-      behavior: reduceRef.current ? 'auto' : 'smooth',
+      behavior: 'smooth',
     });
   };
 
@@ -472,7 +457,7 @@ export default function ProcessTimeline() {
   const on = Math.max(active, 0);
 
   return (
-    <section className="bcp" data-section="process">
+    <section id="bc-process" className="bcp" data-section="process">
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <div id="process" aria-hidden="true" />
       <div className="bcp-hd">

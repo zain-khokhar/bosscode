@@ -109,7 +109,7 @@ function Dashboard({ mobile = false, activeKey }) {
   );
 }
 
-function FlowSvg({ mobile = false, activeKey, onActivate, reducedMotion }) {
+function FlowSvg({ mobile = false, activeKey, onActivate }) {
   const positions = mobile ? MOBILE_SOURCES : DESKTOP_SOURCES;
   const sourceCenterX = mobile ? 126 : 118;
   const hub = mobile ? { x: 200, y: 378 } : { x: 388, y: 212 };
@@ -136,21 +136,19 @@ function FlowSvg({ mobile = false, activeKey, onActivate, reducedMotion }) {
           return (
             <g className={`paper-flow-connection${activeKey === FLOW_DATA[index].key ? ' is-active' : ''}`} key={FLOW_DATA[index].key}>
               <path id={`paper-flow-path-${mobile ? 'm' : 'd'}-${FLOW_DATA[index].key}`} d={path} />
-              <circle className="paper-flow-traveller">
-                {!reducedMotion && (
-                  <animateMotion dur="3.6s" begin={`${index * 0.6}s`} repeatCount="indefinite" path={path} />
-                )}
+              <circle className="paper-flow-traveller" r="4">
+                <animateMotion dur="3.6s" begin={`${index * 0.6}s`} repeatCount="indefinite" path={path} />
               </circle>
             </g>
           );
         })}
         <path className="paper-flow-hub-line" d={dashboardLine} />
-        <circle className="paper-flow-traveller paper-flow-traveller-after">
-          {!reducedMotion && <animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path={dashboardLine} />}
+        <circle className="paper-flow-traveller paper-flow-traveller-after" r="4">
+          <animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path={dashboardLine} />
         </circle>
       </g>
       <g className="paper-flow-hub" transform={`translate(${hub.x} ${hub.y})`} filter={`url(#hub-glow-${mobile ? 'mobile' : 'desktop'})`}>
-        {!reducedMotion && <circle className="paper-flow-pulse" r="43" />}
+        <circle className="paper-flow-pulse" r="43" />
         <circle className="paper-flow-hub-core" r="29" />
         <text className="paper-flow-hub-mark" textAnchor="middle" y="6">BC</text>
         <text className="paper-flow-hub-caption" textAnchor="middle" y="51">one system</text>
@@ -172,19 +170,9 @@ function FlowSvg({ mobile = false, activeKey, onActivate, reducedMotion }) {
 
 export default function Hero() {
   const [activeKey, setActiveKey] = useState(FLOW_DATA[0].key);
-  const [reducedMotion, setReducedMotion] = useState(false);
   const cycleRef = useRef(true);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const updateMotion = () => setReducedMotion(mediaQuery.matches);
-    updateMotion();
-    mediaQuery.addEventListener?.('change', updateMotion);
-    return () => mediaQuery.removeEventListener?.('change', updateMotion);
-  }, []);
-
-  useEffect(() => {
-    if (reducedMotion) return undefined;
     const timer = window.setInterval(() => {
       if (!cycleRef.current) return;
       setActiveKey((current) => {
@@ -193,7 +181,7 @@ export default function Hero() {
       });
     }, 3600);
     return () => window.clearInterval(timer);
-  }, [reducedMotion]);
+  }, []);
 
   const activeItem = useMemo(
     () => FLOW_DATA.find((item) => item.key === activeKey) || FLOW_DATA[0],
@@ -224,8 +212,8 @@ export default function Hero() {
           </div>
           <div id="bc-hero-right">
             <div className="paper-flow-visual">
-              <FlowSvg activeKey={activeKey} onActivate={activate} reducedMotion={reducedMotion} />
-              <FlowSvg mobile activeKey={activeKey} onActivate={activate} reducedMotion={reducedMotion} />
+              <FlowSvg activeKey={activeKey} onActivate={activate} />
+              <FlowSvg mobile activeKey={activeKey} onActivate={activate} />
               <div className="paper-flow-panels" aria-live="polite">
                 <div className="paper-flow-panel paper-flow-panel-before"><span>Before</span><p>{activeItem.before}</p></div>
                 <div className="paper-flow-panel paper-flow-panel-after"><span>With BossCode</span><p>{activeItem.after}</p></div>
