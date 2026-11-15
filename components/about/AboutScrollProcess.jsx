@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import Icon from '@/components/ui/Icon';
 import { PROCESS_STEPS } from './aboutData';
+import { handleTabKeyDown } from './aboutTabHelper';
 
 export default function AboutScrollProcess() {
   const sectionRef = useRef(null);
@@ -72,11 +73,19 @@ export default function AboutScrollProcess() {
               return (
                 <button
                   key={step.num}
+                  id={`ab-step-tab-${step.num}`}
                   type="button"
                   role="tab"
+                  tabIndex={isActive ? 0 : -1}
                   aria-selected={isActive}
+                  aria-controls="ab-step-panel"
                   className={`ab-step-card${isActive ? ' ab-step-card--active' : ''}`}
                   onClick={() => setActiveIdx(idx)}
+                  onKeyDown={(e) =>
+                    handleTabKeyDown(e, idx, PROCESS_STEPS, (_, nextIdx) =>
+                      setActiveIdx(nextIdx)
+                    )
+                  }
                 >
                   {isActive ? (
                     <motion.span
@@ -98,6 +107,9 @@ export default function AboutScrollProcess() {
         <AnimatePresence mode="wait">
           <motion.div
             key={activeStep.num}
+            id="ab-step-panel"
+            role="tabpanel"
+            aria-labelledby={`ab-step-tab-${activeStep.num}`}
             className="ab-step-preview"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

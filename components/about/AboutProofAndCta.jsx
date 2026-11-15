@@ -112,17 +112,17 @@ export default function AboutProofAndCta() {
             <p>Talk with our Karachi team — see live screens tailored to your work in 15 minutes.</p>
           </div>
           <div className="ab-cta-actions">
-            <Link href="/contact" className="btn btn-white btn-icon">
+            <Link href="/contact" className="btn btn-white">
               <span>Book Free Demo</span>
-              <Icon name="arrow" size={16} />
+              <Icon name="arrow" size={16} className="btn-icon" />
             </Link>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost-white btn-icon"
+              className="btn btn-ghost-white"
             >
-              <Icon name="message" size={16} />
+              <Icon name="message" size={16} className="btn-icon" />
               <span>WhatsApp Us</span>
             </a>
           </div>

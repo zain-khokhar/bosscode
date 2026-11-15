@@ -1,6 +1,7 @@
 import PageShell from '@/components/layout/PageShell';
 import '@/app/site-pages.css';
 import '@/components/about/about.css';
+import '@/components/about/about-sections.css';
 import AboutHero3D from '@/components/about/AboutHero3D';
 import AboutBentoValues from '@/components/about/AboutBentoValues';
 import AboutScrollProcess from '@/components/about/AboutScrollProcess';

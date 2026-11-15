@@ -6,6 +6,7 @@ import { RotateCcw } from 'lucide-react';
 import Icon from '@/components/ui/Icon';
 import { createAbout3DScene } from './about3dScene';
 import { ASSEMBLY_STATES, BUSINESS_MODES } from './aboutData';
+import { handleTabKeyDown } from './aboutTabHelper';
 
 const HEADLINE_WORDS = [
   { text: 'Software', gradient: false },
@@ -129,16 +130,22 @@ export default function AboutHero3D() {
             </div>
 
             <div className="ab-mode-rail" role="tablist" aria-label="Business workflow modes">
-              {BUSINESS_MODES.map((mode) => {
+              {BUSINESS_MODES.map((mode, idx) => {
                 const isActive = mode.id === activeMode.id;
                 return (
                   <button
                     key={mode.id}
+                    id={`ab-mode-tab-${mode.id}`}
                     type="button"
                     role="tab"
+                    tabIndex={isActive ? 0 : -1}
                     aria-selected={isActive}
+                    aria-controls="ab-mode-panel"
                     className={`ab-mode-btn${isActive ? ' ab-mode-btn--active' : ''}`}
                     onClick={() => setModeId(mode.id)}
+                    onKeyDown={(e) =>
+                      handleTabKeyDown(e, idx, BUSINESS_MODES, (next) => setModeId(next.id))
+                    }
                   >
                     <span className="ab-mode-icon">
                       <Icon name={mode.icon} size={16} strokeWidth={2.1} />
@@ -155,6 +162,9 @@ export default function AboutHero3D() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeMode.id}
+                id="ab-mode-panel"
+                role="tabpanel"
+                aria-labelledby={`ab-mode-tab-${activeMode.id}`}
                 className="ab-mode-summary"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -195,7 +205,13 @@ export default function AboutHero3D() {
             </div>
 
             {webglFailed ? (
-              <div className="ab-fallback" aria-label={activeMode.label}>
+              <div
+                id="ab-3d-viewport"
+                role="tabpanel"
+                aria-labelledby={`ab-dock-tab-${assemblyState}`}
+                className="ab-fallback"
+                aria-label={activeMode.label}
+              >
                 <div className={`ab-fallback-rig ab-fallback-rig--${assemblyState}`}>
                   <div className="ab-fallback-plate" />
                   <div className="ab-fallback-core">
@@ -209,24 +225,34 @@ export default function AboutHero3D() {
             ) : (
               <div
                 ref={canvasHostRef}
+                id="ab-3d-viewport"
+                role="tabpanel"
+                aria-labelledby={`ab-dock-tab-${assemblyState}`}
                 className="ab-canvas-host"
-                role="img"
                 aria-label={`Interactive 3D architectural model for ${activeMode.label}`}
               />
             )}
 
             <div className="ab-dock-bar">
               <div className="ab-dock" role="tablist" aria-label="3D inspection state">
-                {ASSEMBLY_STATES.map((item) => {
+                {ASSEMBLY_STATES.map((item, idx) => {
                   const isActive = item.id === assemblyState;
                   return (
                     <button
                       key={item.id}
+                      id={`ab-dock-tab-${item.id}`}
                       type="button"
                       role="tab"
+                      tabIndex={isActive ? 0 : -1}
                       aria-selected={isActive}
+                      aria-controls="ab-3d-viewport"
                       className={`ab-dock-btn${isActive ? ' ab-dock-btn--active' : ''}`}
                       onClick={() => setAssemblyState(item.id)}
+                      onKeyDown={(e) =>
+                        handleTabKeyDown(e, idx, ASSEMBLY_STATES, (next) =>
+                          setAssemblyState(next.id)
+                        )
+                      }
                     >
                       {isActive ? (
                         <motion.span
