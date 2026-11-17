@@ -1,83 +1,148 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
-const CARDS = [
+const PROBLEMS = [
   {
-    phase: 'Problem 1',
-    num: '01 / 05',
-    title: 'Paper Everywhere',
-    desc: 'Registers piled up. Old bills get lost.',
-    cta: 'Go digital →',
+    id: 'registers',
+    num: '01',
+    tag: 'Retail & Wholesale',
+    problem: 'Paper Registers & Lost Bills',
+    symptom: 'Old parchi gets lost. Daily closing takes 2 hours.',
+    solution: 'ShopLedger',
     href: '/solutions/shopledger',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 3"/>
-      </svg>
-    ),
+    saving: 'Saves ~2 hrs every night',
+    beforeTitle: 'Before · Paper Register',
+    beforeLines: [
+      'Parchi #412 missing from counter',
+      'Calculator total mismatch: Rs 4,200',
+      '2 hours spent matching cash at 10 PM',
+    ],
+    afterTitle: 'After · ShopLedger Screen',
+    afterBadge: 'Closing in 10 secs',
+    kpis: [
+      { label: 'Today Sales', value: 'Rs 94,200', tone: 'ok' },
+      { label: 'Cash Drawer', value: 'Rs 61,000', tone: 'blue' },
+      { label: 'Saved Bills', value: '48 / 48', tone: 'ok' },
+    ],
+    rows: [
+      { left: 'Bill #1048 · Walk-in Cash', right: 'Rs 3,450', status: 'Paid', tone: 'ok' },
+      { left: 'Bill #1047 · Hamza Hardware', right: 'Rs 18,900', status: 'Digital', tone: 'blue' },
+    ],
   },
   {
-    phase: 'Problem 2',
-    num: '02 / 05',
-    title: 'Lost in WhatsApp',
-    desc: 'Orders missed inside daily chats.',
-    cta: 'Track orders →',
+    id: 'udhaar',
+    num: '02',
+    tag: 'Shops & Distributors',
+    problem: 'Udhaar & Stock Guesswork',
+    symptom: 'Forgotten customer dues and sudden out-of-stock surprises.',
+    solution: 'ShopLedger',
+    href: '/solutions/shopledger',
+    saving: 'Stops silent stock & cash leaks',
+    beforeTitle: 'Before · Memory & Diary',
+    beforeLines: [
+      'Who owes Rs 24,500 from last month?',
+      'Fast-selling item finished without warning',
+      'Awkward phone calls for payment follow-up',
+    ],
+    afterTitle: 'After · Live Dues & Stock',
+    afterBadge: 'Auto Alerts On',
+    kpis: [
+      { label: 'Total Udhaar', value: 'Rs 142,500', tone: 'warn' },
+      { label: 'Low Stock Items', value: '3 items', tone: 'bad' },
+      { label: 'Recovered Today', value: 'Rs 38,000', tone: 'ok' },
+    ],
+    rows: [
+      { left: 'Al-Noor Traders · 12 days due', right: 'Rs 24,500', status: 'WA Sent ✓', tone: 'ok' },
+      { left: 'Cooking Oil 5L · Shelf A2', right: '3 left', status: 'Reorder', tone: 'warn' },
+    ],
+  },
+  {
+    id: 'whatsapp',
+    num: '03',
+    tag: 'Online & WhatsApp Sellers',
+    problem: 'Orders Lost in WhatsApp Chats',
+    symptom: '100+ daily messages. Pending orders get buried and missed.',
+    solution: 'OrderTrack',
     href: '/solutions/ordertrack',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="14" height="14" rx="3"/><path d="M6 9h6M6 12h4"/>
-      </svg>
-    ),
+    saving: '0 missed customer orders',
+    beforeTitle: 'Before · Messy Chat Scroll',
+    beforeLines: [
+      '47 unread chats — who paid advance?',
+      'Staff forgot to pack Gulshan delivery',
+      'Customers asking "order kahan pohancha?"',
+    ],
+    afterTitle: 'After · OrderTrack Board',
+    afterBadge: 'All Orders Synced',
+    kpis: [
+      { label: 'New Today', value: '26 orders', tone: 'blue' },
+      { label: 'Ready to Ship', value: '11 parcels', tone: 'warn' },
+      { label: 'Missed Orders', value: '0', tone: 'ok' },
+    ],
+    rows: [
+      { left: '#1042 · Ayesha Boutique (COD)', right: 'Rs 6,800', status: 'Packing', tone: 'blue' },
+      { left: '#1043 · Bilal Autos (Advance)', right: 'Rs 14,200', status: 'Rider Out', tone: 'ok' },
+    ],
   },
   {
-    phase: 'Problem 3',
-    num: '03 / 05',
-    title: 'Notebook Accounts',
-    desc: 'Stock and udhaar guessed from memory.',
-    cta: 'Fix accounts →',
-    href: '/solutions/shopledger',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="4 8 2 9 4 10"/><polyline points="14 8 16 9 14 10"/><line x1="10" y1="4" x2="8" y2="14"/>
-      </svg>
-    ),
+    id: 'clinic',
+    num: '04',
+    tag: 'Clinics & Labs',
+    problem: 'Crowded Waiting Room & Files',
+    symptom: 'Token mix-ups, lost patient history, and manual reminders.',
+    solution: 'ClinicFlow',
+    href: '/solutions/clinicflow',
+    saving: 'Calm counter, 2x faster check-in',
+    beforeTitle: 'Before · Paper Slip Queue',
+    beforeLines: [
+      'Patients arguing over turn numbers',
+      'Old prescription file not found in rack',
+      'No-shows because nobody reminded them',
+    ],
+    afterTitle: 'After · ClinicFlow Queue',
+    afterBadge: 'WhatsApp Tokens',
+    kpis: [
+      { label: 'Checked Today', value: '34 patients', tone: 'ok' },
+      { label: 'Waiting Now', value: '6 patients', tone: 'blue' },
+      { label: 'Avg Wait', value: '11 mins', tone: 'ok' },
+    ],
+    rows: [
+      { left: 'Token #14 · Sara Khan', right: 'Dr. Room 1', status: 'Inside', tone: 'ok' },
+      { left: 'Token #15 · Tariq Mehmood', right: 'Next', status: 'WA Notified', tone: 'blue' },
+    ],
   },
   {
-    phase: 'Problem 4',
-    num: '04 / 05',
-    title: 'Same Daily Typing',
-    desc: 'Hours wasted typing bills by hand.',
-    cta: 'Automate it →',
+    id: 'billing',
+    num: '05',
+    tag: 'Offices & Service Teams',
+    problem: 'Hours Wasted Typing Bills',
+    symptom: 'Same invoices and payment reminders typed manually every day.',
+    solution: 'BillBot',
     href: '/solutions/billbot',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 2l2 5h5l-4 3 1.5 5L9 12l-4.5 3L6 10 2 7h5z"/>
-      </svg>
-    ),
-  },
-  {
-    phase: 'Problem 5',
-    num: '05 / 05',
-    title: 'Where to Start?',
-    desc: 'Work is messy? We guide you free.',
-    cta: 'Let\'s talk →',
-    href: '/contact',
-    icon: (
-      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 13l4-4 3 3 5-5 4 4"/>
-      </svg>
-    ),
+    saving: 'Bills sent in 1 click',
+    beforeTitle: 'Before · Manual Word / Excel',
+    beforeLines: [
+      'Copy-pasting customer names into PDFs',
+      'Forgetting to send monthly fee reminders',
+      'No clear list of who paid vs pending',
+    ],
+    afterTitle: 'After · BillBot Auto-Billing',
+    afterBadge: 'Auto-Reminders',
+    kpis: [
+      { label: 'Billed This Week', value: 'Rs 285,000', tone: 'blue' },
+      { label: 'Auto-Collected', value: '88%', tone: 'ok' },
+      { label: 'Pending Follow-up', value: '4 bills', tone: 'warn' },
+    ],
+    rows: [
+      { left: 'Inv #884 · Zainab Textiles', right: 'Rs 32,000', status: 'Sent on WA ✓', tone: 'ok' },
+      { left: 'Inv #885 · Metro Logistics', right: 'Rs 19,500', status: 'Due in 2d', tone: 'warn' },
+    ],
   },
 ];
 
 export default function CapabilityFan() {
-  const [current, setCurrent] = useState(0);
-  const deckRef = useRef(null);
-
-  const goNext = () => setCurrent((c) => (c + 1) % CARDS.length);
-  const goPrev = () => setCurrent((c) => (c - 1 + CARDS.length) % CARDS.length);
-
-  const card = CARDS[current];
+  const [activeIdx, setActiveIdx] = useState(0);
+  const item = PROBLEMS[activeIdx];
 
   return (
     <section id="bc-fan" data-section="capabilities">
@@ -85,106 +150,117 @@ export default function CapabilityFan() {
         <div id="bc-fan-header">
           <div className="section-tag">
             <span className="dot" />
-            Sound Familiar?
+            Problems We Fix
           </div>
           <div id="bc-fan-header-bottom">
-            <h2 id="bc-fan-title">Problems We<br />Fix Every Day.</h2>
+            <h2 id="bc-fan-title">
+              Daily Headaches,<br />Solved Simply.
+            </h2>
             <p id="bc-fan-sub">
-              Tap the card to see the next problem.
+              Tap any problem below to see how our software turns daily mess into one clear screen.
             </p>
           </div>
         </div>
 
-        <div id="bc-fan-stage">
-          {/* Single active card in 3D stack */}
-          <div id="bc-fan-deck" ref={deckRef}>
-            {/* Stack preview cards (decorative) */}
-            {[2, 1].map((offset) => (
-              <div
-                key={offset}
-                className="bc-fan-card"
-                style={{
-                  transform: `translate(${offset * 14}px, ${offset * -10}px) rotate(${offset * 3}deg)`,
-                  opacity: 1 - offset * 0.3,
-                  zIndex: 3 - offset,
-                  pointerEvents: 'none',
-                }}
-              />
-            ))}
-
-            {/* Active card */}
-            <div
-              className="bc-fan-card"
-              style={{ zIndex: 4 }}
-              onClick={goNext}
-            >
-              <div>
-                <div className="bc-fan-card-top">
-                  <span className="bc-fan-card-phase">{card.phase}</span>
-                  <span className="bc-fan-card-num">{card.num}</span>
-                </div>
-                <div className="bc-fan-card-icon-wrap">{card.icon}</div>
-                <h3 className="bc-fan-card-title">{card.title}</h3>
-                <p className="bc-fan-card-desc">{card.desc}</p>
-              </div>
-              <Link
-                href={card.href}
-                className="bc-fan-card-footer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <span>{card.cta}</span>
-                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 7h10M8 4l3 3-3 3" />
-                </svg>
-              </Link>
-            </div>
+        <div className="bc-fix-layout">
+          {/* Left: 5 Real Business Problems */}
+          <div className="bc-fix-list" role="tablist" aria-label="Business problems we fix">
+            {PROBLEMS.map((p, idx) => {
+              const isActive = idx === activeIdx;
+              return (
+                <button
+                  key={p.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`bc-fix-item${isActive ? ' is-active' : ''}`}
+                  onClick={() => setActiveIdx(idx)}
+                >
+                  <div className="bc-fix-item-num">{p.num}</div>
+                  <div className="bc-fix-item-body">
+                    <div className="bc-fix-item-tag">{p.tag}</div>
+                    <div className="bc-fix-item-title">{p.problem}</div>
+                    <div className="bc-fix-item-symptom">{p.symptom}</div>
+                  </div>
+                  <span className="bc-fix-item-arrow" aria-hidden="true">→</span>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Navigation */}
-          <div style={{
-            position: 'absolute',
-            bottom: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '16px',
-          }}>
-            <button onClick={goPrev} className="btn btn-ghost btn-sm" aria-label="Previous problem">
-              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}>
-                <path d="M10 7H4M6 4L3 7l3 3" />
-              </svg>
-            </button>
-
-            <div style={{ display: 'flex', gap: '6px' }}>
-              {CARDS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  style={{
-                    width: i === current ? 20 : 6,
-                    height: 6,
-                    borderRadius: 999,
-                    background: i === current ? 'var(--navy)' : 'var(--navy-18)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    transition: 'width 0.3s ease, background 0.3s ease',
-                    padding: 0,
-                  }}
-                  aria-label={`Go to problem ${i + 1}`}
-                />
-              ))}
+          {/* Right: Live Before -> After Proof Stage */}
+          <div className="bc-fix-stage" role="tabpanel" aria-label={item.problem}>
+            {/* Top: Before Card (Paper / Manual Mess) */}
+            <div className="bc-fix-before">
+              <div className="bc-fix-before-head">
+                <span className="bc-fix-pill-bad">{item.beforeTitle}</span>
+                <span className="bc-fix-tag-muted">{item.tag}</span>
+              </div>
+              <ul className="bc-fix-before-list">
+                {item.beforeLines.map((line) => (
+                  <li key={line}>
+                    <span className="bc-fix-x" aria-hidden="true">✕</span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <button onClick={goNext} className="btn btn-ghost btn-sm" aria-label="Next problem">
-              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ width: 14, height: 14 }}>
-                <path d="M4 7h10M8 4l3 3-3 3" />
-              </svg>
-            </button>
+            {/* Center Connector */}
+            <div className="bc-fix-connector">
+              <span className="bc-fix-connector-line" aria-hidden="true" />
+              <span className="bc-fix-connector-badge">
+                Fixed with {item.solution}
+              </span>
+              <span className="bc-fix-connector-line" aria-hidden="true" />
+            </div>
+
+            {/* Bottom: After Card (Live BossCode Screen) */}
+            <div className="bc-fix-after">
+              <div className="bc-fix-after-head">
+                <div className="bc-fix-after-title">
+                  <span className="bc-fix-live-dot" />
+                  <strong>{item.afterTitle}</strong>
+                </div>
+                <span className="bc-fix-pill-ok">{item.afterBadge}</span>
+              </div>
+
+              <div className="bc-fix-kpis">
+                {item.kpis.map((kpi) => (
+                  <div className="bc-fix-kpi" key={kpi.label}>
+                    <small>{kpi.label}</small>
+                    <strong className={`bc-fix-tone-${kpi.tone}`}>{kpi.value}</strong>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bc-fix-rows">
+                {item.rows.map((row) => (
+                  <div className="bc-fix-row" key={row.left}>
+                    <span className="bc-fix-row-left">{row.left}</span>
+                    <div className="bc-fix-row-right">
+                      <strong>{row.right}</strong>
+                      <span className={`bc-fix-status bc-fix-status-${row.tone}`}>{row.status}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bc-fix-after-foot">
+                <span className="bc-fix-saving">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="m9 12 2 2 4-4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                  {item.saving}
+                </span>
+                <Link href={item.href} className="bc-fix-cta">
+                  See {item.solution} Preview →
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-
-        <p id="bc-fan-hint">Click card for next</p>
       </div>
     </section>
   );

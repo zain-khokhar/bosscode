@@ -77,34 +77,96 @@ function PaperCard({ item, index, position, activeKey, onActivate }) {
   );
 }
 
-function Dashboard({ mobile = false, activeKey }) {
-  const x = mobile ? 32 : 516;
-  const y = mobile ? 424 : 174;
+function Dashboard({ mobile = false, activeKey, onActivate }) {
+  const x = mobile ? 24 : 494;
+  const y = mobile ? 416 : 68;
+  const w = mobile ? 352 : 252;
+  const h = mobile ? 236 : 334;
+  const pad = 16;
+  const innerW = w - pad * 2;
+  const kpiW = (innerW - 8) / 2;
+  const rowsStartY = mobile ? 106 : 122;
+  const rowStep = mobile ? 28 : 34;
+
   return (
     <g className="paper-flow-dashboard" transform={`translate(${x} ${y})`}>
-      <rect className="paper-flow-dashboard-card" width={mobile ? 336 : 218} height={mobile ? 218 : 260} rx="16" />
-      <text className="paper-flow-dashboard-title" x="18" y="30">Your business</text>
-      <text className="paper-flow-dashboard-subtitle" x="18" y="49">One screen. Always current.</text>
+      {/* Outer Card */}
+      <rect className="paper-flow-dashboard-card" width={w} height={h} rx="18" />
+      <rect
+        x="1"
+        y="1"
+        width={w - 2}
+        height={h - 2}
+        rx="17"
+        fill="none"
+        stroke="rgba(0, 210, 255, 0.22)"
+        strokeWidth="1"
+      />
+
+      {/* Top Chrome Bar */}
+      <circle cx={pad + 4} cy="19" r="3" fill="#ff5f56" opacity="0.85" />
+      <circle cx={pad + 14} cy="19" r="3" fill="#ffbd2e" opacity="0.85" />
+      <circle cx={pad + 24} cy="19" r="3" fill="#27c93f" opacity="0.85" />
+      <rect x={w - pad - 54} y="11" width="54" height="16" rx="8" fill="rgba(18, 183, 106, 0.16)" stroke="rgba(18, 183, 106, 0.4)" strokeWidth="0.8" />
+      <circle cx={w - pad - 44} cy="19" r="2.5" fill="#12b76a" />
+      <text x={w - pad - 37} y="22" fill="#32d583" fontSize="8.5" fontWeight="700" fontFamily="JetBrains Mono, monospace">LIVE</text>
+
+      {/* Header */}
+      <text className="paper-flow-dashboard-title" x={pad} y="44">Your Business</text>
+      <text className="paper-flow-dashboard-subtitle" x={pad} y="59">Synced across counter &amp; phone</text>
+
+      {/* Top 2 KPI Tiles */}
+      <g transform={`translate(${pad} 68)`}>
+        <rect width={kpiW} height={mobile ? 30 : 42} rx="9" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+        <text x="9" y={mobile ? 12 : 15} fill="rgba(255,255,255,0.55)" fontSize="8" fontFamily="DM Sans, sans-serif">Today&apos;s Sales</text>
+        <text x="9" y={mobile ? 24 : 32} fill="#FFFFFF" fontSize={mobile ? 10.5 : 12.5} fontWeight="800" fontFamily="Space Grotesk, sans-serif">Rs 84,500</text>
+        {!mobile && <text x={kpiW - 8} y="31" textAnchor="end" fill="#32d583" fontSize="8.5" fontWeight="700" fontFamily="JetBrains Mono, monospace">+14%</text>}
+
+        <rect x={kpiW + 8} width={kpiW} height={mobile ? 30 : 42} rx="9" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+        <text x={kpiW + 17} y={mobile ? 12 : 15} fill="rgba(255,255,255,0.55)" fontSize="8" fontFamily="DM Sans, sans-serif">System Health</text>
+        <text x={kpiW + 17} y={mobile ? 24 : 32} fill="#00D2FF" fontSize={mobile ? 10.5 : 12.5} fontWeight="800" fontFamily="Space Grotesk, sans-serif">100% Synced</text>
+      </g>
+
+      {/* 4 Live Rows */}
       {FLOW_DATA.map((item, index) => {
-        const rowY = 68 + index * (mobile ? 32 : 37);
+        const rowY = rowsStartY + index * rowStep;
+        const isRowActive = activeKey === item.key;
         return (
-          <g className={`paper-flow-row${activeKey === item.key ? ' is-active' : ''}`} key={item.key}>
-            <rect x="12" y={rowY - 16} width={mobile ? 312 : 194} height="28" rx="7" />
-            <circle className="paper-flow-status" cx="25" cy={rowY - 2} r="3" />
-            <text className="paper-flow-row-label" x="36" y={rowY + 2}>{item.label}</text>
-            <text className="paper-flow-row-value" x={mobile ? 310 : 194} y={rowY + 2} textAnchor="end">{item.digital}</text>
+          <g
+            className={`paper-flow-row${isRowActive ? ' is-active' : ''}`}
+            key={item.key}
+            onClick={() => onActivate(item.key)}
+            style={{ cursor: 'pointer' }}
+          >
+            <rect x={pad} y={rowY} width={innerW} height={mobile ? 24 : 28} rx="8" />
+            <circle className="paper-flow-status" cx={pad + 12} cy={rowY + (mobile ? 12 : 14)} r="3" />
+            <text className="paper-flow-row-label" x={pad + 22} y={rowY + (mobile ? 15.5 : 17.5)}>{item.label}</text>
+            <text className="paper-flow-row-value" x={pad + innerW - 10} y={rowY + (mobile ? 15.5 : 17.5)} textAnchor="end">{item.digital}</text>
           </g>
         );
       })}
-      <g className="paper-flow-chart" transform={`translate(18 ${mobile ? 190 : 220})`}>
-        <path d={`M0 22h${mobile ? 300 : 180}`} />
-        <rect x="10" y="8" width="12" height="14" rx="2" />
-        <rect x="40" y="1" width="12" height="21" rx="2" />
-        <rect x="70" y="11" width="12" height="11" rx="2" />
-        <rect x="100" y="-7" width="12" height="29" rx="2" />
-        <rect x="130" y="4" width="12" height="18" rx="2" />
-        <rect x="160" y="-14" width="12" height="36" rx="2" />
-      </g>
+
+      {/* Mini Trend & Footer (Desktop) */}
+      {!mobile && (
+        <g transform={`translate(${pad} 264)`}>
+          <rect width={innerW} height="54" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" />
+          <text x="10" y="15" fill="rgba(255,255,255,0.55)" fontSize="8" fontFamily="JetBrains Mono, monospace">7-DAY REVENUE</text>
+          <text x={innerW - 10} y="15" textAnchor="end" fill="#32d583" fontSize="8" fontWeight="700" fontFamily="JetBrains Mono, monospace">+18% ↑</text>
+          <g transform="translate(10 22)">
+            {[10, 14, 11, 18, 15, 22, 24].map((barH, i) => (
+              <rect
+                key={i}
+                x={i * 29}
+                y={24 - barH}
+                width="18"
+                height={barH}
+                rx="3"
+                fill={i === 6 ? '#00D2FF' : 'rgba(0, 85, 255, 0.7)'}
+              />
+            ))}
+          </g>
+        </g>
+      )}
     </g>
   );
 }
@@ -112,8 +174,8 @@ function Dashboard({ mobile = false, activeKey }) {
 function FlowSvg({ mobile = false, activeKey, onActivate }) {
   const positions = mobile ? MOBILE_SOURCES : DESKTOP_SOURCES;
   const sourceCenterX = mobile ? 126 : 118;
-  const hub = mobile ? { x: 200, y: 378 } : { x: 388, y: 212 };
-  const dashboardLine = mobile ? 'M200 410V424' : 'M432 212h84';
+  const hub = mobile ? { x: 200, y: 374 } : { x: 388, y: 212 };
+  const dashboardLine = mobile ? 'M200 404V416' : 'M432 212h62';
   return (
     <svg
       className={`paper-flow-svg${mobile ? ' paper-flow-svg-mobile' : ''}`}
@@ -163,7 +225,7 @@ function FlowSvg({ mobile = false, activeKey, onActivate }) {
           onActivate={onActivate}
         />
       ))}
-      <Dashboard mobile={mobile} activeKey={activeKey} />
+      <Dashboard mobile={mobile} activeKey={activeKey} onActivate={onActivate} />
     </svg>
   );
 }

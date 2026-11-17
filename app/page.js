@@ -12,6 +12,7 @@ import ProcessTimeline from '@/components/sections/ProcessTimeline';
 import Testimonials from '@/components/sections/Testimonials';
 import CtaSection from '@/components/sections/CtaSection';
 import Footer from '@/components/layout/Footer';
+import WhatWeDo from '@/components/sections/Whatwedo';
 
 export default function Home() {
   /* Smooth scroll + dynamic adaptive scroll indicator */
@@ -129,7 +130,7 @@ export default function Home() {
         rafId = requestAnimationFrame(raf);
       }
       rafId = requestAnimationFrame(raf);
-    }).catch(() => {});
+    }).catch(() => { });
 
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -156,10 +157,11 @@ export default function Home() {
       <main id="bc-main" role="main">
         <Hero />
         <StatsBar />
-        <Services />
-        <QuantumCore />
         <CapabilityFan />
+        <WhatWeDo />
+        {/* <Services /> */}
         <Portfolio />
+        <QuantumCore />
         <ProcessTimeline />
         <Testimonials />
         <CtaSection />
